@@ -11,20 +11,21 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.colorpicker;
+package main.java.braingain;
 
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
-import main.java.colorpicker.handlers.FallbackIntentHandler;
-import main.java.colorpicker.handlers.HelpIntentHandler;
-import main.java.colorpicker.handlers.LaunchRequestHandler;
-import main.java.colorpicker.handlers.SessionEndedRequestHandler;
-import main.java.colorpicker.handlers.WhatsMyColorIntentHandler;
-import main.java.colorpicker.handlers.CancelandStopIntentHandler;
-import main.java.colorpicker.handlers.MyColorIsIntentHandler;
 
-public class ColorPickerStreamHandler extends SkillStreamHandler {
+import main.java.braingain.handlers.CancelandStopIntentHandler;
+import main.java.braingain.handlers.FallbackIntentHandler;
+import main.java.braingain.handlers.HelpIntentHandler;
+import main.java.braingain.handlers.LaunchRequestHandler;
+import main.java.braingain.handlers.MyColorIsIntentHandler;
+import main.java.braingain.handlers.SessionEndedRequestHandler;
+import main.java.braingain.handlers.WhatsMyColorIntentHandler;
+
+public class BraingainStreamHandler extends SkillStreamHandler {
 
     private static Skill getSkill() {
         return Skills.standard()
@@ -41,7 +42,7 @@ public class ColorPickerStreamHandler extends SkillStreamHandler {
                 .build();
     }
 
-    public ColorPickerStreamHandler() {
+    public BraingainStreamHandler() {
         super(getSkill());
     }
 

@@ -11,7 +11,7 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.colorpicker.handlers;
+package main.java.braingain.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
@@ -26,9 +26,9 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-import static main.java.colorpicker.handlers.WhatsMyColorIntentHandler.COLOR_KEY;
-import static main.java.colorpicker.handlers.WhatsMyColorIntentHandler.COLOR_SLOT;
 import static com.amazon.ask.request.Predicates.intentName;
+import static main.java.braingain.handlers.WhatsMyColorIntentHandler.COLOR_KEY;
+import static main.java.braingain.handlers.WhatsMyColorIntentHandler.COLOR_SLOT;
 
 public class MyColorIsIntentHandler implements RequestHandler {
     @Override
