@@ -50,9 +50,9 @@ public class KategorieEinstellenIntentHandler implements RequestHandler {
 				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
 	
 				speechText = String
-						.format("Du hast dich mir vorgestellt. Wähle jetzt deine Kathegorie. "
-								+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedächtnistraining.", gewaehlteKategorie);
-				repromptText = "Wähle jetzt deine Kategorie.";
+						.format("Du hast dich mir vorgestellt. Waehle jetzt deine Kathegorie. "
+								+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedaechtnistraining.", gewaehlteKategorie);
+				repromptText = "Waehle jetzt deine Kategorie.";
 	
 			} else {
 				// Render an error since we don't know what the users favorite color is.
@@ -70,13 +70,13 @@ public class KategorieEinstellenIntentHandler implements RequestHandler {
 				
 							speechText = String
 									.format("Ihr habt euch mir jetzt vorgestellt. Wählt jetzt eure Kategorie."
-											+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedächtnistraining.", gewaehlteKategorie);
+											+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedaechtnistraining.", gewaehlteKategorie);
 							repromptText = "Wählt jetzt eure Kategorie.";
 				
 						} else {
 							// Render an error since we don't know what the users favorite color is.
 							speechText = "Ich kenne die Kathegorie nicht. Bitte versuche es noch einmal.";
-							repromptText = "Ich habe die Kathegorie nicht verstanden. Sage mir die Kathegorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich wähle die Kathegorie Logik.";
+							repromptText = "Ich habe die Kathegorie nicht verstanden. Sage mir die Kathegorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich waehle die Kathegorie Logik.";
 							isAskResponse = true;
 						}
 				
