@@ -1,4 +1,4 @@
-package Modell;
+package main.java.braingain.Modell;
 
 public class Spieler {
 	
