@@ -1,9 +1,9 @@
 package main.java.braingain.Modell;
 
-enum Kathegorie {
+enum Kategorie {
 	LOGIK,
 	MATHE,
 	GEOGRAFIE,
-	GEDÄCHTNISTRAINING;
+	GEDAECHTNISTRAINING;
 
 }
