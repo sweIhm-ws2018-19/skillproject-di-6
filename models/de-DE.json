@@ -46,16 +46,16 @@
           "name": "KategorieEinstellenIntent",
           "slots": [
           	{
-          		"name": "gewählteKategorie",
+          		"name": "gewaehlteKategorie",
           		"type": "LIST_OF_CATEGORIES",
           	}
           ],
           "samples": [
-            "Ich will in Kategorie {gewählteKategorie} spielen",
-            "Wir spielen {gewählteKategorie}",
-            "{gewählteKategorie}",
-            "Wir wollen {gewählteKategorie} spielen",
-            "Die Kategorie ist {gewählteKategorie}"
+            "Ich will in Kategorie {gewaehlteKategorie} spielen",
+            "Wir spielen {gewaehlteKategorie}",
+            "{gewaehlteKategorie}",
+            "Wir wollen {gewaehlteKategorie} spielen",
+            "Die Kategorie ist {gewaehlteKategorie}"
           ]
         },
         {
@@ -83,7 +83,7 @@
             },
             {
               "name": {
-                "value": "Gedächtnistraining"
+                "value": "Gedaechtnistraining"
               }
             },
             {
