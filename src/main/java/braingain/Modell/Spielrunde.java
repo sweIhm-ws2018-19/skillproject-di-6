@@ -5,8 +5,9 @@ import java.util.ArrayList;
 public class Spielrunde {
 	ArrayList<Spieler> spieler;
 	ArrayList<Frage> fragen;
+	int anzahlSpieler;
 	
-	Spielrunde(){
+	public Spielrunde(){
 		spieler=new ArrayList<Spieler>();
 		fragen=new ArrayList<Frage>();
 	}
@@ -24,4 +25,9 @@ public class Spielrunde {
 		}
 		return highscoreSpieler;
 	}
+	
+	public int getAnzahlSpieler() {
+		return anzahlSpieler;
+	}
+	
 }

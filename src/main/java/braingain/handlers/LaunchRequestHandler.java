@@ -22,8 +22,15 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
+import main.java.braingain.Modell.Spielrunde;
+
 public class LaunchRequestHandler implements RequestHandler {
-	@Override
+	
+	private Spielrunde sr;
+	
+	public LaunchRequestHandler(Spielrunde sr){
+		this.sr = sr;
+	}
 	public boolean canHandle(HandlerInput input) {
 		return input.matches(requestType(LaunchRequest.class));
 	}

@@ -17,31 +17,32 @@ import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
 
+import main.java.braingain.Modell.Spielrunde;
 import main.java.braingain.handlers.CancelandStopIntentHandler;
 import main.java.braingain.handlers.FallbackIntentHandler;
 import main.java.braingain.handlers.HelpIntentHandler;
 import main.java.braingain.handlers.LaunchRequestHandler;
-import main.java.braingain.handlers.SaveUsernameHandler;
+import main.java.braingain.handlers.UsernamenSpeichernHandler;
 import main.java.braingain.handlers.SessionEndedRequestHandler;
 
 public class BraingainStreamHandler extends SkillStreamHandler {
+	
+	public static Spielrunde sr;
+	
+	private static Skill getSkill() {
+		return Skills.standard()
+			.addRequestHandlers(
+					new LaunchRequestHandler(sr),
+					new CancelandStopIntentHandler(sr),
+					new SessionEndedRequestHandler(sr),
+					new HelpIntentHandler(sr),
+					new FallbackIntentHandler(sr),
+					new UsernamenSpeichernHandler(sr))
+					.build();
+	}
 
-    private static Skill getSkill() {
-        return Skills.standard()
-                .addRequestHandlers(
-                        new LaunchRequestHandler(),
-                        new CancelandStopIntentHandler(),
-                        new SessionEndedRequestHandler(),
-                        new HelpIntentHandler(),
-                        new FallbackIntentHandler(),
-                		new SaveUsernameHandler())
-                // Add your skill id below
-                //.withSkillId("")
-                .build();
-    }
-
-    public BraingainStreamHandler() {
-        super(getSkill());
-    }
-
+	public BraingainStreamHandler() {
+		super(getSkill());
+		sr = new Spielrunde();
+	}
 }

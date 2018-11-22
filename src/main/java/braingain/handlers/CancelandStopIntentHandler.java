@@ -17,12 +17,21 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
+import main.java.braingain.Modell.Spielrunde;
+
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class CancelandStopIntentHandler implements RequestHandler {
-    @Override
+    
+	private Spielrunde sr;
+	
+	public CancelandStopIntentHandler(Spielrunde sr) {
+		this.sr = sr;
+	}
+
+	@Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("AMAZON.StopIntent").or(intentName("AMAZON.CancelIntent")));
     }

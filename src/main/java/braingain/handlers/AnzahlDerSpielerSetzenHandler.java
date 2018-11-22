@@ -13,34 +13,38 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 package main.java.braingain.handlers;
 
+import static com.amazon.ask.request.Predicates.intentName;
+
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
-import static com.amazon.ask.request.Predicates.intentName;
 
-public class SaveUsernameHandler implements RequestHandler {
+public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
-	public static final String NAME = "NAME";
-
+	private static final String NumberOfPlayers = "NumberOfPalyers";
+	
+	
 	@Override
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(intentName("SaveUsernameIntent"));
+		return input.matches(intentName("AnzahlDerSpielerSetzenIntent"));
 	}
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		String speechText;
-		String name = (String) input.getAttributesManager().getSessionAttributes().get(NAME);
-		if (name != null && !name.isEmpty()) {
-			speechText = String.format("Dein Name ist %s und wird gespeichert.", name);
-		} else {
-			speechText = "Um deinen Namen zu speichern musst du ihn mir sagen.";
+		int numberOfPlayers;
+		numberOfPlayers = (int) input.getAttributesManager().getSessionAttributes().get(NumberOfPlayers);
+		
+		if(numberOfPlayers == 0 || numberOfPlayers > 4) {
+			speechText = String.format("Die angegebene Spielerzahl %s kann nicht akzeptiert werden. Die Spieleranzahl ist auf 1 bis 4 Spieler begrenzt.", numberOfPlayers);
+		}else {
+			speechText = String.format("OK. Ihr spielt nun zu %s", numberOfPlayers);
 		}
-
+		
 		return input.getResponseBuilder().withSpeech(speechText).build();
-
+		
 	}
 }

@@ -4,6 +4,8 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
+import main.java.braingain.Modell.Spielrunde;
+
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -12,8 +14,14 @@ import static com.amazon.ask.request.Predicates.intentName;
 //              This handler will not be triggered except in that locale, so it can be
 //              safely deployed for any locale.
 public class FallbackIntentHandler implements RequestHandler {
+	
+	private Spielrunde sr;
+	
+	public FallbackIntentHandler(Spielrunde sr) {
+		this.sr = sr;
+	}
 
-    @Override
+	@Override
     public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("AMAZON.FallbackIntent"));
     }
