@@ -21,9 +21,8 @@ import main.java.braingain.handlers.CancelandStopIntentHandler;
 import main.java.braingain.handlers.FallbackIntentHandler;
 import main.java.braingain.handlers.HelpIntentHandler;
 import main.java.braingain.handlers.LaunchRequestHandler;
-import main.java.braingain.handlers.MyColorIsIntentHandler;
+import main.java.braingain.handlers.SaveUsernameHandler;
 import main.java.braingain.handlers.SessionEndedRequestHandler;
-import main.java.braingain.handlers.WhatsMyColorIntentHandler;
 
 public class BraingainStreamHandler extends SkillStreamHandler {
 
@@ -35,7 +34,7 @@ public class BraingainStreamHandler extends SkillStreamHandler {
                         new SessionEndedRequestHandler(),
                         new HelpIntentHandler(),
                         new FallbackIntentHandler(),
-                		new SaveUsername())
+                		new SaveUsernameHandler())
                 // Add your skill id below
                 //.withSkillId("")
                 .build();

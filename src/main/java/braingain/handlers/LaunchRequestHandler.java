@@ -13,29 +13,26 @@
 
 package main.java.braingain.handlers;
 
+import static com.amazon.ask.request.Predicates.requestType;
+
+import java.util.Optional;
+
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
-import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.requestType;
-
 public class LaunchRequestHandler implements RequestHandler {
-    @Override
-    public boolean canHandle(HandlerInput input) {
-        return input.matches(requestType(LaunchRequest.class));
-    }
+	@Override
+	public boolean canHandle(HandlerInput input) {
+		return input.matches(requestType(LaunchRequest.class));
+	}
 
-    @Override
-    public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Hallo. Mit mir trainierst du dein Gehirn.";
-        String repromptText = "Bitte sage mir, ob du alleine oder im Duell spielen willst.";
-        return input.getResponseBuilder()
-                .withSimpleCard("ColorSession", speechText)
-                .withSpeech(speechText)
-                .withReprompt(repromptText)
-                .build();
-    }
+	@Override
+	public Optional<Response> handle(HandlerInput input) {
+		String speechText = "Hallo. Mit mir trainierst du dein Gehirn. Bitte sage mir, ob du alleine oder im Duell spielen willst.";
+		String repromptText = "Bitte sage mir wie viele Leute spielen.";
+		return input.getResponseBuilder().withSimpleCard("BrainSession", speechText).withSpeech(speechText)
+				.withReprompt(repromptText).build();
+	}
 }
