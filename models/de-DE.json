@@ -16,7 +16,7 @@
           "samples": []
         },
         {
-          "name": "SetPlayerCountIntent",
+          "name": "AnzahlDerSpielerSetzenIntent",
           "slots": [
             {
               "name": "numberOfPlayers",
@@ -29,7 +29,7 @@
           ]
         },
         {
-          "name": "SaveUsernameIntent",
+          "name": "UsernamenSpeichernIntent",
           "slots": [
           	{
           		"name": "username",
@@ -43,19 +43,19 @@
           ]
         },
         {
-          "name": "SaveCategorieIntent",
+          "name": "KategorieEinstellenIntent",
           "slots": [
           	{
-          		"name": "category",
+          		"name": "gewählteKategorie",
           		"type": "LIST_OF_CATEGORIES",
           	}
           ],
           "samples": [
-            "Ich will in Kategorie {category} spielen",
-            "Wir spielen {category}",
-            "{category}",
-            "Wir wollen {category} spielen",
-            "Die Kategorie ist {category}"
+            "Ich will in Kategorie {gewählteKategorie} spielen",
+            "Wir spielen {gewählteKategorie}",
+            "{gewählteKategorie}",
+            "Wir wollen {gewählteKategorie} spielen",
+            "Die Kategorie ist {gewählteKategorie}"
           ]
         },
         {
