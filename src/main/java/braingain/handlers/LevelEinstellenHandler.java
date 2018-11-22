@@ -23,16 +23,16 @@ import main.java.braingain.Modell.Spielrunde;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class LevelAendernHandler implements RequestHandler {
+public class LevelEinstellenHandler implements RequestHandler {
 
 	private Spielrunde sr;
 
-	public LevelAendernHandler(Spielrunde sr) {
+	public LevelEinstellenHandler(Spielrunde sr) {
 		this.sr = sr;
 	}
 
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(intentName("LevelAendernIntent"));
+		return input.matches(intentName("LevelEinstellenIntent"));
 	}
 
 	@Override

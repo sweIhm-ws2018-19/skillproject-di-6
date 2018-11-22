@@ -1,4 +1,4 @@
-package main.java.colorpicker.handlers;
+package main.java.braingain.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import main.java.braingain.Modell.Spielrunde;
@@ -14,12 +14,11 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-import static main.java.colorpicker.handlers.KathegorieEinstellenHandler.CATHEGORY_KEY;  //TODO brauche noch einen  Cathegory-Slot mit einem Cathegory-Key
-import static main.java.colorpicker.handlers.KathegorieEinstellen.CATHEGORY_SLOT;
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class KategorieEinstellenIntentHandler implements RequestHandler {
 
+	private static final Object LIST_OF_CATEGORIES = "LIST_OF_CATEGORIES";
 	private Spielrunde sr;
 	
 	public KategorieEinstellenIntentHandler(Spielrunde sr){
@@ -39,20 +38,20 @@ public class KategorieEinstellenIntentHandler implements RequestHandler {
 		Map<String, Slot> slots = intent.getSlots();
 
 		// Get the color slot from the list of slots.
-		Slot selectedCathegorySlot = slots.get(CATHEGORY_SLOT);
+		Slot selectedCathegorySlot = slots.get(LIST_OF_CATEGORIES);
 
 		String speechText, repromptText;
 		boolean isAskResponse = false;
-		if(sr.anzahlSpieler==1) {
+		if(sr.getAnzahlSpieler()==1) {
 			// Check for favorite color and create output to user.
 			if (selectedCathegorySlot != null) {
 				// Store the user's favorite color in the Session and create response.
-				String gewählteKategorie = selectedCathegorySlot.getValue();
-				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(CATHEGORY_KEY, gewählteKategorie));
+				String gewaehlteKategorie = selectedCathegorySlot.getValue();
+				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
 	
 				speechText = String
 						.format("Du hast dich mir vorgestellt. Wähle jetzt deine Kathegorie. "
-								+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedächtnistraining.", gewählteKategorie);
+								+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedächtnistraining.", gewaehlteKategorie);
 				repromptText = "Wähle jetzt deine Kategorie.";
 	
 			} else {
@@ -66,12 +65,12 @@ public class KategorieEinstellenIntentHandler implements RequestHandler {
 			// Check for favorite color and create output to user.
 						if (selectedCathegorySlot != null) {
 							// Store the user's favorite color in the Session and create response.
-							String gewählteKategorie = selectedCathegorySlot.getValue();
-							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(CATHEGORY_KEY, gewählteKategorie));
+							String gewaehlteKategorie = selectedCathegorySlot.getValue();
+							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
 				
 							speechText = String
 									.format("Ihr habt euch mir jetzt vorgestellt. Wählt jetzt eure Kategorie."
-											+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedächtnistraining.", gewählteKategorie);
+											+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedächtnistraining.", gewaehlteKategorie);
 							repromptText = "Wählt jetzt eure Kategorie.";
 				
 						} else {
