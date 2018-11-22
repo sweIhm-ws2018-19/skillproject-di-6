@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "lieblingsfarbe",
+      "invocationName": "Braingain",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -16,25 +16,46 @@
           "samples": []
         },
         {
-          "name": "MyColorIsIntent",
+          "name": "SetPlayerCountIntent",
           "slots": [
             {
-              "name": "Color",
-              "type": "LIST_OF_COLORS"
+              "name": "numberOfPlayers",
+              "type": Integer,
             }
           ],
           "samples": [
-            " Meine Lieblingsfarbe ist {Color}",
-            " Ich mag {Color}"
+            " Wir sind {numberOfPlayers} Spieler",
+            " Wir wollen mit {numberOfPlayers} spielen"
           ]
         },
         {
-          "name": "WhatsMyColorIntent",
-          "slots": [],
+          "name": "SaveUsernameIntent",
+          "slots": [
+          	{
+          		"name": "username",
+          		"type": String,
+          	}
+          ],
           "samples": [
-            "was ist meine Lieblingsfarbe",
-            "welche Farbe mag ich am liebsten",
-            "sag mir meine Lieblingsfarbe"
+            "Ich heiﬂe {username}",
+            "Ich bin {username}",
+            "{username}"
+          ]
+        },
+        {
+          "name": "SaveCategorieIntent",
+          "slots": [
+          	{
+          		"name": "category",
+          		"type": "LIST_OF_CATEGORIES",
+          	}
+          ],
+          "samples": [
+            "Ich will in Kategorie {category} spielen",
+            "Wir spielen {category}",
+            "{category}",
+            "Wir wollen {category} spielen",
+            "Die Kategorie ist {category}"
           ]
         },
         {
@@ -48,46 +69,26 @@
       ],
       "types": [
         {
-          "name": "LIST_OF_COLORS",
+          "name": "LIST_OF_CATEGORIES",
           "values": [
             {
               "name": {
-                "value": "gr√ºn"
+                "value": "Logik"
               }
             },
             {
               "name": {
-                "value": "blau"
+                "value": "Mathe"
               }
             },
             {
               "name": {
-                "value": "lila"
+                "value": "Ged‰chtnistraining"
               }
             },
             {
               "name": {
-                "value": "rot"
-              }
-            },
-            {
-              "name": {
-                "value": "orange"
-              }
-            },
-            {
-              "name": {
-                "value": "rosa"
-              }
-            },
-            {
-              "name": {
-                "value": "t√ºrkis"
-              }
-            },
-            {
-              "name": {
-                "value": "gelb"
+                "value": "Geographie"
               }
             }
           ]
