@@ -46,8 +46,8 @@ public class LevelEinstellenIntentHandler implements RequestHandler {
 			// Check for level and create output to user.
 			if (selectedLevelSlot != null) {
 				// Store the user's Level in the Session and create response.
-				String gewaehltesLevel = selectedCathegorySlot.getValue();
-				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteLevel, LIST_OF_LEVEL));
+				String gewaehltesLevel = selectedLevelSlot.getValue();
+				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
 	
 				speechText = String
 						.format("Du hast Kategorie %s gewaehlt. Waehle jetzt dein Level. "
@@ -65,7 +65,7 @@ public class LevelEinstellenIntentHandler implements RequestHandler {
 			// Check for favorite color and create output to user.
 						if (selectedLevelSlot != null) {
 							// Store the user's favorite color in the Session and create response.
-							String gewaehltesLevel = selectedCathegorySlot.getValue();
+							String gewaehltesLevel = selectedLevelSlot.getValue();
 							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
 				
 							speechText = String
