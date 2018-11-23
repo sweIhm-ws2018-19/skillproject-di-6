@@ -1,6 +1,8 @@
 package test.java;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+
+import org.junit.Test;
 
 public class LevelEinstellenHandlerTest {
 
