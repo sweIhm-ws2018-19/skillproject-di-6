@@ -1,5 +1,5 @@
 ﻿# Braingain- ein Alexa Skill
-Ein neues Spiel für dich und deine Freunde, oder zum Alleine-Spielen!
+Ein neues Spiel für dich und deine Freunde, oder zum Alleine-Spielen!Teste dein Wissen und erweitere deine Fähigkeit des Logischen Denkens!
 
 ## 
 
@@ -8,6 +8,8 @@ Im Rahmen der Vorlesung Software Engineering unserer Hochschule wollen wir, vier
 ## Konzept
 
 Für ein etwas komplexeres Spiel wie dieses strukturieren wir unseren Code nach dem Model-View-Controller Konzept.  Controller sind hierin die EventHandler- Klassen, die auf neue Events reagiert und die erlangten Informationen an das Model weiterleitet welches diese speichert und verarbeitet, und damit die Logik unseres Spieles darstellt. Unsere View stellt dieses Mal kein Visuelles Element dar, sondern kontrolliert die auditiven Ausgaben von Alexa.
+
+## 
 
 ## Concepts
 This sample shows how to create a Lambda function for handling Alexa Skill requests that:
@@ -62,15 +64,15 @@ my color is {Color}
 my favorite color is {Color}
 ```
 
-Since AMAZON.CancelIntent, AMAZON.HelpIntent, and AMAZON.StopIntent are built-in Alexa intents, sample utterances do not need to be provided as they are automatically inherited.
+Amazon Intents, die wir von Amazon so übernehmen konnten, sind der AMAZON.CancelIntent, AMAZON.HelpIntent und der AMAZON.StopIntent.
 
-The Developer Console alternately allows you to edit the entire skill model in JSON format by selecting “JSON Editor” on the navigation bar. For this sample, the following JSON schema can be used.
+Nach einem gegebenen Beispiel eines Skills für Alexa haben wir die JSON Datei soweit umgeschrieben, dass sie die Ansprüche unseres Programmes erfüllt. Eine andere Möglichkeit, an die für euren Skill benötigte JSON-Datei zu kommen ist, sie über die Amazon Developer Console erstellen zu lassen. Hier ist unser momentaner JSON-Code, der sich im Verlauf der Spiel-Entwicklung noch verändern kann:
 
 ```
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "color picker",
+      "invocationName": "Braingain",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -85,66 +87,79 @@ The Developer Console alternately allows you to edit the entire skill model in J
           "samples": []
         },
         {
-          "name": "MyColorIsIntent",
+          "name": "AnzahlDerSpielerSetzenIntent",
           "slots": [
             {
-              "name": "Color",
-              "type": "LIST_OF_COLORS"
+              "name": "numberOfPlayers",
+              "type": Integer,
             }
           ],
           "samples": [
-            " my color is {Color}",
-            " my favorite color is {Color}"
+            " Wir sind {numberOfPlayers} Spieler",
+            " Wir wollen mit {numberOfPlayers} spielen"
           ]
         },
         {
-          "name": "WhatsMyColorIntent",
-          "slots": [],
+          "name": "UsernamenSpeichernIntent",
+          "slots": [
+          	{
+          		"name": "username",
+          		"type": String,
+          	}
+          ],
           "samples": [
-            "whats my color",
-            "what is my color",
-            "say my color",
-            "tell me my color",
-            "whats my favorite color",
-            "what is my favorite color",
-            "say my favorite color",
-            "tell me my favorite color",
-            "tell me what my favorite color is"
+            "Ich heiße {username}",
+            "Ich bin {username}",
+            "{username}"
           ]
+        },
+        {
+          "name": "KategorieEinstellenIntent",
+          "slots": [
+          	{
+          		"name": "gewaehlteKategorie",
+          		"type": "LIST_OF_CATEGORIES",
+          	}
+          ],
+          "samples": [
+            "Ich will in Kategorie {gewaehlteKategorie} spielen",
+            "Wir spielen {gewaehlteKategorie}",
+            "{gewaehlteKategorie}",
+            "Wir wollen {gewaehlteKategorie} spielen",
+            "Die Kategorie ist {gewaehlteKategorie}"
+          ]
+        },
+        {
+          "name": "AMAZON.PauseIntent",
+          "samples": []
+        },
+        {
+          "name": "AMAZON.ResumeIntent",
+          "samples": []
         }
       ],
       "types": [
         {
-          "name": "LIST_OF_COLORS",
+          "name": "LIST_OF_CATEGORIES",
           "values": [
             {
               "name": {
-                "value": "green"
+                "value": "Logik"
               }
             },
             {
               "name": {
-                "value": "blue"
+                "value": "Mathe"
               }
             },
             {
               "name": {
-                "value": "purple"
+                "value": "Gedaechtnistraining"
               }
             },
             {
               "name": {
-                "value": "red"
-              }
-            },
-            {
-              "name": {
-                "value": "orange"
-              }
-            },
-            {
-              "name": {
-                "value": "yellow"
+                "value": "Geographie"
               }
             }
           ]
