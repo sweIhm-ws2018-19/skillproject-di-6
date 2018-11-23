@@ -21,12 +21,19 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
+import main.java.braingain.Modell.Spielrunde;
+
 
 public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
-	private static final String NumberOfPlayers = "NumberOfPalyers";
+	private static final String NumberOfPlayers = "NumberOfPlayers";
 	
+	Spielrunde sr;
 	
+	public AnzahlDerSpielerSetzenHandler(Spielrunde sr) {
+		this.sr = sr;
+	}
+
 	@Override
 	public boolean canHandle(HandlerInput input) {
 		return input.matches(intentName("AnzahlDerSpielerSetzenIntent"));

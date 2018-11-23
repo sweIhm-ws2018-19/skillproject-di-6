@@ -16,14 +16,13 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class LevelEinstellenIntentHandler implements RequestHandler {
+public class LevelEinstellenHandler implements RequestHandler {
 
 	private static final Object LIST_OF_LEVEL = "LIST_OF_LEVEL";
 	private Spielrunde sr;
 	
-	public LevelEinstellenIntentHandler(Spielrunde sr){
+	public LevelEinstellenHandler(Spielrunde sr){
 		this.sr = sr;
-		
 	}
 	
 	public boolean canHandle(HandlerInput input) {

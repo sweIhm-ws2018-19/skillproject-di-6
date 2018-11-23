@@ -16,14 +16,13 @@ import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
-public class KategorieEinstellenIntentHandler implements RequestHandler {
+public class KategorieEinstellenHandler implements RequestHandler {
 
 	private static final Object LIST_OF_CATEGORIES = "LIST_OF_CATEGORIES";
 	private Spielrunde sr;
 	
-	public KategorieEinstellenIntentHandler(Spielrunde sr){
+	public KategorieEinstellenHandler(Spielrunde sr){
 		this.sr = sr;
-		
 	}
 	
 	public boolean canHandle(HandlerInput input) {

@@ -18,12 +18,15 @@ import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
 
 import main.java.braingain.Modell.Spielrunde;
+import main.java.braingain.handlers.AnzahlDerSpielerSetzenHandler;
 import main.java.braingain.handlers.CancelandStopIntentHandler;
 import main.java.braingain.handlers.FallbackIntentHandler;
 import main.java.braingain.handlers.HelpIntentHandler;
+import main.java.braingain.handlers.KategorieEinstellenHandler;
 import main.java.braingain.handlers.LaunchRequestHandler;
-import main.java.braingain.handlers.UsernamenSpeichernHandler;
+import main.java.braingain.handlers.LevelEinstellenHandler;
 import main.java.braingain.handlers.SessionEndedRequestHandler;
+import main.java.braingain.handlers.UsernamenSpeichernHandler;
 
 public class BraingainStreamHandler extends SkillStreamHandler {
 	
@@ -32,11 +35,14 @@ public class BraingainStreamHandler extends SkillStreamHandler {
 	private static Skill getSkill() {
 		return Skills.standard()
 			.addRequestHandlers(
-					new LaunchRequestHandler(sr),
+					new AnzahlDerSpielerSetzenHandler(sr),
 					new CancelandStopIntentHandler(sr),
-					new SessionEndedRequestHandler(sr),
-					new HelpIntentHandler(sr),
 					new FallbackIntentHandler(sr),
+					new HelpIntentHandler(sr),
+					new KategorieEinstellenHandler(sr),
+					new LaunchRequestHandler(sr),
+					new LevelEinstellenHandler(sr),
+					new SessionEndedRequestHandler(sr),
 					new UsernamenSpeichernHandler(sr))
 					.build();
 	}
