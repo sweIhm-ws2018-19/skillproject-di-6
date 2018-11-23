@@ -1,5 +1,5 @@
 package main.java.braingain.handlers;
-package test.java.Test;
+package test.java.*;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import main.java.braingain.Modell.Spielrunde;
