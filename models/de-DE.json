@@ -20,7 +20,7 @@
           "slots": [
             {
               "name": "numberOfPlayers",
-              "type": Integer,
+              "type": "integer",
             }
           ],
           "samples": [
@@ -33,7 +33,7 @@
           "slots": [
           	{
           		"name": "username",
-          		"type": String,
+          		"type": "string",
           	}
           ],
           "samples": [
