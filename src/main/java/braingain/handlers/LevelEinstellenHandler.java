@@ -21,7 +21,7 @@ public class LevelEinstellenIntentHandler implements RequestHandler {
 	private static final Object LIST_OF_LEVEL = "LIST_OF_LEVEL";
 	private Spielrunde sr;
 	
-	public KategorieEinstellenIntentHandler(Spielrunde sr){
+	public LevelEinstellenIntentHandler(Spielrunde sr){
 		this.sr = sr;
 		
 	}
