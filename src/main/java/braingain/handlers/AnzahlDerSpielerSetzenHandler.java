@@ -13,8 +13,6 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 package main.java.braingain.handlers;
 
-import test.java.*;
-
 import static com.amazon.ask.request.Predicates.intentName;
 
 import java.util.Optional;
