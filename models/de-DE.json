@@ -37,7 +37,7 @@
           	}
           ],
           "samples": [
-            "Ich heiﬂe {username}",
+            "Ich hei√üe {username}",
             "Ich bin {username}",
             "{username}"
           ]
@@ -56,6 +56,22 @@
             "{gewaehlteKategorie}",
             "Wir wollen {gewaehlteKategorie} spielen",
             "Die Kategorie ist {gewaehlteKategorie}"
+          ]
+        },
+        {
+          "name": "LevelEinstellenIntent",
+          "slots": [
+          	{
+          		"name": "gewaehltesLevel",
+          		"type": "LIST_OF_LEVELS",
+          	}
+          ],
+          "samples": [
+            "Ich will in Kategorie {gewaehltesLevel} spielen",
+            "Wir spielen {gewaehltesLevel}",
+            "{gewaehltesLevel}",
+            "Wir wollen {gewaehltesLevel} spielen",
+            "Die Kategorie ist {gewaehltesLevel}"
           ]
         },
         {
@@ -89,6 +105,31 @@
             {
               "name": {
                 "value": "Geographie"
+              }
+            }
+          ]
+        },
+        {
+         "name": "LIST_OF_LEVELS",
+          "values": [
+            {
+             "name": {
+               "value": "Einfach"
+             }
+            },
+            {
+             "name": {
+              "value": "Mittel" 
+             }
+            },
+            {
+             "name": {
+               "value": "Anspruchsvoll"
+             }
+            },
+            {
+              "name": {
+                "value": "Schwer"
               }
             }
           ]
