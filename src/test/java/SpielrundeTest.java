@@ -1,11 +1,13 @@
 package test.java;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.fail;
 
 import org.junit.Test;
 
 public class SpielrundeTest {
-
+	
+	SpielrundeTest sr = new SpielrundeTest();
+	
 	@Test
 	public void testSpielrunde() {
 		fail("Not yet implemented");

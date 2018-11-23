@@ -8,8 +8,8 @@ public class Spielrunde {
 	private	int anzahlSpieler;
 	
 	public Spielrunde(){
-		spieler=new ArrayList<Spieler>();
-		fragen=new ArrayList<Frage>();
+		spieler = new ArrayList<Spieler>();
+		fragen = new ArrayList<Frage>();
 	}
 
 	ArrayList<Spieler> getHighscore() {
@@ -24,6 +24,11 @@ public class Spielrunde {
 			}
 		}
 		return highscoreSpieler;
+	}
+	
+	public void getFragen() {
+		//TODO
+		//Nachdem wir Level und Kategorie bekommen haben, ziehen wir die Fragen aus unserer Datenbank.
 	}
 	
 	public int getAnzahlSpieler() {
