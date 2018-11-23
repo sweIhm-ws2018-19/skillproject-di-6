@@ -12,7 +12,8 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 */
 
 package main.java.braingain.handlers;
-package test.java.*;
+
+import test.java.*;
 
 import java.util.Optional;
 
