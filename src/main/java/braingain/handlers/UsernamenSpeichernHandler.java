@@ -14,7 +14,6 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 package main.java.braingain.handlers;
 
 import java.util.Optional;
-import java.lang.string;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
