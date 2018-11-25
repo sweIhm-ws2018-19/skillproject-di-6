@@ -2,33 +2,36 @@ package main.java.braingain.Modell;
 
 public class Spieler {
 	
-	private String Name;
+	private String name;
 	private int punktestand;
 	private int highscore;
 	
-	Spieler() {
+	public Spieler(String name, int punktestand, int highscore) {
 		
+		this.name = name;
+		this.punktestand = punktestand;
+		this.highscore = highscore;
 		
 	}
 
-	void beantwortet(boolean richtigBeantwortet){
-//		if(richtigBeantwortet) {
-//			punktestand++;
-//		}else {
-//			punktestand--;
-//		}
-		punktestand = richtigBeantwortet ? +1 : -1;
+	public void beantwortet(boolean richtigBeantwortet){
+		if(richtigBeantwortet) {
+			punktestand++;
+		}else {
+			punktestand--;
+		}
+		//punktestand = richtigBeantwortet ? +1 : -1;
 	}
 	
 	protected String getName() {
-		return Name;
+		return name;
 	}
 
 	protected void setName(String name) {
-		Name = name;
+		this.name = name;
 	}
 
-	protected int getPunktestand() {
+	public int getPunktestand() {
 		return punktestand;
 	}
 

@@ -1,31 +1,11 @@
 package test.java;
 
-import static org.junit.Assert.fail;
-
-import org.junit.Test;
+import main.java.braingain.Modell.Spielrunde;
 
 public class SpielrundeTest {
 	
-	SpielrundeTest sr = new SpielrundeTest();
+	Spielrunde runde = new Spielrunde();
 	
-	@Test
-	public void testSpielrunde() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetHighscore() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetAnzahlSpieler() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetAnzahlDerSpieler() {
-		fail("Not yet implemented");
-	}
-
+	//Noch keine Methoden, auﬂer Getter uns Setter.
+	
 }

@@ -12,14 +12,14 @@ public class Spielrunde {
 		fragen = new ArrayList<Frage>();
 	}
 
-	ArrayList<Spieler> getHighscore() {
-		ArrayList<Spieler> highscoreSpieler= new ArrayList<Spieler>();
+	public ArrayList<Spieler> getHighscore() {
+		ArrayList<Spieler> highscoreSpieler = new ArrayList<Spieler>();
 		highscoreSpieler.add(spieler.get(0));
 		for(Spieler s:spieler) {
-			if(s.getPunktestand()>highscoreSpieler.get(0).getPunktestand()) {
+			if(s.getPunktestand() > highscoreSpieler.get(0).getPunktestand()) {
 				highscoreSpieler.clear();
 				highscoreSpieler.add(s);
-			}else if(s.getPunktestand()==highscoreSpieler.get(0).getPunktestand()) {
+			}else if(s.getPunktestand() == highscoreSpieler.get(0).getPunktestand()) {
 				highscoreSpieler.add(s);
 			}
 		}

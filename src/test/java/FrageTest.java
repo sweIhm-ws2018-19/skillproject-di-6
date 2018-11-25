@@ -1,16 +1,10 @@
 package test.java;
 
-import static org.junit.Assert.fail;
-
-import org.junit.Test;
+import main.java.braingain.Modell.Frage;
 
 public class FrageTest {
 	
-	FrageTest ft = new FrageTest();
+	Frage frage = new Frage("Wie viele Seiten hat ein Würfel?");
 	
-	@Test
-	public void testFrage() {
-		fail("Not yet implemented");
-	}
-
+	//Keine Funktionen bis jetzt
 }

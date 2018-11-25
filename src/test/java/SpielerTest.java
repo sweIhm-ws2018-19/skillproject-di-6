@@ -1,51 +1,24 @@
 package test.java;
 
-import static org.junit.Assert.fail;
-
+import org.junit.Assert;
 import org.junit.Test;
+
+import main.java.braingain.Modell.Spieler;
 
 public class SpielerTest {
 	
-	SpielerTest st = new SpielerTest();
+	private static final String NAME = "Franz";
+	private static final int HIGHSCORE = 5;
+	private static final int PUNKTESTAND = 10;
+	
+	Spieler spieler = new Spieler(NAME, PUNKTESTAND, HIGHSCORE);
 	
 	@Test
-	public void testSpieler() {
-		fail("Not yet implemented");
-	}
-
-	@Test
 	public void testBeantwortet() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetName() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetName() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetPunktestand() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetPunktestand() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetHighscore() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testSetHighscore() {
-		fail("Not yet implemented");
+		spieler.beantwortet(true);
+		Assert.assertSame("Die Methode beantworten funktioniert nicht richtig.", 11, spieler.getPunktestand());
+		spieler.beantwortet(false);
+		Assert.assertSame("Die Methode beantworten funktioniert nicht richtig.", 10, spieler.getPunktestand());
 	}
 
 }

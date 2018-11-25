@@ -1,24 +1,25 @@
 package test.java;
 
-import static org.junit.Assert.*;
+import org.junit.Assert;
 
-import org.junit.Test;
+import main.java.braingain.Modell.Antwort;
+import main.java.braingain.Modell.Frage;
 
 public class AntwortTest {
 	
-	AntwortTest at = new AntwortTest();
-	
-	@Test
-	public void testAntwort() {
-		fail("Not yet implemented");
-	}
+	String[] antworten = {"Fünf", "Sechs"};
+	Frage frage = new Frage("Wie viele Seiten hat ein Würfel?");
+	Antwort at = new Antwort(antworten, frage) ;
 	
 	public void getSchlagwoerter() {
-		fail("Not yet implemented");
+		
+		Assert.assertArrayEquals("Schlagwörter sind nicht richtig", antworten, at.getSchlagwoerter());
+		
 	}
 	
 	public void testgetFrage() {
-		fail("Not yet implemented");
+		
+		Assert.assertEquals("Die Frage ist nicht richtig", frage, at.getFrage());
 	}
 	
 }
