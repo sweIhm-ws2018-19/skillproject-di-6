@@ -6,6 +6,6 @@ public class SpielrundeTest {
 	
 	Spielrunde runde = new Spielrunde();
 	
-	//Noch keine Methoden, außer Getter uns Setter.
+	//Noch keine Methoden, auÃŸer Getter und Setter.
 	
 }
