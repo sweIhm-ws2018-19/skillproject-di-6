@@ -7,13 +7,13 @@ import main.java.braingain.Modell.Frage;
 
 public class AntwortTest {
 	
-	String[] antworten = {"Fünf", "Sechs"};
-	Frage frage = new Frage("Wie viele Seiten hat ein Würfel?");
+	String[] antworten = {"Fuenf", "Sechs"};
+	Frage frage = new Frage("Wie viele Seiten hat ein Wuerfel?");
 	Antwort at = new Antwort(antworten, frage) ;
 	
 	public void getSchlagwoerter() {
 		
-		Assert.assertArrayEquals("Schlagwörter sind nicht richtig", antworten, at.getSchlagwoerter());
+		Assert.assertArrayEquals("Schlagwoerter sind nicht richtig", antworten, at.getSchlagwoerter());
 		
 	}
 	
