@@ -40,7 +40,7 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(intentName("UsernameSpeichernIntent"));
+		return input.matches(intentName("UsernamenSpeichernIntent"));
 	}
 
 	@Override
