@@ -26,7 +26,7 @@ public class KategorieEinstellenHandler implements RequestHandler {
 	}
 	
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(intentName("MyCathegoryIsIntent"));
+		return input.matches(intentName("KategorieEinstellenIntent"));
 	}
 
 	
@@ -49,14 +49,14 @@ public class KategorieEinstellenHandler implements RequestHandler {
 				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
 	
 				speechText = String
-						.format("Du hast dich mir vorgestellt. Waehle jetzt deine Kathegorie. "
+						.format("Du hast dich mir vorgestellt. Waehle jetzt deine Kategorie. "
 								+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedaechtnistraining.", gewaehlteKategorie);
 				repromptText = "Waehle jetzt deine Kategorie.";
 	
 			} else {
 				// Render an error since we don't know what the users favorite color is.
 				speechText = "Ich kenne die Kategorie nicht. Bitte versuche es noch einmal.";
-				repromptText = "Ich habe die Kahegorie nicht verstanden. Sage mir die Kategorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich wähle die Katgorie Logik.";
+				repromptText = "Ich habe die Kategorie nicht verstanden. Sage mir die Kategorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich waehle die Katgorie Logik.";
 				isAskResponse = true;
 			}
 
@@ -68,14 +68,14 @@ public class KategorieEinstellenHandler implements RequestHandler {
 							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
 				
 							speechText = String
-									.format("Ihr habt euch mir jetzt vorgestellt. Wählt jetzt eure Kategorie."
+									.format("Ihr habt euch mir jetzt vorgestellt. Waehlt jetzt eure Kategorie."
 											+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedaechtnistraining.", gewaehlteKategorie);
-							repromptText = "Wählt jetzt eure Kategorie.";
+							repromptText = "Waehlt jetzt eure Kategorie.";
 				
 						} else {
 							// Render an error since we don't know what the users favorite color is.
-							speechText = "Ich kenne die Kathegorie nicht. Bitte versuche es noch einmal.";
-							repromptText = "Ich habe die Kathegorie nicht verstanden. Sage mir die Kathegorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich waehle die Kathegorie Logik.";
+							speechText = "Ich kenne die Kategorie nicht. Bitte versuche es noch einmal.";
+							repromptText = "Ich habe die Kategorie nicht verstanden. Sage mir die Kategorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich waehle die Kategorie Logik.";
 							isAskResponse = true;
 						}
 				
