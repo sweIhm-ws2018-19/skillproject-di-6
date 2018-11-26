@@ -26,7 +26,7 @@ public class LevelEinstellenHandler implements RequestHandler {
 	}
 	
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(intentName("MyLevelIsIntent"));
+		return input.matches(intentName("LevelEinstellenIntent"));
 	}
 
 	
