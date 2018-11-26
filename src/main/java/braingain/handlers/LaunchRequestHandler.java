@@ -37,7 +37,7 @@ public class LaunchRequestHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String speechText = "Hallo. Mit mir trainierst du dein Gehirn. Bitte sage mir, ob du alleine oder im Duell spielen willst.";
+		String speechText = "Hallo. Mit mir trainierst du dein Gehirn. Bitte sage mir, mit wie vielen Spielern du spielst. Es koennen maximal 4 Spieler spielen.";
 		String repromptText = "Bitte sage mir wie viele Leute spielen.";
 		return input.getResponseBuilder().withSimpleCard("BrainSession", speechText).withSpeech(speechText)
 				.withReprompt(repromptText).build();

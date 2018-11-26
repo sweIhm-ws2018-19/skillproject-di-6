@@ -18,7 +18,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class LevelEinstellenHandler implements RequestHandler {
 
-	private static final Object LIST_OF_LEVEL = "LIST_OF_LEVEL";
+	private static final Object LIST_OF_LEVEL = "gewaehltesLevel";
 	private Spielrunde sr;
 	
 	public LevelEinstellenHandler(Spielrunde sr){
@@ -49,8 +49,7 @@ public class LevelEinstellenHandler implements RequestHandler {
 				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
 	
 				speechText = String
-						.format("Du hast Kategorie %s gewaehlt. Waehle jetzt dein Level. "
-								+ "Es gibt folgende Level: Einfach, Mittel, Anspruchsvoll und Schwer.", gewaehltesLevel);
+						.format("Du hast das Level %s gewaehlt. Mehr kann ich im ersten Sprint noch nicht.", gewaehltesLevel);
 				repromptText = "Waehle jetzt dein Level.";
 	
 			} else {
@@ -68,8 +67,7 @@ public class LevelEinstellenHandler implements RequestHandler {
 							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
 				
 							speechText = String
-									.format("Ihr habt Kategorie %s gewaehlt. Waehlt jetzt euer Level."
-											+ "Es gibt folgende Level: Einfach, Mittel, Anspruchsvoll und Schwer.", gewaehltesLevel);
+									.format("Ihr habt das Level %s gewaehlt. Mehr kann ich im ersten Sprint noch nicht.", gewaehltesLevel);
 							repromptText = "Waehlt jetzt eurer Level.";
 				
 						} else {

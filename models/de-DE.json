@@ -1,140 +1,251 @@
 {
-  "interactionModel": {
-    "languageModel": {
-      "invocationName": "Braingain",
-      "intents": [
-        {
-          "name": "AMAZON.CancelIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.HelpIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.StopIntent",
-          "samples": []
-        },
-        {
-          "name": "AnzahlDerSpielerSetzenIntent",
-          "slots": [
-            {
-              "name": "numberOfPlayers",
-              "type": "integer",
-            }
-          ],
-          "samples": [
-            " Wir sind {numberOfPlayers} Spieler",
-            " Wir wollen mit {numberOfPlayers} spielen"
-          ]
-        },
-        {
-          "name": "UsernamenSpeichernIntent",
-          "slots": [
-          	{
-          		"name": "username",
-          		"type": "string",
-          	}
-          ],
-          "samples": [
-            "Ich hei√üe {username}",
-            "Ich bin {username}",
-            "{username}"
-          ]
-        },
-        {
-          "name": "KategorieEinstellenIntent",
-          "slots": [
-          	{
-          		"name": "gewaehlteKategorie",
-          		"type": "LIST_OF_CATEGORIES",
-          	}
-          ],
-          "samples": [
-            "Ich will in Kategorie {gewaehlteKategorie} spielen",
-            "Wir spielen {gewaehlteKategorie}",
-            "{gewaehlteKategorie}",
-            "Wir wollen {gewaehlteKategorie} spielen",
-            "Die Kategorie ist {gewaehlteKategorie}"
-          ]
-        },
-        {
-          "name": "LevelEinstellenIntent",
-          "slots": [
-          	{
-          		"name": "gewaehltesLevel",
-          		"type": "LIST_OF_LEVELS",
-          	}
-          ],
-          "samples": [
-            "Ich will in Kategorie {gewaehltesLevel} spielen",
-            "Wir spielen {gewaehltesLevel}",
-            "{gewaehltesLevel}",
-            "Wir wollen {gewaehltesLevel} spielen",
-            "Die Kategorie ist {gewaehltesLevel}"
-          ]
-        },
-        {
-          "name": "AMAZON.PauseIntent",
-          "samples": []
-        },
-        {
-          "name": "AMAZON.ResumeIntent",
-          "samples": []
+    "interactionModel": {
+        "languageModel": {
+            "invocationName": "braingain",
+            "intents": [
+                {
+                    "name": "AMAZON.CancelIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.HelpIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.StopIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AnzahlDerSpielerSetzenIntent",
+                    "slots": [
+                        {
+                            "name": "numberOfPlayers",
+                            "type": "LIST_OF_PLAYERNUMBERS"
+                        }
+                    ],
+                    "samples": [
+                        " Wir sind {numberOfPlayers} Spieler",
+                        " Wir wollen mit {numberOfPlayers} spielen"
+                    ]
+                },
+                {
+                    "name": "UsernamenSpeichernIntent",
+                    "slots": [
+                        {
+                            "name": "username",
+                            "type": "LIST_OF_NAMES"
+                        }
+                    ],
+                    "samples": [
+                        "Mein Username ist {username}",
+                        "Mein Spielername ist {username}",
+                        "Ich heiﬂe {username}",
+                        "Ich bin {username}"
+                    ]
+                },
+                {
+                    "name": "KategorieEinstellenIntent",
+                    "slots": [
+                        {
+                            "name": "gewaehlteKategorie",
+                            "type": "LIST_OF_CATEGORIES"
+                        }
+                    ],
+                    "samples": [
+                        "Ich will in Kategorie {gewaehlteKategorie} spielen",
+                        "Wir spielen {gewaehlteKategorie}",
+                        "Wir wollen {gewaehlteKategorie} spielen",
+                        "Die Kategorie ist {gewaehlteKategorie}"
+                    ]
+                },
+                {
+                    "name": "LevelEinstellenIntent",
+                    "slots": [
+                        {
+                            "name": "gewaehltesLevel",
+                            "type": "LIST_OF_LEVELS"
+                        }
+                    ],
+                    "samples": [
+                        "Ich will in Level {gewaehltesLevel} spielen",
+                        "Wir spielen {gewaehltesLevel}",
+                        "Wir wollen {gewaehltesLevel} spielen",
+                        "Das Level ist {gewaehltesLevel}"
+                    ]
+                },
+                {
+                    "name": "AMAZON.PauseIntent",
+                    "samples": []
+                },
+                {
+                    "name": "AMAZON.ResumeIntent",
+                    "samples": []
+                }
+            ],
+            "types": [
+                {
+                    "name": "LIST_OF_CATEGORIES",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "logik"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Mathe"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Gedaechtnistraining"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Geographie"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "LIST_OF_LEVELS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Einfach"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Mittel"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Anspruchsvoll"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Schwer"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "LIST_OF_PLAYERNUMBERS",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "vier",
+                                "synonyms": [
+                                    "4"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "drei",
+                                "synonyms": [
+                                    "3"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "zwei",
+                                "synonyms": [
+                                    "2"
+                                ]
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "ein",
+                                "synonyms": [
+                                    "1"
+                                ]
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "AMAZON.DE_FIRST_NAME",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Jessica"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Maria"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Joseph"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Lisa"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Max"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Anna"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "LIST_OF_NAMES",
+                    "values": [
+                        {
+                            "name": {
+                                "value": "Magdalena"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Anna"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Sepp"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Maria"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Joseph"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Max"
+                            }
+                        },
+                        {
+                            "name": {
+                                "value": "Lisa"
+                            }
+                        }
+                    ]
+                }
+            ]
         }
-      ],
-      "types": [
-        {
-          "name": "LIST_OF_CATEGORIES",
-          "values": [
-            {
-              "name": {
-                "value": "Logik"
-              }
-            },
-            {
-              "name": {
-                "value": "Mathe"
-              }
-            },
-            {
-              "name": {
-                "value": "Gedaechtnistraining"
-              }
-            },
-            {
-              "name": {
-                "value": "Geographie"
-              }
-            }
-          ]
-        },
-        {
-         "name": "LIST_OF_LEVELS",
-          "values": [
-            {
-             "name": {
-               "value": "Einfach"
-             }
-            },
-            {
-             "name": {
-              "value": "Mittel" 
-             }
-            },
-            {
-             "name": {
-               "value": "Anspruchsvoll"
-             }
-            },
-            {
-              "name": {
-                "value": "Schwer"
-              }
-            }
-          ]
-        }
-      ]
     }
-  }
 }

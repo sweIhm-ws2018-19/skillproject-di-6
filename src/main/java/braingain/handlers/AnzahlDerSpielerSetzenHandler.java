@@ -15,18 +15,24 @@ package main.java.braingain.handlers;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
+import com.amazon.ask.model.Intent;
+import com.amazon.ask.model.IntentRequest;
+import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
+import com.amazon.ask.model.Slot;
 
 import main.java.braingain.Modell.Spielrunde;
 
 
 public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
-	private static final String NumberOfPlayers = "NumberOfPlayers";
+	private static final String LIST_OF_PLAYERNUMBERS = "numberOfPlayers";
 	
 	Spielrunde sr;
 	
@@ -42,16 +48,43 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		String speechText;
-		int numberOfPlayers;
-		numberOfPlayers = (int) input.getAttributesManager().getSessionAttributes().get(NumberOfPlayers);
+		//int numberOfPlayers;
 		
-		if(numberOfPlayers == 0 || numberOfPlayers > 4) {
-			speechText = String.format("Die angegebene Spielerzahl %s kann nicht akzeptiert werden. Die Spieleranzahl ist auf 1 bis 4 Spieler begrenzt.", numberOfPlayers);
-		}else {
-			speechText = String.format("OK. Ihr spielt nun zu %s", numberOfPlayers);
+		Request request = input.getRequestEnvelope().getRequest();
+		IntentRequest intentRequest = (IntentRequest) request;
+		Intent intent = intentRequest.getIntent();
+		Map<String, Slot> slots = intent.getSlots();
+
+		// Get the level slot from the list of slots.
+		Slot selectedPlayerSlot = slots.get(LIST_OF_PLAYERNUMBERS);
+		
+		if(selectedPlayerSlot != null) {
+			String numberOfPlayers = selectedPlayerSlot.getValue();
+			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
+			speechText = String.format("OK. Ihr spielt nun zu %s. Sagt mir nun einer zur Zeit eure Namen. Sagt zum Beispiel ich heiße Max.", numberOfPlayers);
+		} else {
+			speechText = "Ich habe deine Antwort leider nicht verstanden. Wie viele Spieler seid ihr?";
 		}
 		
-		return input.getResponseBuilder().withSpeech(speechText).build();
+		
+/*
+		try {
+			numberOfPlayers = (int) input.getAttributesManager().getSessionAttributes().get(NumberOfPlayers);
+		
+			if(numberOfPlayers == 0 || numberOfPlayers > 4) {
+				speechText = String.format("Die angegebene Spielerzahl %s kann nicht akzeptiert werden. Die Spieleranzahl ist auf 1 bis 4 Spieler begrenzt.", numberOfPlayers);
+			}else {
+				speechText = String.format("OK. Ihr spielt nun zu %s", numberOfPlayers);
+			}
+		
+		}catch (Exception e) {
+			speechText = "Es geschah ein Fehler: "+ e.getMessage();
+		}*/
+		
+		
+		return input.getResponseBuilder().withSpeech(speechText)
+				.withShouldEndSession(false)
+				.build();
 		
 	}
 }

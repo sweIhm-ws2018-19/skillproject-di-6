@@ -18,7 +18,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class KategorieEinstellenHandler implements RequestHandler {
 
-	private static final Object LIST_OF_CATEGORIES = "LIST_OF_CATEGORIES";
+	private static final Object LIST_OF_CATEGORIES = "gewaehlteKategorie";
 	private Spielrunde sr;
 	
 	public KategorieEinstellenHandler(Spielrunde sr){
@@ -49,8 +49,7 @@ public class KategorieEinstellenHandler implements RequestHandler {
 				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
 	
 				speechText = String
-						.format("Du hast dich mir vorgestellt. Waehle jetzt deine Kategorie. "
-								+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedaechtnistraining.", gewaehlteKategorie);
+						.format("Du hast die Kategorie %s gewaehlt. Waehle nun das Level. Es gibt einfach, mittel, anspruchsvoll und schwer.", gewaehlteKategorie);
 				repromptText = "Waehle jetzt deine Kategorie.";
 	
 			} else {
@@ -68,8 +67,7 @@ public class KategorieEinstellenHandler implements RequestHandler {
 							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
 				
 							speechText = String
-									.format("Ihr habt euch mir jetzt vorgestellt. Waehlt jetzt eure Kategorie."
-											+ "Es gibt folgende Kategorien: Logik, Mathematik, Geografie und Gedaechtnistraining.", gewaehlteKategorie);
+									.format("Ihr habt die Kategorie %s gewaehlt. Waehlt nun euer Level. Es gibt einfach, mittel, anspruchsvoll und schwer.", gewaehlteKategorie);
 							repromptText = "Waehlt jetzt eure Kategorie.";
 				
 						} else {

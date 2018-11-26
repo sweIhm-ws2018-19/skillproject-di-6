@@ -13,11 +13,17 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 package main.java.braingain.handlers;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
+import com.amazon.ask.model.Intent;
+import com.amazon.ask.model.IntentRequest;
+import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
+import com.amazon.ask.model.Slot;
 
 import main.java.braingain.Modell.Spielrunde;
 
@@ -25,7 +31,7 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class UsernamenSpeichernHandler implements RequestHandler {
 
-	public static final String NAME = "NAME";
+	public static final String LIST_OF_NAMES = "username";
 	private Spielrunde sr;
 
 	public UsernamenSpeichernHandler(Spielrunde sr) {
@@ -41,12 +47,31 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 	public Optional<Response> handle(HandlerInput input) {
 
 		String speechText;
-		String name = (String) input.getAttributesManager().getSessionAttributes().get(NAME);
-		if (name != null && !name.isEmpty()) {
-			speechText = String.format("Dein Name ist %s und wird gespeichert.", name);
+		//String name = (String) input.getAttributesManager().getSessionAttributes().get(NAME);
+		Request request = input.getRequestEnvelope().getRequest();
+		IntentRequest intentRequest = (IntentRequest) request;
+		Intent intent = intentRequest.getIntent();
+		Map<String, Slot> slots = intent.getSlots();
+
+		// Get the color slot from the list of slots.
+		Slot selectedNameSlot = slots.get(LIST_OF_NAMES);
+		
+		if(selectedNameSlot != null) {
+		String username = selectedNameSlot.getValue();
+		input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
+		speechText = String.format("Du heiﬂt %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", username);
+		} else {
+			speechText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
+		}
+
+
+		/*if (name != null && !name.isEmpty()) {
+			speechText = String.format("Dein Name ist %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", name);
 		} else {
 			speechText = "Um deinen Namen zu speichern musst du ihn mir sagen.";
-		}
-		return input.getResponseBuilder().withSpeech(speechText).build();
+		}*/
+		return input.getResponseBuilder().withSpeech(speechText)
+				.withShouldEndSession(false)
+				.build();
 	}
 }
