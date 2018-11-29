@@ -23,28 +23,30 @@ public class Spieler {
 		//punktestand = richtigBeantwortet ? +1 : -1;
 	}
 	
-	protected String getName() {
+	public String getName() {
 		return name;
 	}
 
-	protected void setName(String name) {
+	/*protected void setName(String name) {
 		this.name = name;
-	}
+	}*/
 
 	public int getPunktestand() {
 		return punktestand;
 	}
 
-	protected void setPunktestand(int punktestand) {
+	/*protected void setPunktestand(int punktestand) {
 		this.punktestand = punktestand;
-	}
+	}*/
 
-	protected int getHighscore() {
+	public int getHighscore() {
 		return highscore;
 	}
 
-	protected void setHighscore(int highscore) {
-		this.highscore = highscore;
+	public void setHighscore() {
+		if(punktestand > highscore) {
+			highscore = punktestand;
+		}
 	}
 
 }

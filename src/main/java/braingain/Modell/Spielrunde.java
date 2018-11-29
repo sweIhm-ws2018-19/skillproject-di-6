@@ -6,13 +6,15 @@ public class Spielrunde {
 	ArrayList<Spieler> spieler;
 	ArrayList<Frage> fragen;
 	private	int anzahlSpieler;
+	Kategorie kategorie;
+	Level level;
 	
 	public Spielrunde(){
 		spieler = new ArrayList<Spieler>();
 		fragen = new ArrayList<Frage>();
 	}
 
-	public ArrayList<Spieler> getHighscore() {
+	public ArrayList<Spieler> getHighscoreSpieler() {
 		ArrayList<Spieler> highscoreSpieler = new ArrayList<Spieler>();
 		highscoreSpieler.add(spieler.get(0));
 		for(Spieler s:spieler) {
@@ -26,6 +28,18 @@ public class Spielrunde {
 		return highscoreSpieler;
 	}
 	
+	public String[] getHighscore() {
+		ArrayList<Spieler> highscoreSpieler = getHighscoreSpieler();
+		int highscore = highscoreSpieler.get(0).getPunktestand();
+		int anzahlGewinner = highscoreSpieler.size();
+		String[] ausgaben = new String[anzahlGewinner+1];
+		ausgaben[0] = Integer.toString(highscore);
+		for(int i = 0; i< anzahlGewinner; i++) {
+			ausgaben[i+1] = highscoreSpieler.get(i).getName();
+		}
+		
+	}
+	
 	public void getFragen() {
 		//TODO
 		//Nachdem wir Level und Kategorie bekommen haben, ziehen wir die Fragen aus unserer Datenbank.
@@ -37,6 +51,16 @@ public class Spielrunde {
 	
 	public void setAnzahlDerSpieler(int anzahlDerSpieler) {
 		this.anzahlSpieler = anzahlDerSpieler;
+	}
+	
+	public void setKategorie(String kategorie) {
+		String categorie = kategorie.toLowerCase();
+		//TODO: finde die richtige Kategorie im Enum und setze this.kategorie auf dieses Enumobjekt...
+	}
+	
+	public void setLevel(String level) {
+		String lvl = level.toLowerCase();
+		//TODO: finde das richtige Level im Enum und setze this.level auf dieses Enumobjekt...
 	}
 	
 }
