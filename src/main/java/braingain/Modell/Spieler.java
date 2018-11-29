@@ -15,12 +15,12 @@ public class Spieler {
 	}
 
 	public void beantwortet(boolean richtigBeantwortet){
-		if(richtigBeantwortet) {
+		(richtigBeantwortet) {
 			punktestand++;
 		}else {
 			punktestand--;
 		}
-		//punktestand = richtigBeantwortet ? +1 : -1;
+		punktestand = richtigBeantwortet ? punktestand +1 : punktestand -1;
 	}
 	
 	public String getName() {
