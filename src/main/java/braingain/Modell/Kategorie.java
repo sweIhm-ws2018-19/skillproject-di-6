@@ -8,7 +8,7 @@ enum Kategorie {
 	
 	private String[] value;
 	
-	public Kategorie(String[] kategorien){this.value = kategorien;}
+	Kategorie(String[] kategorien){this.value = kategorien;}
 	
 	public String[] value() {return value;}
 
