@@ -1,10 +1,10 @@
 package main.java.braingain.Modell;
 
 enum Kategorie {
-	LOGIK({"logik","logic"}),
-	MATHE({"mathe","mathematik"}),
-	GEOGRAFIE({"geo","geografie","geographie","erdkunde"}),
-	GEDAECHTNISTRAINING({"gedaechtnistraining","gehirntraining"});
+	LOGIK(new String[]{"logik","logic"}),
+	MATHE(new String[]{"mathe","mathematik"}),
+	GEOGRAFIE(new String[]{"geo","geografie","geographie","erdkunde"}),
+	GEDAECHTNISTRAINING(new String[]{"gedaechtnistraining","gehirntraining"});
 	
 	private String[] value;
 	
