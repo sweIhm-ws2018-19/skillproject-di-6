@@ -15,11 +15,6 @@ public class Spieler {
 	}
 
 	public void beantwortet(boolean richtigBeantwortet){
-		(richtigBeantwortet) {
-			punktestand++;
-		}else {
-			punktestand--;
-		}
 		punktestand = richtigBeantwortet ? punktestand +1 : punktestand -1;
 	}
 	
