@@ -38,6 +38,7 @@ public class Spielrunde {
 			ausgaben[i+1] = highscoreSpieler.get(i).getName();
 		}
 		
+		return ausgaben;
 	}
 	
 	public void getFragen() {
