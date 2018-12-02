@@ -54,9 +54,16 @@ public class Spielrunde {
 		this.anzahlSpieler = anzahlDerSpieler;
 	}
 	
-	public void setKategorie(String kategorie) {
+	
+	public boolean setKategorie(String kategorie) {
+		boolean kategorieIsSet=false;
 		String categorie = kategorie.toLowerCase();
-		//TODO: finde die richtige Kategorie im Enum und setze this.kategorie auf dieses Enumobjekt...
+		Kategorie temp = Kategorie.getKategorie(categorie);
+		if(temp!= null) {
+			this.kategorie = temp;
+			kategorieIsSet = true;
+		}	
+		return kategorieIsSet;
 	}
 	
 	public void setLevel(String level) {
