@@ -11,5 +11,14 @@ enum Kategorie {
 	Kategorie(String[] kategorien){this.value = kategorien;}
 	
 	public String[] value() {return value;}
+	
+	public Kategorie getKategorie(String propose) {
+		for(Kategorie k: this.values()) {
+			for(String s: k.value) {
+				if(s.equals(propose)) return k;
+			}
+		}
+		return null;
+	}
 
 }
