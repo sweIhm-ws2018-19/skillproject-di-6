@@ -13,7 +13,7 @@ enum Kategorie {
 	public String[] value() {return value;}
 	
 	public static Kategorie getKategorie(String propose) {
-		for(Kategorie k: this.values()) {
+		for(Kategorie k: Kategorie.values()) {
 			for(String s: k.value) {
 				if(s.equals(propose)) return k;
 			}
