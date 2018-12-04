@@ -43,7 +43,7 @@ public class KategorieEinstellenHandler implements RequestHandler {
 		boolean isAskResponse = false;
 		if(sr.getAnzahlSpieler()==1) {
 			// Check for favorite color and create output to user.
-			if (selectedCathegorySlot != null) {
+			if (selectedCathegorySlot != null && selectedCathegorySlot.getResolutions().toString().contains("ER_SUCCESS_MATCH")) {
 				// Store the user's favorite color in the Session and create response.
 				String gewaehlteKategorie = selectedCathegorySlot.getValue();
 				boolean kategorieExists = sr.setKategorie(gewaehlteKategorie);
@@ -71,7 +71,7 @@ public class KategorieEinstellenHandler implements RequestHandler {
 
 		}else {
 			// Check for favorite color and create output to user.
-						if (selectedCathegorySlot != null) {
+						if (selectedCathegorySlot != null && selectedCathegorySlot.getResolutions().toString().contains("ER_SUCCESS_MATCH")) {
 							// Store the user's favorite color in the Session and create response.
 							String gewaehlteKategorie = selectedCathegorySlot.getValue();
 							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
