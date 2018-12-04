@@ -41,7 +41,7 @@ public class Spielrunde {
 		return ausgaben;
 	}
 	
-	public void getFragen() {
+	public void fetchFragen() {
 		//TODO
 		//Nachdem wir Level und Kategorie bekommen haben, ziehen wir die Fragen aus unserer Datenbank.
 	}
@@ -69,6 +69,15 @@ public class Spielrunde {
 	public void setLevel(String level) {
 		String lvl = level.toLowerCase();
 		//TODO: finde das richtige Level im Enum und setze this.level auf dieses Enumobjekt...
+	}
+	
+	public void checkAntwort(String antwort){
+		//TODO: kontrolliere die Antwort und aktualisiere in Spieler den Punktestand...
+	}
+	
+	public String getNaechsteFrage(){
+		//TODO: gebe die Frage aus dem Frage-Objekt der naechsten Frage in der Liste an den Handler weiter...
+		return "";
 	}
 	
 }
