@@ -2,7 +2,7 @@ package main.java.braingain.Modell;
 
 public class Spieler {
 	
-	private String name;
+	private final String name;
 	private int punktestand;
 	private int highscore;
 	
@@ -22,17 +22,9 @@ public class Spieler {
 		return name;
 	}
 
-	/*protected void setName(String name) {
-		this.name = name;
-	}*/
-
 	public int getPunktestand() {
 		return punktestand;
 	}
-
-	/*protected void setPunktestand(int punktestand) {
-		this.punktestand = punktestand;
-	}*/
 
 	public int getHighscore() {
 		return highscore;
