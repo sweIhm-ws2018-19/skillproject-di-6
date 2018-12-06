@@ -55,10 +55,10 @@ public class Spielrunde {
 	}
 	
 	
-	public boolean setKategorie(String kategorie) {
+		public boolean setKategorie(String kategorie) {
 		boolean kategorieIsSet=false;
 		String categorie = kategorie.toLowerCase();
-		Kategorie temp = Kategorie.getKategorie(categorie);
+		Kategorie temp = getKategorie(categorie);
 		if(temp!= null) {
 			this.kategorie = temp;
 			kategorieIsSet = true;
@@ -66,9 +66,33 @@ public class Spielrunde {
 		return kategorieIsSet;
 	}
 	
-	public void setLevel(String level) {
-		String lvl = level.toLowerCase();
-		//TODO: finde das richtige Level im Enum und setze this.level auf dieses Enumobjekt...
+	public Kategorie getKategorie(String propose) {
+		for(Kategorie k: Kategorie.values()) {
+			for(String s: k.value) {
+				if(s.equals(propose)) return k;
+			}
+		}
+		return null;
+	}
+	
+	public boolean setLevel(String level) {
+		boolean levelIsSet=false;
+		String level_1 = level.toLowerCase();
+		Level temp = getLevel(level_1);
+		if(temp!= null) {
+			this.level = temp;
+			levelIsSet = true;
+		}	
+		return levelIsSet;
+	}
+	
+	public Level getLevel(String propose) {
+		for(Level k: Level.values()) {
+			for(String s: k.value) {
+				if(s.equals(propose)) return k;
+			}
+		}
+		return null;
 	}
 	
 	public void checkAntwort(String antwort){
