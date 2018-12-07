@@ -30,9 +30,22 @@ public class Frage {
 		return frage;
 	}
 	
-	public ArrayList<String> getAntworten(){
+	public String getAntwortString() throws Exception{
+		if(antworten.size() > 1) {
+			throw new Exception("The Method getAntwortString must only be called when there is only one answer.");
+		}
+		return antworten.get(0);
+	}
+	
+	public ArrayList<String> getAntwortenArrayList(){
 		return antworten;
 	}
 	
-	
+	public String[] getAntwortenArray() {
+		String[] antwortenArray = new String[antworten.size()];
+		for(int i = 0; i < antworten.size(); i++) {
+			antwortenArray[i] = antworten.get(i);
+		}
+		return antwortenArray;
+	}
 }
