@@ -1,7 +1,8 @@
-package main.java.braingain.handlers;
+package braingain.handlers;
+
+import static com.amazon.ask.request.Predicates.intentName;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
-import main.java.braingain.Modell.Spielrunde;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
@@ -14,7 +15,8 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-import static com.amazon.ask.request.Predicates.intentName;
+
+import braingain.modell.Spielrunde;
 
 public class KategorieEinstellenHandler implements RequestHandler {
 

@@ -11,7 +11,7 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  the specific language governing permissions and limitations under the License.
 */
 
-package main.java.braingain.handlers;
+package braingain.handlers;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
@@ -27,12 +27,11 @@ import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
-import main.java.braingain.Modell.Spielrunde;
-
+import braingain.modell.Spielrunde;
 
 public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
-	private static final String LIST_OF_PLAYERNUMBERS = "numberOfPlayers";
+	private static final Object LIST_OF_PLAYERNUMBERS = "numberOfPlayers";
 	
 	Spielrunde sr;
 	
@@ -40,12 +39,10 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 		this.sr = sr;
 	}
 
-	@Override
 	public boolean canHandle(HandlerInput input) {
 		return input.matches(intentName("AnzahlDerSpielerSetzenIntent"));
 	}
 
-	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		String speechText;
 		//int numberOfPlayers;

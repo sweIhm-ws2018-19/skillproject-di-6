@@ -1,4 +1,6 @@
-package main.java.braingain.Modell;
+package braingain.modell;
+
+public enum Level{
 
 	EINFACH(new String[] {"einfach", "simpel"}),
 	MITTEL(new String[] {"mittel", "mittelschwer"}),
@@ -6,7 +8,7 @@ package main.java.braingain.Modell;
 	SCHWER(new String[] {"schwer", "schwierig"});
 	
 	
-	String[] value;
+	private String[] value;
 	
 	Level(String[] kategorien){this.value = kategorien;}
 	

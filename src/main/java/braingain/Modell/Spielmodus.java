@@ -1,4 +1,4 @@
-package main.java.braingain.Modell;
+package braingain.modell;
 
 public enum Spielmodus {
 	

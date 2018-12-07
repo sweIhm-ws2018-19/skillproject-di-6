@@ -11,18 +11,19 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.braingain.handlers;
+package braingain.handlers;
+
+import static com.amazon.ask.request.Predicates.requestType;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.SessionEndedRequest;
 
-import main.java.braingain.Modell.Spielrunde;
+import braingain.modell.Spielrunde;
 
 import java.util.Optional;
 
-import static com.amazon.ask.request.Predicates.requestType;
 
 public class SessionEndedRequestHandler implements RequestHandler {
 	

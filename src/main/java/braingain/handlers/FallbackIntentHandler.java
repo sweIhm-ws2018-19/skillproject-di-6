@@ -1,14 +1,14 @@
-package main.java.braingain.handlers;
+package braingain.handlers;
+
+import static com.amazon.ask.request.Predicates.intentName;
+
+import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
-import main.java.braingain.Modell.Spielrunde;
-
-import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.intentName;
+import braingain.modell.Spielrunde;
 
 // 2018-July-09: AMAZON.FallackIntent is only currently available in en-US locale.
 //              This handler will not be triggered except in that locale, so it can be
@@ -21,12 +21,10 @@ public class FallbackIntentHandler implements RequestHandler {
 		this.sr = sr;
 	}
 
-	@Override
-    public boolean canHandle(HandlerInput input) {
+	public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("AMAZON.FallbackIntent"));
     }
 
-    @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText = "Tut mir leid, das weiss ich nicht. Sage einfach Hilfe.";
         return input.getResponseBuilder()

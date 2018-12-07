@@ -11,17 +11,17 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.braingain.handlers;
+package braingain.handlers;
+
+import static com.amazon.ask.request.Predicates.intentName;
+
+import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
-import main.java.braingain.Modell.Spielrunde;
-
-import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.intentName;
+import braingain.modell.Spielrunde;
 
 public class HelpIntentHandler implements RequestHandler {
 	
@@ -31,12 +31,10 @@ public class HelpIntentHandler implements RequestHandler {
 		this.sr = sr;
 	}
 
-	@Override
-    public boolean canHandle(HandlerInput input) {
+	public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("AMAZON.HelpIntent"));
     }
 
-    @Override
     public Optional<Response> handle(HandlerInput input) {
         String speechText = "Du kannst mit mir dein Gehirn trainieren. Zuerst musst du mir sagen, wie viele Spieler ihr seid, dann eure Namen, die Kategorie, welche ihr spielen wollt und das Level.";
         String repromptText = "Bitte sage mir, wie viele Spieler ihr seid.";

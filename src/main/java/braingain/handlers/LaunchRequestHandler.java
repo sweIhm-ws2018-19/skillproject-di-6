@@ -11,7 +11,7 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.braingain.handlers;
+package braingain.handlers;
 
 import static com.amazon.ask.request.Predicates.requestType;
 
@@ -22,7 +22,7 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
-import main.java.braingain.Modell.Spielrunde;
+import braingain.modell.Spielrunde;
 
 public class LaunchRequestHandler implements RequestHandler {
 	
@@ -35,7 +35,6 @@ public class LaunchRequestHandler implements RequestHandler {
 		return input.matches(requestType(LaunchRequest.class));
 	}
 
-	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		String speechText = "Hallo. Mit mir trainierst du dein Gehirn. Bitte sage mir, mit wie vielen Spielern du spielst. Es koennen maximal 4 Spieler spielen.";
 		String repromptText = "Bitte sage mir wie viele Leute spielen.";

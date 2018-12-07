@@ -1,4 +1,4 @@
-package main.java.braingain.Modell;
+package braingain.modell;
 
 import java.util.ArrayList;
 
@@ -16,7 +16,7 @@ public class Frage {
 	public Frage(String frage, String[] antworten) {
 		this.frage = frage;
 		this.antworten = new ArrayList<String>();
-		for(int i = 0; i<antworten.length; i++){
+		for(int i = 0; i < antworten.length; i++){
 			this.antworten.add(antworten[i]);	
 		}
 	}

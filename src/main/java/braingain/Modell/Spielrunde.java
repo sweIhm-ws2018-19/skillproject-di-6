@@ -1,4 +1,4 @@
-package main.java.braingain.Modell;
+package braingain.modell;
 
 import java.util.ArrayList;
 
@@ -68,7 +68,7 @@ public class Spielrunde {
 	
 	public Kategorie getKategorie(String propose) {
 		for(Kategorie k: Kategorie.values()) {
-			for(String s: k.value) {
+			for(String s: k.value()) {
 				if(s.equals(propose)) return k;
 			}
 		}
@@ -88,7 +88,7 @@ public class Spielrunde {
 	
 	public Level getLevel(String propose) {
 		for(Level k: Level.values()) {
-			for(String s: k.value) {
+			for(String s: k.value()) {
 				if(s.equals(propose)) return k;
 			}
 		}

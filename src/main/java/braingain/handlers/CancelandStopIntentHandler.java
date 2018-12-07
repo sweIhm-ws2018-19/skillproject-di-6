@@ -11,13 +11,13 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.braingain.handlers;
+package braingain.handlers;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
-import main.java.braingain.Modell.Spielrunde;
+import braingain.modell.Spielrunde;
 
 import java.util.Optional;
 
@@ -31,12 +31,10 @@ public class CancelandStopIntentHandler implements RequestHandler {
 		this.sr = sr;
 	}
 
-	@Override
-    public boolean canHandle(HandlerInput input) {
+	public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("AMAZON.StopIntent").or(intentName("AMAZON.CancelIntent")));
     }
 
-    @Override
     public Optional<Response> handle(HandlerInput input) {
         return input.getResponseBuilder()
                 .withSpeech("Auf Wiedersehen")
