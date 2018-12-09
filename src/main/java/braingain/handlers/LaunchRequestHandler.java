@@ -41,4 +41,28 @@ public class LaunchRequestHandler implements RequestHandler {
 		return input.getResponseBuilder().withSimpleCard("BrainSession", speechText).withSpeech(speechText)
 				.withReprompt(repromptText).build();
 	}
+	ResponseBuilder responseBuilder = input.getResponseBuilder();
+
+	//see if color is stored already
+	AttributesManager attributesManager = input.getAttributesManager();
+	Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
+	String Spielernamen = (String) persistentAttributes.get(UsernameSpeichernHandler.LIST_OF_NAMES);
+
+    if(Spielername != null){
+
+	//put stored color in session Attributes
+		Spieler neuerspieler = new Spieler(Spielernamen);
+		input.getAttributesManager().setSessionAttributes(Collections.singletonMap(UsernameSpeicherHandler.LIST_OF_NAMES,
+				neuerspieler.getName()));
+		String speechText =
+				String.format("%s %s. %s","Dein Username is " , neuerspieler.getName());
+		responseBuilder.withSimpleCard("BrainSession", speechText)
+				.withSpeech(speechText)
+				.withReprompt("Bitte sag mir deinen Spielernamen.");
+	}else {
+		responseBuilder.withSimpleCard("BrainSession",UsernamenSpeichernHandler.speechText)
+				.withSpeech(UsernamenSpeichernHandler.speechText)
+				.withReprompt("Bitte sag mir deinen Usernamen");
+	}
+}
 }
