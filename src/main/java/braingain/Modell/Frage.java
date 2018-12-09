@@ -1,9 +1,8 @@
-package main.java.braingain.Modell;
+package braingain.modell;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Frage implemets Serializable{
+public class Frage {
 	
 	private String frage;
 	private ArrayList<String> antworten;
@@ -17,7 +16,7 @@ public class Frage implemets Serializable{
 	public Frage(String frage, String[] antworten) {
 		this.frage = frage;
 		this.antworten = new ArrayList<String>();
-		for(int i = 0; i<antworten.length; i++){
+		for(int i = 0; i < antworten.length; i++){
 			this.antworten.add(antworten[i]);	
 		}
 	}
@@ -31,9 +30,22 @@ public class Frage implemets Serializable{
 		return frage;
 	}
 	
-	public ArrayList<String> getAntworten(){
+	public String getAntwortString() throws Exception{
+		if(antworten.size() > 1) {
+			throw new Exception("The Method getAntwortString must only be called when there is only one answer.");
+		}
+		return antworten.get(0);
+	}
+	
+	public ArrayList<String> getAntwortenArrayList(){
 		return antworten;
 	}
 	
-	
+	public String[] getAntwortenArray() {
+		String[] antwortenArray = new String[antworten.size()];
+		for(int i = 0; i < antworten.size(); i++) {
+			antwortenArray[i] = antworten.get(i);
+		}
+		return antwortenArray;
+	}
 }

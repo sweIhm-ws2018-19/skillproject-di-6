@@ -1,8 +1,6 @@
 package modellTest;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.Assert;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import braingain.modell.Spieler;
@@ -11,43 +9,40 @@ class SpielerTest {
 	
 
 	private static final String NAME = "Franz";
-	private static final int HIGHSCORE = 5;
 	private static final int PUNKTESTAND = 10;
+	private static final int HIGHSCORE = 5;
 	
 	Spieler spieler = new Spieler(NAME, PUNKTESTAND, HIGHSCORE);
 	
-	
-	@Test
-	void testSpieler() {
-		fail("Not yet implemented");
-	}
-
 	@Test
 	void testBeantwortet() {
 		spieler.beantwortet(true);
-		Assert.assertSame("Die Methode beantworten funktioniert nicht richtig.", 11, spieler.getPunktestand());
+		Assertions.assertEquals(11, spieler.getPunktestand(), "Die Methoden beantworten funktioniert nicht richtig.");
 		spieler.beantwortet(false);
-		Assert.assertSame("Die Methode beantworten funktioniert nicht richtig.", 10, spieler.getPunktestand());
+		Assertions.assertEquals(10, spieler.getPunktestand(), "Die Methoden beantworten funktioniert nicht richtig.");
 	}
 
 	@Test
 	void testGetName() {
-		fail("Not yet implemented");
+		Assertions.assertEquals(NAME, spieler.getName(), "Der Name stimmt nicht ueberein.");
 	}
 
 	@Test
 	void testGetPunktestand() {
-		fail("Not yet implemented");
+		Assertions.assertEquals(PUNKTESTAND, spieler.getPunktestand(), "Der Punktestand ist nicht richtig.");
 	}
 
 	@Test
 	void testGetHighscore() {
-		fail("Not yet implemented");
+		Assertions.assertEquals(HIGHSCORE, spieler.getHighscore(), "Der Highscore stimmt nicht ueberein.");
 	}
 
 	@Test
 	void testSetHighscore() {
-		fail("Not yet implemented");
+		spieler.setHighscore();
+		Assertions.assertEquals(spieler.getHighscore(), spieler.getPunktestand(), "Der Highscore und der Punktestand muessten gleich sein.");
+		spieler.setHighscore();
+		Assertions.assertEquals(PUNKTESTAND, spieler.getHighscore(), "Der Punktestand und der Highscore muessten gleich sein.");
 	}
 
 }

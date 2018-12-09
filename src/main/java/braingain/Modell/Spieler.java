@@ -15,7 +15,7 @@ public class Spieler {
 	}
 
 	public void beantwortet(boolean richtigBeantwortet){
-		punktestand = richtigBeantwortet ? punktestand +1 : punktestand -1;
+		punktestand = richtigBeantwortet ? punktestand + 1 : punktestand - 1;
 	}
 	
 	public String getName() {

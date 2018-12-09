@@ -15,5 +15,9 @@ public enum Kategorie {
 	public String[] value() {
 		return value;
 	}
-
+	
+	public String toString() {
+		return value[0];
+	}
+	
 }
