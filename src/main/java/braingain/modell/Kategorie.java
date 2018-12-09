@@ -19,5 +19,4 @@ public enum Kategorie {
 	public String toString() {
 		return value[0];
 	}
-	
 }
