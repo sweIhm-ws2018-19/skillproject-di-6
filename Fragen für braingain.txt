@@ -12,7 +12,7 @@
 	Wievielter sind Sie dann?
 Antwort: der Zweiten
 
-121 Du stehst in einem quadratischen Raum, bei dem alle 4 Wände, sowie der Boden und die Decke komplett aus Spiegeln bestehen. 
+121 Du stehst in einem kubischen Raum, bei dem alle 4 Wände, sowie der Boden und die Decke komplett aus Spiegeln bestehen. 
 	Wie oft kannst Du Dich sehen?
 Antwort: Gar nicht, da es kein Licht gibt.
 
