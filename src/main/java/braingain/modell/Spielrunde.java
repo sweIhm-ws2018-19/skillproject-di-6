@@ -24,9 +24,6 @@ public class Spielrunde {
 	}
 	
 	public boolean addFrage(Frage f) {
-		if(f.getAntwortString() == null) {
-			return false;
-		}
 		return fragen.add(f);
 	}
 	
@@ -50,24 +47,24 @@ public class Spielrunde {
 		int anzahlGewinner = highscoreSpieler.size();
 		String[] ausgaben = new String[anzahlGewinner + 1];
 		ausgaben[0] = Integer.toString(highscore);
-		for (int i = 0; i < anzahlGewinner; i++) {
-			ausgaben[i + 1] = highscoreSpieler.get(i).getName();
+		for (int i = 1; i < anzahlGewinner; i++) {
+			ausgaben[i] = highscoreSpieler.get(i).getName();
 		}
 
 		return ausgaben;
 	}
 
-	public String fetchFragen() {
+	public String fetchFrage() {
 		String newFrage = fragen.get(counter).getFrage();
 		return newFrage;
 	}
 
-	public int getAnzahlSpieler() {
-		return anzahlSpieler;
+	public void setAnzahlSpieler(int anzahlSpieler) {
+		this.anzahlSpieler = anzahlSpieler;
 	}
 
-	public void setAnzahlDerSpieler(int anzahlDerSpieler) {
-		this.anzahlSpieler = anzahlDerSpieler;
+	public int getAnzahlSpieler() {
+		return anzahlSpieler;
 	}
 
 	public boolean setKategorie(String kategorie) {
@@ -110,7 +107,19 @@ public class Spielrunde {
 		}
 		return null;
 	}
-
+	
+	public void setCounter(int counter) {
+		this.counter = counter;
+	}
+	
+	public void increaseCounter() {
+		this.counter++;
+	}
+	
+	public int getCounter() {
+		return this.counter;
+	}
+	
 	public void checkAntwort(String antwort) {
 		// TODO: kontrolliere die Antwort und aktualisiere in Spieler den Punktestand...
 	}
