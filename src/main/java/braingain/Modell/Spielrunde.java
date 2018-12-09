@@ -15,7 +15,11 @@ public class Spielrunde {
 	}
 
 	public boolean addPlayer(Spieler spieler){
-		return this.spieler.add(spieler);
+		boolean succeded = false;
+		if(spieler.length() < anzahlSpieler){
+			succeded = this.spieler.add(spieler)
+		}
+		return succeded;
 	}
 	
 	
