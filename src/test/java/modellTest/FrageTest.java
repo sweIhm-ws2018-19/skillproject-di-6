@@ -23,7 +23,14 @@ class FrageTest {
 	Frage frage1 = new Frage(befehl1, antwort);
 	Frage frage2 = new Frage(befehl2, antwortenArray);
 	Frage frage3 = new Frage(befehl3, antwortenArrayList);
-
+	
+	@Test
+	void testFrage() {
+		Assertions.assertNotNull(frage1, "Die frage existiert, mit dem ersten Konstruktor.");
+		Assertions.assertNotNull(frage2, "Die frage existiert, mit dem zweiten Konstruktor.");
+		Assertions.assertNotNull(frage3, "Die frage existiert, mit dem dritten Konstruktor.");
+	}
+	
 	@Test
 	void testGetFrage() {
 		Assertions.assertEquals(befehl1, frage1.getFrage(), "Die Frage stimmt nicht ueberein.");
