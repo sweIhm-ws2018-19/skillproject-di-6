@@ -54,22 +54,29 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 		// Get the color slot from the list of slots.
 		Slot selectedNameSlot = slots.get(LIST_OF_NAMES);
 		
-		if(selectedNameSlot != null) {
-		String username = selectedNameSlot.getValue();
-		input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
-		speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geographie, Logik und Gehirntraining.", username);
+		if (selectedNameSlot != null) {
+			String username = selectedNameSlot.getValue();
+			Spieler spieler = new Spieler(selectedNameSlot.getValue());
+			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
+			speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geographie, Logik und Gehirntraining.", username);
+
+			//store persistent
+			AttributesManager attributesManager = input.getAttributesManager();
+			Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
+			persistentAttributes.put(LIST_OF_NAMES, spieler.getName());
+			attributesManager.setPersistentAttributes(persistentAttributes);
+			attributesManager.savePersistentAttributes();
+
+			speechText =
+					String.format("%s %s. %s", "Dein Spielername ist ", spieler.getName());
+
 		} else {
 			speechText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
+
 		}
-
-
-		/*if (name != null && !name.isEmpty()) {
-			speechText = String.format("Dein Name ist %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", name);
-		} else {
-			speechText = "Um deinen Namen zu speichern musst du ihn mir sagen.";
-		}*/
-		return input.getResponseBuilder().withSpeech(speechText)
-				.withShouldEndSession(false)
-				.build();
-	}
+			return input.getResponseBuilder().withSpeech(speechText)
+					.withShouldEndSession(false)
+					.build();
+		}
+	
 }
