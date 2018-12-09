@@ -107,6 +107,5 @@ public class Spielrunde {
 	public String getNaechsteFrage(){
 		//TODO: gebe die Frage aus dem Frage-Objekt der naechsten Frage in der Liste an den Handler weiter...
 		return "";
-	}
-	
+	}	
 }
