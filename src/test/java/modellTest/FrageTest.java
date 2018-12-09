@@ -39,7 +39,7 @@ class FrageTest {
 	}
 
 	@Test
-	void testGetAntworten() throws Exception {
+	void testGetAntworten() {
 
 		Assertions.assertEquals(antwort, frage1.getAntwortString(), "Die Antwort stimmt nicht.");
 		Assertions.assertArrayEquals(antwortenArray, frage2.getAntwortenArray(), "Die Antworten stimmt nicht.");
@@ -53,11 +53,7 @@ class FrageTest {
 		Iterator<String> itTest = frage3.getAntwortenArrayList().iterator();
 
 		Assertions.assertEquals(it.next(), itTest.next(), "Die Antworten stimmen nicht ueberein.");
-
-		Assertions.assertThrows(Exception.class, () -> {
-			frage2.getAntwortString();
-		}, "Der Test muesste eine normale Exception schmeissen.");
-
+		Assertions.assertEquals(frage2.getAntwortString(), antwortenArray[0], "Es muesste die erste Antwort im Array sein.");
 	}
 
 }
