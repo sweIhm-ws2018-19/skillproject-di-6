@@ -20,5 +20,4 @@ public enum Level {
 	public String toString() {
 		return value[0];
 	}
-
 }
