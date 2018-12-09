@@ -5,9 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import braingain.modell.Kategorie;
-import braingain.modell.Level;
-import braingain.modell.Spielrunde;
+import braingain.modell.*;
 
 class SpielrundeTest {
 	
@@ -17,12 +15,21 @@ class SpielrundeTest {
 	
 	Spielrunde sr = new Spielrunde();
 	
+	Spieler marc = new Spieler("Marc", 10, 15);
+	Spieler peter = new Spieler("Peter", 5, 29);
+	
 	@Test
 	void testSpielrunde() {
 		Assertions.assertNotNull(sr.spieler, "Der Konstruktor funktioniert nicht.");
 		Assertions.assertNotNull(sr.fragen, "Der Konstruktor funktioniert nicht.");
 	}
-
+	
+	@Test
+	void testAddPlayer() {
+		Assertions.assertTrue(sr.addPlayer(marc), "Der Spieler muesste hinzugefuegt werden koennen.");
+		Assertions.assertTrue(sr.addPlayer(peter), "Der Spieler muessten hinzugefuegt werden koennen.");
+	}
+	
 	@Test
 	void testGetHighscoreSpieler() {
 		fail("Not yet implemented");
