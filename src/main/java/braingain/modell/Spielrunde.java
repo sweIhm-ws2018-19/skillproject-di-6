@@ -6,6 +6,7 @@ public class Spielrunde {
 	public ArrayList<Spieler> spieler;
 	public ArrayList<Frage> fragen;
 	private int anzahlSpieler;
+	private int counter;
 	Kategorie kategorie;
 	Level level;
 
@@ -13,7 +14,15 @@ public class Spielrunde {
 		spieler = new ArrayList<Spieler>();
 		fragen = new ArrayList<Frage>();
 	}
-
+	
+	public boolean addPlayer(Spieler s){
+		boolean succeded = false;
+		if(spieler.size() < anzahlSpieler){
+			succeded = this.spieler.add(s);
+		}
+		return succeded;
+	}
+	
 	public ArrayList<Spieler> getHighscoreSpieler() {
 		ArrayList<Spieler> highscoreSpieler = new ArrayList<Spieler>();
 		highscoreSpieler.add(spieler.get(0));
@@ -41,10 +50,9 @@ public class Spielrunde {
 		return ausgaben;
 	}
 
-	public void fetchFragen() {
-		// TODO
-		// Nachdem wir Level und Kategorie bekommen haben, ziehen wir die Fragen aus
-		// unserer Datenbank.
+	public String fetchFragen() {
+		String newFrage = fragen.get(counter).getFrage();
+		return newFrage;
 	}
 
 	public int getAnzahlSpieler() {
