@@ -14,6 +14,11 @@ public class Spielrunde {
 		fragen = new ArrayList<Frage>();
 	}
 
+	public boolean addPlayer(Spieler spieler){
+		return this.spieler.add(spieler);
+	}
+	
+	
 	public ArrayList<Spieler> getHighscoreSpieler() {
 		ArrayList<Spieler> highscoreSpieler = new ArrayList<Spieler>();
 		highscoreSpieler.add(spieler.get(0));
