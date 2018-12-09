@@ -1,8 +1,9 @@
 package main.java.braingain.Modell;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Frage {
+public class Frage implemets Serializable{
 	
 	private String frage;
 	private ArrayList<String> antworten;
