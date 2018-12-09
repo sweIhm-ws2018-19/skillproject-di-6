@@ -71,7 +71,12 @@ class SpielrundeTest {
 		String highscore = Integer.toString(HIGHESTPOINTS);
 		String[] winners = { marc.getName(), karl.getName() };
 		String[] toTest = sr.getHighscore();
-
+		
+		System.out.println(winners[0]);
+		System.out.println(winners[1]);
+		System.out.println(toTest[1]);
+		System.out.println(toTest[2]);
+		
 		Assertions.assertEquals(highscore, toTest[0], "Der Highscore stimmt nicht.");
 		for (int i = 0; i < winners.length; i++) {
 			Assertions.assertEquals(winners[i], toTest[i + 1], "Die Gewinner sind nicht korrekt.");
@@ -154,10 +159,4 @@ class SpielrundeTest {
 	void testCheckAntwort() {
 		// TODO
 	}
-
-	@Test
-	void testGetNaechsteFrage() {
-		// TODO
-	}
-
 }
