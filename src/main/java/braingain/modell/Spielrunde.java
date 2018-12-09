@@ -24,12 +24,8 @@ public class Spielrunde {
 	}
 	
 	public boolean addFrage(Frage f) {
-		try {
-			if(f.getAntwortString() == null) {
-				return false;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+		if(f.getAntwortString() == null) {
+			return false;
 		}
 		return fragen.add(f);
 	}
