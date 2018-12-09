@@ -6,6 +6,7 @@ public class Spielrunde {
 	ArrayList<Spieler> spieler;
 	ArrayList<Frage> fragen;
 	private	int anzahlSpieler;
+	private	int counter;
 	Kategorie kategorie;
 	Level level;
 	
@@ -41,9 +42,9 @@ public class Spielrunde {
 		return ausgaben;
 	}
 	
-	public void fetchFragen() {
-		//TODO
-		//Nachdem wir Level und Kategorie bekommen haben, ziehen wir die Fragen aus unserer Datenbank.
+	public String fetchFragen() {
+		String newFrage = fragen.get(counter).getFrage();
+		return newFrage;		
 	}
 	
 	public int getAnzahlSpieler() {
