@@ -23,6 +23,17 @@ public class Spielrunde {
 		return succeded;
 	}
 	
+	public boolean addFrage(Frage f) {
+		try {
+			if(f.getAntwortString() == null) {
+				return false;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return fragen.add(f);
+	}
+	
 	public ArrayList<Spieler> getHighscoreSpieler() {
 		ArrayList<Spieler> highscoreSpieler = new ArrayList<Spieler>();
 		highscoreSpieler.add(spieler.get(0));
