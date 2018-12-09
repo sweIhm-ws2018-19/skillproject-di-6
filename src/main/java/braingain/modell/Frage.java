@@ -30,9 +30,9 @@ public class Frage {
 		return frage;
 	}
 	
-	public String getAntwortString() throws Exception{
+	public String getAntwortString() {
 		if(antworten.size() > 1) {
-			throw new Exception("The Method getAntwortString must only be called when there is only one answer.");
+			System.out.println("Es gibt mehr als nur eine Antwort, es wird nur die erste zurueckgegeben.");;
 		}
 		return antworten.get(0);
 	}
