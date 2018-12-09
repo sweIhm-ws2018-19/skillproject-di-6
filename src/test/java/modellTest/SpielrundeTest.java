@@ -2,6 +2,8 @@ package modellTest;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -13,10 +15,14 @@ class SpielrundeTest {
 	private static final Kategorie KATEGORIE = Kategorie.LOGIK;
 	private static final Level LEVEL = Level.MITTEL;
 	
+	private static final Frage frage1 = new Frage();
+	
 	Spielrunde sr = new Spielrunde();
 	
+	//Peter und Karl haben den gleichen und auch hoechsten Highscore.
 	Spieler marc = new Spieler("Marc", 10, 15);
 	Spieler peter = new Spieler("Peter", 5, 29);
+	Spieler karl = new Spieler("Karl", 7, 29);
 	
 	@Test
 	void testSpielrunde() {
@@ -32,12 +38,20 @@ class SpielrundeTest {
 	
 	@Test
 	void testGetHighscoreSpieler() {
-		fail("Not yet implemented");
+		ArrayList<Spieler> testHighscoreSpieler = new ArrayList<>();
+		testHighscoreSpieler.add(marc);
+		testHighscoreSpieler.add(karl);
+		ArrayList<Spieler> highscoreSpieler = sr.getHighscoreSpieler();
+		
+		for(int i = 0; i < highscoreSpieler.size(); i++) {
+			Assertions.assertEquals(highscoreSpieler.get(i), testHighscoreSpieler.get(i), "Die Spieler stimmen nicht ueberein.");
+		}
+		
 	}
 
 	@Test
 	void testGetHighscore() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
