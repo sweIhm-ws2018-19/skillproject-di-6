@@ -96,7 +96,7 @@ public class Spielrunde {
 		return newFrage;
 	}
 	
-	public String actualizeFragen(){
+	public void refreshFragen(){
 		fragen = Frage.alleFragen.get(kategorie).get(level);
 	}
 
