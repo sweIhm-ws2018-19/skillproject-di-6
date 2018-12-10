@@ -9,6 +9,7 @@ public class Frage {
 	
 	private String frage;
 	private ArrayList<String> antworten;
+	public static ArrayList<ArrayList<ArrayList<Frage>>> alleFragen;
 	
 	/**
 	 * Initialisiert eine neue Frage, mit einer Frage und einer Antwort als String.
@@ -88,4 +89,74 @@ public class Frage {
 	public ArrayList<String> getAntwortenArrayList(){
 		return antworten;
 	}
+	
+	static{
+		makeNewMap();
+		readQuestions();
+	}
+	
+	/**
+	 * initialisiert alleFragen
+	 *
+	 */
+	private static void makeNewMap() {
+		fragen = new ArrayList<>(); 
+		for(int i = 0; i< KategorieValues.length; i++) {
+			fragen.add(new ArrayList<>());
+			for(int j = 0 ; j < LevelValues.length ; j++ ) {
+				fragen.get(i).add(new ArrayList<Frage>());
+			}
+		}	
+	}
+	
+	/**
+	 * fuellt alleFragen
+	 *
+	 * @param frage Die Frage
+	 * @param antwort Die Antwort
+	 * @param kat integer, der fuer die Kategorie steht
+	 * @param level integer, der fuer den Schwierigkeitsgrad steht
+	 */
+	private static void newQuestion(String frage, String antwort, int kat, int level) {
+		fragen.get(kat-1).get(level-1).add(new Frage(frage,antwort));
+	}
+	
+	/**
+	 * Methode, die Fragen aus Datei Fragen.txt einliesst, und einsortiert in alleFragen
+	 *
+	 */
+	private static void readQuestions() {
+		
+		String fileName = "Fragen.txt";
+		try(BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))){
+			
+			for (String temp = reader.readLine(); temp != null; temp = reader.readLine()) {
+				int zuordnung = Integer.parseInt(temp);
+				int lvl = zuordnung % 10;
+				int kat = (zuordnung-lvl)/10;
+				String Frage = reader.readLine();
+				String Antwort = reader.readLine();
+				newQuestion(Frage,Antwort,kat,lvl);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 *Hilfsfunktion, um die Richtigkeit der Uebernahme zu ueberpruefen
+	 *
+	 */
+	private static void iterate() {
+		for(int i = 0; i< KategorieValues.length; i++) {
+			for(int j = 0 ; j < LevelValues.length ; j++ ) {
+				for(Frage f : fragen.get(i).get(j)) {
+					System.out.println(f.getFrage());
+					System.out.println(f.getAntworten());
+								
+				}
+			}
+		}
+	} 
 }
