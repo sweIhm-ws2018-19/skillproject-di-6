@@ -33,13 +33,13 @@
                     "slots": [
                         {
                             "name": "username",
-                            "type": "LIST_OF_NAMES"
+                            "type": "AMAZON.DE_FIRST_NAME"
                         }
                     ],
                     "samples": [
                         "Mein Username ist {username}",
                         "Mein Spielername ist {username}",
-                        "Ich hei�e {username}",
+                        "Ich heiße {username}",
                         "Ich bin {username}"
                     ]
                 },
@@ -80,6 +80,29 @@
                 {
                     "name": "AMAZON.ResumeIntent",
                     "samples": []
+                },
+                {
+                    "name": "AntwortIntent",
+                    "slots": [
+                        {
+                            "name": "antwort",
+                            "type": ""
+                        }
+                    ],
+                    "samples": [
+                        "Das macht {antwort}",
+                        "Die Antwort ist {antwort}"
+                    ]
+                },
+                {
+                    "name": "FrageStellenIntent",
+                    "slots": [],
+                    "samples": [
+                        "starte training",
+                        "starte fragen",
+                        "naechste Frage",
+                        "nächste Frage"
+                    ]
                 }
             ],
             "types": [
