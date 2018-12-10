@@ -58,7 +58,8 @@ public class Spielrunde {
 	public ArrayList<Spieler> getHighscoreSpieler() {
 		ArrayList<Spieler> highscoreSpieler = new ArrayList<Spieler>();
 		highscoreSpieler.add(spieler.get(0));
-		for (Spieler s : spieler) {
+		for (int i = 1; i<spieler.size(); i++) {
+			Spieler s = spieler.get(i);
 			if (s.getPunktestand() > highscoreSpieler.get(0).getPunktestand()) {
 				highscoreSpieler.clear();
 				highscoreSpieler.add(s);
