@@ -1,12 +1,12 @@
 package braingain.handlers;
 
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 
 class LevelEinstellenHandlerTest {
 
-	@Test
+/*	@Test
 	void testCanHandle() {
 		fail("Not yet implemented");
 	}
@@ -15,5 +15,5 @@ class LevelEinstellenHandlerTest {
 	void testHandle() {
 		fail("Not yet implemented");
 	}
-
+*/
 }
