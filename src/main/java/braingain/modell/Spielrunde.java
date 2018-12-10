@@ -10,6 +10,7 @@ public class Spielrunde {
 	public ArrayList<Spieler> spieler;
 	public ArrayList<Frage> fragen;
 	private int anzahlSpieler;
+	private int aktuellerSpieler;
 	private int counter;
 	Kategorie kategorie;
 	Level level;
@@ -21,6 +22,8 @@ public class Spielrunde {
 	public Spielrunde() {
 		spieler = new ArrayList<Spieler>();
 		fragen = new ArrayList<Frage>();
+		counter = 0;
+		aktuellerSpieler = 0;
 	}
 
 	/**
