@@ -23,7 +23,19 @@ public class Spieler {
 		this.highscore = highscore;
 		
 	}
-
+	
+	/**
+	 * Initialisiert einen neuem Spieler, nur mit Namen und gibt ihm keine Punkte und keinen Highscore
+	 * 
+	 * @param name the name
+	 */
+	
+	public Spieler(String name) {
+		this.name = name;
+		this.punktestand = 0;
+		this.highscore = 0;
+	}
+	
 	/**
 	 * Diese Methode testet, ob man richtig oder falsch geantwortet hat.
 	 *

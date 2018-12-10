@@ -56,10 +56,10 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 		Slot selectedPlayerSlot = slots.get(LIST_OF_PLAYERNUMBERS);
 		
 		if(selectedPlayerSlot != null) {
-			int numberOfPlayers = selectedPlayerSlot.getValue();
+			String numberOfPlayers = selectedPlayerSlot.getValue();
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
 			speechText = String.format("OK. Ihr spielt nun zu %s. Sagt mir nun einer zur Zeit eure Namen. Sagt zum Beispiel ich heisse Max.", numberOfPlayers);
-			sr.setAnzahlSpieler(numberOfPlayers);
+			sr.setAnzahlSpieler(Integer.parseInt(numberOfPlayers));
 		} else {
 			speechText = "Ich habe deine Antwort leider nicht verstanden. Wie viele Spieler seid ihr?";
 		}

@@ -1,18 +1,21 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>alexa-skills-kit-samples</groupId>
+
+  <groupId>skillproject-di-6</groupId>
   <artifactId>Braingain</artifactId>
   <packaging>jar</packaging>
   <version>1.0</version>
   <name>Braingain</name>
   <url>http://developer.amazon.com/ask</url>
+
   <licenses>
     <license>
       <name>The Apache License, Version 2.0</name>
       <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
     </license>
   </licenses>
+
   <developers>
     <developer>
       <name>Alexa Skills Kit</name>
@@ -21,6 +24,7 @@
       <organizationUrl>http://developer.amazon.com/ask</organizationUrl>
     </developer>
   </developers>
+  
   <scm>
     <connection>scm:git:https://github.com/amzn/alexa-skills-kit-java.git</connection>
     <developerConnection>scm:git:https://github.com/amzn/alexa-skills-kit-java.git</developerConnection>
@@ -35,12 +39,11 @@
     </dependency>
     <dependency>
       <groupId>org.mockito</groupId>
-      <artifactId>mockito-testng</artifactId>
-      <version>0.1.1</version>
-      <type>pom</type>
+      <artifactId>mockito-core</artifactId>
+      <version>2.23.4</version>
     </dependency>
   </dependencies>
-
+  
   <build>
     <sourceDirectory>src</sourceDirectory>
     <pluginManagement>
@@ -58,5 +61,6 @@
       </plugins>
     </pluginManagement>
   </build>
+  
   
 </project>

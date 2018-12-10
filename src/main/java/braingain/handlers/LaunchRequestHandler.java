@@ -15,22 +15,28 @@ package braingain.handlers;
 
 import static com.amazon.ask.request.Predicates.requestType;
 
+import java.util.Collections;
+import java.util.Map;
 import java.util.Optional;
 
+import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
+import com.amazon.ask.response.ResponseBuilder;
 
+import braingain.modell.Spieler;
 import braingain.modell.Spielrunde;
 
 public class LaunchRequestHandler implements RequestHandler {
-	
+
 	private Spielrunde sr;
-	
-	public LaunchRequestHandler(Spielrunde sr){
+
+	public LaunchRequestHandler(Spielrunde sr) {
 		this.sr = sr;
 	}
+
 	public boolean canHandle(HandlerInput input) {
 		return input.matches(requestType(LaunchRequest.class));
 	}
@@ -40,29 +46,24 @@ public class LaunchRequestHandler implements RequestHandler {
 		String repromptText = "Bitte sage mir wie viele Leute spielen.";
 		return input.getResponseBuilder().withSimpleCard("BrainSession", speechText).withSpeech(speechText)
 				.withReprompt(repromptText).build();
+
+		ResponseBuilder responseBuilder = input.getResponseBuilder();
+
+		AttributesManager attributesManager = input.getAttributesManager();
+		Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
+		String spielername = (String) persistentAttributes.get(UsernamenSpeichernHandler.LIST_OF_NAMES);
+
+		if (spielername != null) {
+
+			Spieler neuerspieler = new Spieler(spielername);
+			input.getAttributesManager().setSessionAttributes(
+					Collections.singletonMap(neuerspieler.getName(), UsernamenSpeichernHandler.LIST_OF_NAMES));
+			speechText = String.format("%s %s. %s", "Dein Username is ", neuerspieler.getName());
+			responseBuilder.withSimpleCard("BrainSession", speechText).withSpeech(speechText)
+					.withReprompt("Bitte sag mir deinen Spielernamen.");
+		} else {
+			responseBuilder.withSimpleCard("BrainSession", UsernamenSpeichernHandler.speechText)
+					.withSpeech(UsernamenSpeichernHandler.speechText).withReprompt("Bitte sag mir deinen Usernamen");
+		}
 	}
-	ResponseBuilder responseBuilder = input.getResponseBuilder();
-
-	//see if color is stored already
-	AttributesManager attributesManager = input.getAttributesManager();
-	Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-	String Spielernamen = (String) persistentAttributes.get(UsernameSpeichernHandler.LIST_OF_NAMES);
-
-    if(Spielername != null){
-
-	//put stored color in session Attributes
-		Spieler neuerspieler = new Spieler(Spielernamen);
-		input.getAttributesManager().setSessionAttributes(Collections.singletonMap(UsernameSpeicherHandler.LIST_OF_NAMES,
-				neuerspieler.getName()));
-		String speechText =
-				String.format("%s %s. %s","Dein Username is " , neuerspieler.getName());
-		responseBuilder.withSimpleCard("BrainSession", speechText)
-				.withSpeech(speechText)
-				.withReprompt("Bitte sag mir deinen Spielernamen.");
-	}else {
-		responseBuilder.withSimpleCard("BrainSession",UsernamenSpeichernHandler.speechText)
-				.withSpeech(UsernamenSpeichernHandler.speechText)
-				.withReprompt("Bitte sag mir deinen Usernamen");
-	}
-}
 }

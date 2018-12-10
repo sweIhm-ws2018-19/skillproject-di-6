@@ -1,6 +1,11 @@
 package braingain.modell;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * The Class Frage.
@@ -101,9 +106,9 @@ public class Frage {
 	 */
 	private static void makeNewMap() {
 		fragen = new ArrayList<>(); 
-		for(int i = 0; i< KategorieValues.length; i++) {
+		for(int i = 0; i< Kategorie.values().length; i++) {
 			fragen.add(new ArrayList<>());
-			for(int j = 0 ; j < LevelValues.length ; j++ ) {
+			for(int j = 0 ; j < Level.values().length ; j++ ) {
 				fragen.get(i).add(new ArrayList<Frage>());
 			}
 		}	
@@ -149,11 +154,12 @@ public class Frage {
 	 *
 	 */
 	private static void iterate() {
-		for(int i = 0; i< KategorieValues.length; i++) {
-			for(int j = 0 ; j < LevelValues.length ; j++ ) {
+		for(int i = 0; i< Kategorie.values().length; i++) {
+			for(int j = 0 ; j < Level.values().length ; j++ ) {
 				for(Frage f : fragen.get(i).get(j)) {
 					System.out.println(f.getFrage());
-					System.out.println(f.getAntworten());
+					Iterator<String> it = f.getAntwortenArrayList().iterator();
+					System.out.println(it.next());
 								
 				}
 			}

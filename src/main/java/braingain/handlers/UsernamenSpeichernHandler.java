@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
+import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Intent;
@@ -27,6 +28,7 @@ import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
+import braingain.modell.Spieler;
 import braingain.modell.Spielrunde;
 
 public class UsernamenSpeichernHandler implements RequestHandler {
@@ -63,12 +65,11 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 			//store persistent
 			AttributesManager attributesManager = input.getAttributesManager();
 			Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-			persistentAttributes.put(LIST_OF_NAMES, spieler.getName());
+			persistentAttributes.put(spieler.getName(), LIST_OF_NAMES);
 			attributesManager.setPersistentAttributes(persistentAttributes);
 			attributesManager.savePersistentAttributes();
 
-			speechText =
-					String.format("%s %s. %s", "Dein Spielername ist ", spieler.getName());
+			speechText = String.format("%s %s. %s", "Dein Spielername ist ", spieler.getName());
 
 		} else {
 			speechText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
