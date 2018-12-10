@@ -1,17 +1,17 @@
 package braingain.modell;
 
-import java.util.ArrayList;
+/*import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import braingain.modell.Frage;
+import braingain.modell.Frage; */
 
 class FrageTest {
 
-	String befehl1 = "Wie viele Seiten hat ein Wuerfel?";
+	/*String befehl1 = "Wie viele Seiten hat ein Wuerfel?";
 	String befehl2 = "Nenne ein natuerlich radioaktives Elemente unter Blei?";
 	String befehl3 = "Nenne einen Platonischen Körper";
 
@@ -54,6 +54,6 @@ class FrageTest {
 
 		Assertions.assertEquals(it.next(), itTest.next(), "Die Antworten stimmen nicht ueberein.");
 		Assertions.assertEquals(frage2.getAntwortString(), antwortenArray[0], "Es muesste die erste Antwort im Array sein.");
-	}
+	} */
 
 }
