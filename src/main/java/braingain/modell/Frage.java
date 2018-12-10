@@ -112,14 +112,14 @@ public class Frage {
 	 *
 	 */
 	static void makeNewMap() {
-		alleFragen = new HashMap<>(); 
-		for(int i = 0; i< KategorieValues.length; i++) {
-			alleFragen.put(KategorieValues[i],new HashMap<>());
-			for(int j = 0 ; j < LevelValues.length ; j++ ) {
-				alleFragen.get(i).put(LevelValues[j],new ArrayList<Frage>());
-			}
-		}	
-	}
+            alleFragen = new HashMap<>();
+            for(Kategorie k : KategorieValues) {
+                alleFragen.put(k,new HashMap<>());
+                for(Level l : LevelValues) {
+                    alleFragen.get(k).put(l,new ArrayList<Frage>());
+                }
+            }
+        }
 	
 	/**
 	 * fuellt alleFragen
@@ -162,16 +162,16 @@ public class Frage {
 	 *Hilfsfunktion, um die Richtigkeit der Uebernahme zu ueberpruefen
 	 *
 	 */
-	private static void iterate() {
-		for(int i = 0; i< KategorieValues.length; i++) {
-			for(int j = 0 ; j < Level.values().length ; j++ ) {
-				for(Frage f : alleFragen.get(i).get(j)) {
-					System.out.println(f.getFrage());
-					Iterator<String> it = f.getAntwortenArrayList().iterator();
-					System.out.println(it.next());
-								
-				}
-			}
-		}
-	} 
+        private static void iterate() {
+            for(Kategorie k : KategorieValues) {
+                for(Level l : LevelValues) {
+                    for(Frage f : alleFragen.get(k).get(l)) {
+                        System.out.println(f.getFrage());
+                        Iterator<String> it = f.getAntwortenArrayList().iterator();
+                        System.out.println(it.next());
+
+                    }
+                }
+            }
+        } 
 }
