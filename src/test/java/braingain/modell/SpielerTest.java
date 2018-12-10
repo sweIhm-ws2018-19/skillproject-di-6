@@ -1,13 +1,13 @@
 package braingain.modell;
-/*
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import braingain.modell.Spieler;
-*/
+
 class SpielerTest {
 	
-/*
+
 	private static final String NAME_1 = "Franz";
 	private static final int PUNKTESTAND_1 = 10;
 	private static final int HIGHSCORE_1 = 5;
@@ -60,5 +60,4 @@ class SpielerTest {
 		spieler1.setHighscore();
 		Assertions.assertEquals(HIGHSCORE_2, spieler2.getHighscore(), "Der Punktestand und der Highscore muessten gleich sein.");
 	}
-*/
 }
