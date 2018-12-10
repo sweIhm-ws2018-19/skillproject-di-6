@@ -1,5 +1,5 @@
 package braingain.handlers;
-/*
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -9,9 +9,9 @@ import org.mockito.Mockito;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 
 import braingain.modell.Spielrunde;
-*/
+
 class AnzahlDerSpielerSetzenHandlerTest {
-	/*
+	
 	private AnzahlDerSpielerSetzenHandler handler = new AnzahlDerSpielerSetzenHandler(new Spielrunde());
 	
 	@Test
@@ -25,5 +25,4 @@ class AnzahlDerSpielerSetzenHandlerTest {
 	void testHandle() {
 		fail("Not yet implemented");
 	}
-*/
 }

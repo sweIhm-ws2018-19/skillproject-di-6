@@ -1,5 +1,5 @@
 package braingain.handlers;
-/*
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 
@@ -12,9 +12,9 @@ import com.amazon.ask.model.Response;
 
 import braingain.modell.Frage;
 import braingain.modell.Spielrunde;
-*/
+
 class FrageStellenHandlerTest {
-	/*
+	
 	private FrageStellenHandler handler = new FrageStellenHandler(new Spielrunde());
 	private static final Frage FRAGE = new Frage("Wie heisst die Hauptstadt von Schweden?", "Stockholm");
 
@@ -35,5 +35,4 @@ class FrageStellenHandlerTest {
 		Mockito.when(handlerInputMock.getResponseBuilder().withSpeech(FRAGE.getFrage()));
 		Assertions.assertEquals(FRAGE.getFrage(), handler.handle(handlerInputMock));
 	}
-*/
 }
