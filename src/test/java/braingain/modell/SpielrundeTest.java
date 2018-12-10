@@ -1,6 +1,7 @@
 package braingain.modell;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -54,7 +55,7 @@ class SpielrundeTest {
 		testHighscoreSpieler.add(marc);
 		testHighscoreSpieler.add(karl);
 		ArrayList<Spieler> highscoreSpieler = sr.getHighscoreSpieler();
-
+		
 		for (int i = 0; i < highscoreSpieler.size(); i++) {
 			Assertions.assertEquals(highscoreSpieler.get(i).getName(), testHighscoreSpieler.get(i).getName(),
 					"Die Spieler stimmen nicht ueberein.");
@@ -71,11 +72,6 @@ class SpielrundeTest {
 		String highscore = Integer.toString(HIGHESTPOINTS);
 		String[] winners = { marc.getName(), karl.getName() };
 		String[] toTest = sr.getHighscore();
-		
-		System.out.println(winners[0]);
-		System.out.println(winners[1]);
-		System.out.println(toTest[1]);
-		System.out.println(toTest[2]);
 		
 		Assertions.assertEquals(highscore, toTest[0], "Der Highscore stimmt nicht.");
 		for (int i = 0; i < winners.length; i++) {
