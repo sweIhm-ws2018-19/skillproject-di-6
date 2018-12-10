@@ -1,4 +1,4 @@
-package modellTest;
+package braingain.modell;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;

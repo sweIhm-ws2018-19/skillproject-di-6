@@ -1,5 +1,6 @@
-package handlerTest;
+package braingain.handlers;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.when;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,6 @@ import org.mockito.Mockito;
 import braingain.handlers.FrageStellenHandler;
 import braingain.modell.Frage;
 import braingain.modell.Spielrunde;
-
 class FrageStellenHandlerTest {
 
 	private FrageStellenHandler handler = new FrageStellenHandler(new Spielrunde());
@@ -31,8 +31,9 @@ class FrageStellenHandlerTest {
 	@Test
 	void testHandle() {
 		HandlerInput handlerInputMock = Mockito.mock(HandlerInput.class);
-		Mockito.when(handlerInputMock.matches(any())).thenReturn(FRAGE.getFrage());
+		Mockito.when(handlerInputMock.getResponseBuilder().withSpeech(FRAGE.getFrage()));
 		Assertions.assertEquals(FRAGE.getFrage(), handler.handle(handlerInputMock));
 	}
 
 }
+

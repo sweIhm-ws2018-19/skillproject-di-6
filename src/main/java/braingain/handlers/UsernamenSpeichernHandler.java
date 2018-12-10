@@ -53,7 +53,6 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 		Intent intent = intentRequest.getIntent();
 		Map<String, Slot> slots = intent.getSlots();
 
-		// Get the color slot from the list of slots.
 		Slot selectedNameSlot = slots.get(LIST_OF_NAMES);
 		
 		if (selectedNameSlot != null) {
@@ -62,7 +61,6 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
 			speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geographie, Logik und Gehirntraining.", username);
 
-			//store persistent
 			AttributesManager attributesManager = input.getAttributesManager();
 			Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
 			persistentAttributes.put(spieler.getName(), LIST_OF_NAMES);

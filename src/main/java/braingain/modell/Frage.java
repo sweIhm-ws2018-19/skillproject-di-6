@@ -131,8 +131,8 @@ public class Frage {
 	 *
 	 */
 	private static void readQuestions() {
-		
-		String fileName = "Fragen.txt";
+
+		String fileName = System.getProperty("user.dir") + "\\Fragen.txt";
 		try(BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))){
 			
 			for (String temp = reader.readLine(); temp != null; temp = reader.readLine()) {

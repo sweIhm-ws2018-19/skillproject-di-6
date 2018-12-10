@@ -27,6 +27,6 @@ public class FrageStellenHandler implements RequestHandler {
 		String speechText = sr.fetchFrage();
 
 		return input.getResponseBuilder().withSpeech(speechText).withSimpleCard("FrageSession", speechText)
-				.withSpeech(speechText).withShouldEndSession(false).build();
+				.withShouldEndSession(false).build();
 	}
 }

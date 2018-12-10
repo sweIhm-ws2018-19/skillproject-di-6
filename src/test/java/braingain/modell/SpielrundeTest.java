@@ -1,4 +1,4 @@
-package modellTest;
+package braingain.modell;
 
 import java.util.ArrayList;
 
