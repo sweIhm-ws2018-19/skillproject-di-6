@@ -61,13 +61,13 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
 			speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geographie, Logik und Gehirntraining.", username);
 
-			AttributesManager attributesManager = input.getAttributesManager();
+			/*AttributesManager attributesManager = input.getAttributesManager();
 			Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
 			persistentAttributes.put(spieler.getName(), LIST_OF_NAMES);
 			attributesManager.setPersistentAttributes(persistentAttributes);
-			attributesManager.savePersistentAttributes();
+			attributesManager.savePersistentAttributes();*/
 
-			speechText = String.format("%s %s. %s", "Dein Spielername ist ", spieler.getName());
+			//speechText = String.format("%s %s. %s", "Dein Spielername ist ", spieler.getName());
 
 		} else {
 			speechText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
