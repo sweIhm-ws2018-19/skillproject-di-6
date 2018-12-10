@@ -1,10 +1,12 @@
 package braingain.modell;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -162,7 +164,7 @@ public class Frage {
 	 */
 	private static void iterate() {
 		for(int i = 0; i< KategorieValues.length; i++) {
-			for(int j = 0 ; j < LevelValues().length ; j++ ) {
+			for(int j = 0 ; j < Level.values().length ; j++ ) {
 				for(Frage f : alleFragen.get(i).get(j)) {
 					System.out.println(f.getFrage());
 					Iterator<String> it = f.getAntwortenArrayList().iterator();
