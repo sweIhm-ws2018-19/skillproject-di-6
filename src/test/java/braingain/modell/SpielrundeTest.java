@@ -150,11 +150,24 @@ class SpielrundeTest {
 		sr.increaseCounter();
 		Assertions.assertEquals(COUNTER + 1, sr.getCounter(), "Counter stimmt nicht");
 	}
-
+	
+	@Test
+	void testUpdateSpielerTrophy() {
+		// TODO
+	}
+	
+	@Test
+	void testSaveSpielerTrophy() {
+		// TODO
+	}
+	
 	@Test
 	void testCheckAntwort() {
 		// TODO
 	}
 	
-	
+	@Test
+	void testGetRichtigeAntwort() {
+		// TODO
+	}
 }
