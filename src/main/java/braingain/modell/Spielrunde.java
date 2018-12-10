@@ -227,7 +227,7 @@ public class Spielrunde {
 	 *
 	 * @param Die gegeben Antwort
 	 */
-	public void checkAntwort(String antwort) {
+	public boolean checkAntwort(String antwort) {
 		// TODO: kontrolliere die Antwort und aktualisiere in Spieler den Punktestand...
 		ArrayList<String> antworten = fragen.get(counter).getAntwortenArrayList();
 		boolean ubereinstimmung = false;
