@@ -147,7 +147,7 @@ public class Frage {
 				int lvl = zuordnung % 10;
 				int kate = (zuordnung-lvl)/10;
 				Kategorie kat = KategorieValues[kate-1];
-				Level level = LevelValues[lvl];
+				Level level = LevelValues[lvl-1];
 				String Frage = reader.readLine();
 				String Antwort = reader.readLine();
 				newQuestion(Frage,Antwort,kat,level);
