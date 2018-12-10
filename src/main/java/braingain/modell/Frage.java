@@ -105,11 +105,11 @@ public class Frage {
 	 *
 	 */
 	private static void makeNewMap() {
-		fragen = new ArrayList<>(); 
+		alleFragen = new ArrayList<>(); 
 		for(int i = 0; i< Kategorie.values().length; i++) {
-			fragen.add(new ArrayList<>());
+			alleFragen.add(new ArrayList<>());
 			for(int j = 0 ; j < Level.values().length ; j++ ) {
-				fragen.get(i).add(new ArrayList<Frage>());
+				alleFragen.get(i).add(new ArrayList<Frage>());
 			}
 		}	
 	}
@@ -123,7 +123,7 @@ public class Frage {
 	 * @param level integer, der fuer den Schwierigkeitsgrad steht
 	 */
 	private static void newQuestion(String frage, String antwort, int kat, int level) {
-		fragen.get(kat-1).get(level-1).add(new Frage(frage,antwort));
+		alleFragen.get(kat-1).get(level-1).add(new Frage(frage,antwort));
 	}
 	
 	/**
@@ -156,7 +156,7 @@ public class Frage {
 	private static void iterate() {
 		for(int i = 0; i< Kategorie.values().length; i++) {
 			for(int j = 0 ; j < Level.values().length ; j++ ) {
-				for(Frage f : fragen.get(i).get(j)) {
+				for(Frage f : alleFragen.get(i).get(j)) {
 					System.out.println(f.getFrage());
 					Iterator<String> it = f.getAntwortenArrayList().iterator();
 					System.out.println(it.next());
