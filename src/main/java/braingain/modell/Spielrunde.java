@@ -211,6 +211,13 @@ public class Spielrunde {
 	public int getCounter() {
 		return this.counter;
 	}
+	
+	public void naechsterSpieler() {
+		aktuellerSpieler += 1;
+		if(aktuellerSpieler == anzahlSpieler) {
+			aktuellerSpieler -= anzahlSpieler;
+		}
+	}
 
 	/**
 	 * Testet ob die gegeben Antwort die richtige ist und aktualisieert dann damit den Punktestand.
@@ -219,5 +226,18 @@ public class Spielrunde {
 	 */
 	public void checkAntwort(String antwort) {
 		// TODO: kontrolliere die Antwort und aktualisiere in Spieler den Punktestand...
+		ArrayList<String> antworten = fragen.get(counter).getAntwortenArrayList();
+		boolean ubereinstimmung = false;
+		int antwortZahl = antworten.size();
+		while(!ubereinstimmung && antwortZahl>0) {
+			antwortZahl -= 1;
+			ubereinstimmung = antworten.get(antwortZahl).equalsIgnoreCase(antwort);
+		}
+		spieler.get(aktuellerSpieler).beantwortet(ubereinstimmung);
+		return ubereinstimmung;
+	}
+	
+	public String getRichtigeAntwort() {
+		return fragen.get(counter).getAntwortString();
 	}
 }
