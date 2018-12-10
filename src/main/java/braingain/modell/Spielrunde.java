@@ -1,12 +1,23 @@
 package braingain.modell;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * The Class Spielrunde.
  */
 public class Spielrunde {
 
+	HashMap<String, Integer> spielerTrophy = new HashMap<>();
 	public ArrayList<Spieler> spieler;
 	public ArrayList<Frage> fragen;
 	private int anzahlSpieler;
@@ -99,12 +110,12 @@ public class Spielrunde {
 		String newFrage = fragen.get(counter).getFrage();
 		return newFrage;
 	}
-	
+
 	/**
 	 * Aktualisiert alle Fragen
 	 */
-	
-	public void refreshFragen(){
+
+	public void refreshFragen() {
 		fragen = Frage.alleFragen.get(kategorie).get(level);
 	}
 
@@ -216,15 +227,61 @@ public class Spielrunde {
 		return this.counter;
 	}
 	
+	/*
+	 * Setzt den naechsten Spieler
+	 */
 	public void naechsterSpieler() {
 		aktuellerSpieler += 1;
-		if(aktuellerSpieler == anzahlSpieler) {
+		if (aktuellerSpieler == anzahlSpieler) {
 			aktuellerSpieler -= anzahlSpieler;
+		}
+	}
+	
+	/*
+	 * Braucht noch erklaerung
+	 */
+	public void updateSpielerTrophy() {
+		String fileName = System.getProperty("user.dir") + File.separator + "Spieler.txt";
+
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
+
+			for (String temp = reader.readLine(); temp != null; temp = reader.readLine()) {
+				String name = temp;
+				int integer = Integer.parseInt(reader.readLine());
+				spielerTrophy.put(name, integer);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*
+	 * Braucht noch erklaerung
+	 */
+	public void saveSpielerTrophy() {
+
+		for (Spieler s : spieler) {
+			if (spielerTrophy.get(s.getName()) == null) {
+				spielerTrophy.put(s.getName(), s.getPunktestand());
+			}
+		}
+		String fileName = System.getProperty("user.dir") + File.separator + "Spieler.txt";
+		new File(fileName).mkdir();
+		try (BufferedWriter writer = new BufferedWriter(
+				new OutputStreamWriter(new FileOutputStream(fileName, false)))) {
+			for (Entry<String, Integer> entry : spielerTrophy.entrySet()) {
+				writer.write(entry.getKey());
+				writer.write(entry.getValue());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 
 	/**
-	 * Testet ob die gegeben Antwort die richtige ist und aktualisieert dann damit den Punktestand.
+	 * Testet ob die gegeben Antwort die richtige ist und aktualisieert dann damit
+	 * den Punktestand.
 	 *
 	 * @param Die gegeben Antwort
 	 */
@@ -233,14 +290,14 @@ public class Spielrunde {
 		ArrayList<String> antworten = fragen.get(counter).getAntwortenArrayList();
 		boolean ubereinstimmung = false;
 		int antwortZahl = antworten.size();
-		while(!ubereinstimmung && antwortZahl>0) {
+		while (!ubereinstimmung && antwortZahl > 0) {
 			antwortZahl -= 1;
 			ubereinstimmung = antworten.get(antwortZahl).equalsIgnoreCase(antwort);
 		}
 		spieler.get(aktuellerSpieler).beantwortet(ubereinstimmung);
 		return ubereinstimmung;
 	}
-	
+
 	public String getRichtigeAntwort() {
 		return fragen.get(counter).getAntwortString();
 	}
