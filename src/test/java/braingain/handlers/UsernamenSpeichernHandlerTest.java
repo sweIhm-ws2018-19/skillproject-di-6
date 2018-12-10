@@ -1,11 +1,11 @@
 package braingain.handlers;
 
-import static org.junit.jupiter.api.Assertions.*;
+//import static org.junit.jupiter.api.Assertions.*;
 
-import org.junit.jupiter.api.Test;
+//import org.junit.jupiter.api.Test;
 
 class UsernamenSpeichernHandlerTest {
-
+/*
 	@Test
 	void testCanHandle() {
 		fail("Not yet implemented");
@@ -15,5 +15,5 @@ class UsernamenSpeichernHandlerTest {
 	void testHandle() {
 		fail("Not yet implemented");
 	}
-
+*/
 }
