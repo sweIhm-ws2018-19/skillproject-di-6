@@ -28,11 +28,10 @@ class FrageStellenHandlerTest {
 	@Test
 	void testHandle() {
 		HandlerInput handlerInputMock = Mockito.mock(HandlerInput.class);
-		
+		//Gibt eine IndexOutOfBoundsEcxeption, weiss nicht wieso
 		Response response = handler.handle(handlerInputMock).get();
 		
 		Assertions.assertFalse(response.getShouldEndSession());
-		
 		Mockito.when(handlerInputMock.getResponseBuilder().withSpeech(FRAGE.getFrage()));
 		Assertions.assertEquals(FRAGE.getFrage(), handler.handle(handlerInputMock));
 	}
