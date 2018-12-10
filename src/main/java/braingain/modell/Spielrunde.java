@@ -95,6 +95,10 @@ public class Spielrunde {
 		String newFrage = fragen.get(counter).getFrage();
 		return newFrage;
 	}
+	
+	public String actualizeFragen(){
+		fragen = Frage.alleFragen.get(kategorie).get(level);
+	}
 
 	/**
 	 * Sets the anzahl spieler.
