@@ -47,7 +47,7 @@ public class LaunchRequestHandler implements RequestHandler {
 		return input.getResponseBuilder().withSimpleCard("BrainSession", speechText).withSpeech(speechText)
 				.withReprompt(repromptText).build();
 
-		ResponseBuilder responseBuilder = input.getResponseBuilder();
+		/*ResponseBuilder responseBuilder = input.getResponseBuilder();
 
 		AttributesManager attributesManager = input.getAttributesManager();
 		Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
@@ -64,6 +64,6 @@ public class LaunchRequestHandler implements RequestHandler {
 		} else {
 			responseBuilder.withSimpleCard("BrainSession", UsernamenSpeichernHandler.speechText)
 					.withSpeech(UsernamenSpeichernHandler.speechText).withReprompt("Bitte sag mir deinen Usernamen");
-		}
+		}*/
 	}
 }
