@@ -1,0 +1,52 @@
+1 Logik
+2 Mathe
+3 Geografie
+4 Gedächtnistraining
+
+01 Einfach
+02 Mittel
+03 Anspruchvoll
+04 Schwer
+
+111 Sie machen bei einem Marathonlauf mit und überholen kurz vor dem Ziel den Zweiten. 
+	Wievielter sind Sie dann?
+Antwort: der Zweiten
+
+121 Du stehst in einem kubischen Raum, bei dem alle 4 Wände, sowie der Boden und die Decke komplett aus Spiegeln bestehen. 
+	Wie oft kannst Du Dich sehen?
+Antwort: Gar nicht, da es kein Licht gibt.
+
+131 Der Eiffelturm in Paris ist dreihundert Meter hoch und wiegt circa 8000 Tonnen. 
+	Würde man ihn aus dem gleichen Material in einer Höhe von dreißig Zentimetern originalgetreu nachbauen, 
+	wie schwer wäre er dann?
+Antwort: 8 Gramm
+
+141	Du bist in einem Boot auf einem See. Du holst den Anker ein. 
+	a) Sinkt oder b) steigt der Wasserspiegel? c) Oder bleibt er gleich?
+Antwort: Er steigt
+
+211 5*3 + 20
+Antwort: 35
+
+221 (73-46)*2
+Antwort: 54
+
+231 sqrt(64):16
+Antwort: 0,5
+
+241 (3^3-6):7
+Antwort: 3
+
+311 Welcher Fluss fliesst mitten durch München?
+Antwort: Isar
+
+321 Was ist die Hauptstadt von Australien?
+Antwort: Canberra
+
+331 An welche Länder grenzt Belgien?
+Antwort: Niederlande, Deutschland, Luxemburg und Frankreich
+
+341 Was ist Wolof?
+Antwort: Eine Sprache, sie wird hauptsächlich in Senegal gesprochen.
+
+
