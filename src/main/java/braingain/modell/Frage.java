@@ -14,7 +14,12 @@ public class Frage {
 	
 	private String frage;
 	private ArrayList<String> antworten;
-	public static ArrayList<ArrayList<ArrayList<Frage>>> alleFragen;
+	
+	
+	public static HashMap<Kategorie,HashMap<Level,ArrayList<Frage>> > alleFragen;
+	private static Kategorie[] KategorieValues = Kategorie.values();
+	private static Level[] LevelValues = Level.values();
+	
 	
 	/**
 	 * Initialisiert eine neue Frage, mit einer Frage und einer Antwort als String.
@@ -104,12 +109,12 @@ public class Frage {
 	 * initialisiert alleFragen
 	 *
 	 */
-	private static void makeNewMap() {
-		alleFragen = new ArrayList<>(); 
-		for(int i = 0; i< Kategorie.values().length; i++) {
-			alleFragen.add(new ArrayList<>());
-			for(int j = 0 ; j < Level.values().length ; j++ ) {
-				alleFragen.get(i).add(new ArrayList<Frage>());
+	static void makeNewMap() {
+		alleFragen = new HashMap<>(); 
+		for(int i = 0; i< KategorieValues.length; i++) {
+			alleFragen.put(KategorieValues[i],new HashMap<>());
+			for(int j = 0 ; j < LevelValues.length ; j++ ) {
+				alleFragen.get(i).put(LevelValues[j],new ArrayList<Frage>());
 			}
 		}	
 	}
@@ -122,26 +127,28 @@ public class Frage {
 	 * @param kat integer, der fuer die Kategorie steht
 	 * @param level integer, der fuer den Schwierigkeitsgrad steht
 	 */
-	private static void newQuestion(String frage, String antwort, int kat, int level) {
-		alleFragen.get(kat-1).get(level-1).add(new Frage(frage,antwort));
+	private static void newQuestion(String frage, String antwort, Kategorie kat, Level level) {
+		alleFragen.get(kat).get(level).add(new Frage(frage,antwort));
 	}
 	
 	/**
 	 * Methode, die Fragen aus Datei Fragen.txt einliesst, und einsortiert in alleFragen
 	 *
 	 */
-	private static void readQuestions() {
-
-		String fileName = System.getProperty("user.dir") + "\\Fragen.txt";
+	static void readQuestions() {
+		String fileName = "resources"+ File.separator + "Fragen.txt";
+		
 		try(BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))){
 			
 			for (String temp = reader.readLine(); temp != null; temp = reader.readLine()) {
 				int zuordnung = Integer.parseInt(temp);
 				int lvl = zuordnung % 10;
-				int kat = (zuordnung-lvl)/10;
+				int kate = (zuordnung-lvl)/10;
+				Kategorie kat = KategorieValues[kate-1];
+				Level level = LevelValues[lvl];
 				String Frage = reader.readLine();
 				String Antwort = reader.readLine();
-				newQuestion(Frage,Antwort,kat,lvl);
+				newQuestion(Frage,Antwort,kat,level);
 			}
 			
 		} catch (IOException e) {
@@ -154,8 +161,8 @@ public class Frage {
 	 *
 	 */
 	private static void iterate() {
-		for(int i = 0; i< Kategorie.values().length; i++) {
-			for(int j = 0 ; j < Level.values().length ; j++ ) {
+		for(int i = 0; i< KategorieValues.length; i++) {
+			for(int j = 0 ; j < LevelValues().length ; j++ ) {
 				for(Frage f : alleFragen.get(i).get(j)) {
 					System.out.println(f.getFrage());
 					Iterator<String> it = f.getAntwortenArrayList().iterator();
