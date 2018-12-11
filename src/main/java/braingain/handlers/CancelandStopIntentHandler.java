@@ -31,10 +31,12 @@ public class CancelandStopIntentHandler implements RequestHandler {
 		this.sr = sr;
 	}
 
-	public boolean canHandle(HandlerInput input) {
+	@Override
+    public boolean canHandle(HandlerInput input) {
         return input.matches(intentName("AMAZON.StopIntent").or(intentName("AMAZON.CancelIntent")));
     }
 
+    @Override
     public Optional<Response> handle(HandlerInput input) {
         return input.getResponseBuilder()
                 .withSpeech("Auf Wiedersehen")

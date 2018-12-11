@@ -13,13 +13,10 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 package braingain.handlers;
 
-import static com.amazon.ask.request.Predicates.intentName;
-
 import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Intent;
@@ -28,22 +25,25 @@ import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
-import braingain.modell.Spieler;
 import braingain.modell.Spielrunde;
+
+import static com.amazon.ask.request.Predicates.intentName;
 
 public class UsernamenSpeichernHandler implements RequestHandler {
 
-	public static final Object LIST_OF_NAMES = "username";
+	public static final String LIST_OF_NAMES = "username";
 	private Spielrunde sr;
 
 	public UsernamenSpeichernHandler(Spielrunde sr) {
 		this.sr = sr;
 	}
 
+	@Override
 	public boolean canHandle(HandlerInput input) {
 		return input.matches(intentName("UsernamenSpeichernIntent"));
 	}
 
+	@Override
 	public Optional<Response> handle(HandlerInput input) {
 
 		String speechText;
@@ -53,29 +53,25 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 		Intent intent = intentRequest.getIntent();
 		Map<String, Slot> slots = intent.getSlots();
 
+		// Get the color slot from the list of slots.
 		Slot selectedNameSlot = slots.get(LIST_OF_NAMES);
 		
-		if (selectedNameSlot != null) {
-			String username = selectedNameSlot.getValue();
-			Spieler spieler = new Spieler(selectedNameSlot.getValue());
-			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
-			speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geographie, Logik und Gehirntraining.", username);
-
-			AttributesManager attributesManager = input.getAttributesManager();
-			Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-			persistentAttributes.put(spieler.getName(), LIST_OF_NAMES);
-			attributesManager.setPersistentAttributes(persistentAttributes);
-			attributesManager.savePersistentAttributes();
-
-			speechText = String.format("%s %s. %s", "Dein Spielername ist ", spieler.getName());
-
+		if(selectedNameSlot != null) {
+		String username = selectedNameSlot.getValue();
+		input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
+		speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", username);
 		} else {
 			speechText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
+		}
 
-		}
-			return input.getResponseBuilder().withSpeech(speechText)
-					.withShouldEndSession(false)
-					.build();
-		}
-	
+
+		/*if (name != null && !name.isEmpty()) {
+			speechText = String.format("Dein Name ist %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", name);
+		} else {
+			speechText = "Um deinen Namen zu speichern musst du ihn mir sagen.";
+		}*/
+		return input.getResponseBuilder().withSpeech(speechText)
+				.withShouldEndSession(false)
+				.build();
+	}
 }

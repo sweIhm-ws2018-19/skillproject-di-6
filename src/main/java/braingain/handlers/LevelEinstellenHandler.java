@@ -1,11 +1,5 @@
 package braingain.handlers;
 
-import static com.amazon.ask.request.Predicates.intentName;
-
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Intent;
@@ -16,6 +10,12 @@ import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
 
 import braingain.modell.Spielrunde;
+
+import java.util.Collections;
+import java.util.Map;
+import java.util.Optional;
+
+import static com.amazon.ask.request.Predicates.intentName;
 
 public class LevelEinstellenHandler implements RequestHandler {
 
@@ -30,6 +30,7 @@ public class LevelEinstellenHandler implements RequestHandler {
 		return input.matches(intentName("LevelEinstellenIntent"));
 	}
 
+	
 	public Optional<Response> handle(HandlerInput input) {
 		Request request = input.getRequestEnvelope().getRequest();
 		IntentRequest intentRequest = (IntentRequest) request;
@@ -49,9 +50,10 @@ public class LevelEinstellenHandler implements RequestHandler {
 				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
 	
 				speechText = String
-						.format("Du hast das Level %s gewaehlt. Mehr kann ich im ersten Sprint noch nicht.", gewaehltesLevel);
+						.format("Du hast das Level %s gewaehlt. Sage naechste Frage, um zu beginnen.", gewaehltesLevel);
 				repromptText = "Waehle jetzt dein Level.";
-	
+				sr.setLevel(gewaehltesLevel);
+				sr.refreshFragen();
 			} else {
 				// Render an error since we don't know what the users favorite color is.
 				speechText = "Ich kenne das Level nicht. Bitte versuche es noch einmal.";
@@ -69,7 +71,8 @@ public class LevelEinstellenHandler implements RequestHandler {
 							speechText = String
 									.format("Ihr habt das Level %s gewaehlt. Mehr kann ich im ersten Sprint noch nicht.", gewaehltesLevel);
 							repromptText = "Waehlt jetzt eurer Level.";
-				
+							sr.setLevel(gewaehltesLevel);
+							sr.refreshFragen();
 						} else {
 							// Render an error since we don't know what the users favorite color is.
 							speechText = "Ich kenne das Level nicht. Bitte versucht es noch einmal.";

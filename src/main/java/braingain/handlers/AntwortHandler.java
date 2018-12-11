@@ -6,7 +6,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Optional;
 
-import com.amazon.ask.attributes.AttributesManager;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Intent;
@@ -15,7 +14,6 @@ import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
-import braingain.modell.Spieler;
 import braingain.modell.Spielrunde;
 
 public class AntwortHandler implements RequestHandler {

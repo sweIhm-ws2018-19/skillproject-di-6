@@ -29,9 +29,10 @@ import com.amazon.ask.model.Slot;
 
 import braingain.modell.Spielrunde;
 
+
 public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
-	private static final Object LIST_OF_PLAYERNUMBERS = "numberOfPlayers";
+	private static final String LIST_OF_PLAYERNUMBERS = "numberOfPlayers";
 	
 	Spielrunde sr;
 	
@@ -39,10 +40,12 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 		this.sr = sr;
 	}
 
+	@Override
 	public boolean canHandle(HandlerInput input) {
 		return input.matches(intentName("AnzahlDerSpielerSetzenIntent"));
 	}
 
+	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		String speechText;
 		//int numberOfPlayers;
