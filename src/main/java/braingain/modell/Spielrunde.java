@@ -248,4 +248,13 @@ public class Spielrunde {
 		// return fragen.get(counter).getAntwortString();
 		return defaultFrage.getAntwortString();
 	}
+	
+	public String[] getPlayer() {
+		String[] playerArray = new String[anzahlSpieler];
+		for(int i = 0; i < anzahlSpieler; i++) {
+			playerArray[i] = spieler.get(i).getName();
+		}
+		return playerArray;
+	}
+	
 }

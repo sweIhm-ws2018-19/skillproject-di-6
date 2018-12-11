@@ -7,16 +7,16 @@ package braingain.modell;
 public enum Kategorie {
 
 	/** Kategorie logik. */
-	LOGIK(new String[] { "logik", "logic" }),
+	LOGIK(new String[] { "Logik", "logik", "logic" }),
 
 	/** Kategorie mathe. */
-	MATHE(new String[] { "mathe", "mathematik" }),
+	MATHE(new String[] { "Mathe", "mathe", "mathematik" }),
 
 	/** Kategorie geografie. */
-	GEOGRAFIE(new String[] { "geo", "geografie", "geographie", "erdkunde" }),
+	GEOGRAFIE(new String[] { "Geographie", "geo", "geografie", "geographie", "erdkunde" }),
 
 	/** Kategorie gedaechtnistraining. */
-	GEDAECHTNISTRAINING(new String[] { "gedaechtnistraining", "gehirntraining" });
+	GEDAECHTNISTRAINING(new String[] { "Gedaechtnistraining", "gedaechtnistraining", "gehirntraining" });
 
 	/** Welche Namen die Kategorie noch haben kann. */
 	private String[] value;
