@@ -27,6 +27,8 @@ import main.java.braingain.handlers.LaunchRequestHandler;
 import main.java.braingain.handlers.LevelEinstellenHandler;
 import main.java.braingain.handlers.SessionEndedRequestHandler;
 import main.java.braingain.handlers.UsernamenSpeichernHandler;
+import main.java.braingain.handlers.AntwortHandler;
+import main.java.braingain.handlers.FrageStellenHandler;
 
 public class BraingainStreamHandler extends SkillStreamHandler {
 	
@@ -44,7 +46,9 @@ public class BraingainStreamHandler extends SkillStreamHandler {
 					new LaunchRequestHandler(sr),
 					new LevelEinstellenHandler(sr),
 					new SessionEndedRequestHandler(sr),
-					new UsernamenSpeichernHandler(sr))
+					new UsernamenSpeichernHandler(sr),
+					new AntwortHandler(sr),
+					new FrageStellenHandler(sr))
 					.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
 					.build();
 	}

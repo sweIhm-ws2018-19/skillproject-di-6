@@ -1,15 +1,49 @@
 package main.java.braingain.Modell;
 
-enum Kategorie {
-	LOGIK(new String[]{"logik","logic"}),
-	MATHE(new String[]{"mathe","mathematik"}),
-	GEOGRAFIE(new String[]{"geo","geografie","geographie","erdkunde"}),
-	GEDAECHTNISTRAINING(new String[]{"gedaechtnistraining","gehirntraining"});
+//TODO: Auto-generated Javadoc
+/**
+* The Enum Kategorie.
+*/
+public enum Kategorie {
 	
-	private String[] value;
+	/** Kategorie logik. */
+	LOGIK(new String[] { "logik", "logic" }),
 	
-	Kategorie(String[] kategorien){this.value = kategorien;}
+	/** Kategorie mathe. */
+	MATHE(new String[] { "mathe", "mathematik" }),
 	
-	public String[] value() {return value;}
+	/** Kategorie geografie. */
+	GEOGRAFIE(new String[] { "geo", "geografie", "geographie", "erdkunde" }),
+	
+	/** Kategorie gedaechtnistraining. */
+	GEDAECHTNISTRAINING(new String[] { "gedaechtnistraining", "gehirntraining" });
 
+	/** Welche Namen die Kategorie noch haben kann. */
+	private String[] value;
+
+	/**
+	 * Instantiates a new kategorie.
+	 *
+	 * @param kategorien the kategorien
+	 */
+	Kategorie(String[] kategorien) {
+		this.value = kategorien;
+	}
+
+	/**
+	 * Value.
+	 *
+	 * @return Alle Values
+	 */
+	public String[] value() {
+		return value;
+	}
+	
+	/* (non-Javadoc)
+	 * @see java.lang.Enum#toString()
+	 */
+	public String toString() {
+		return value[0];
+	}
 }
+

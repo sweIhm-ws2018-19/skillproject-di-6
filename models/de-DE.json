@@ -39,7 +39,7 @@
                     "samples": [
                         "Mein Username ist {username}",
                         "Mein Spielername ist {username}",
-                        "Ich hei√üe {username}",
+                        "Ich heiﬂe {username}",
                         "Ich bin {username}"
                     ]
                 },
@@ -86,7 +86,7 @@
                     "slots": [
                         {
                             "name": "antwort",
-                            "type": ""
+                            "type": "AMAZON.CreativeWorkType"
                         }
                     ],
                     "samples": [
@@ -101,7 +101,7 @@
                         "starte training",
                         "starte fragen",
                         "naechste Frage",
-                        "n√§chste Frage"
+                        "n‰chste Frage"
                     ]
                 }
             ],

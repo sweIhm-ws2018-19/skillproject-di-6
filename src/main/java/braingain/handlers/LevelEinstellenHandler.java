@@ -49,9 +49,10 @@ public class LevelEinstellenHandler implements RequestHandler {
 				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
 	
 				speechText = String
-						.format("Du hast das Level %s gewaehlt. Mehr kann ich im ersten Sprint noch nicht.", gewaehltesLevel);
+						.format("Du hast das Level %s gewaehlt. Sage naechste Frage, um zu beginnen.", gewaehltesLevel);
 				repromptText = "Waehle jetzt dein Level.";
-	
+				sr.setLevel(gewaehltesLevel);
+				sr.refreshFragen();
 			} else {
 				// Render an error since we don't know what the users favorite color is.
 				speechText = "Ich kenne das Level nicht. Bitte versuche es noch einmal.";
@@ -69,7 +70,8 @@ public class LevelEinstellenHandler implements RequestHandler {
 							speechText = String
 									.format("Ihr habt das Level %s gewaehlt. Mehr kann ich im ersten Sprint noch nicht.", gewaehltesLevel);
 							repromptText = "Waehlt jetzt eurer Level.";
-				
+							sr.setLevel(gewaehltesLevel);
+							sr.refreshFragen();
 						} else {
 							// Render an error since we don't know what the users favorite color is.
 							speechText = "Ich kenne das Level nicht. Bitte versucht es noch einmal.";

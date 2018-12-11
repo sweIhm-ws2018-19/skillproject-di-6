@@ -59,7 +59,7 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 		if(selectedNameSlot != null) {
 		String username = selectedNameSlot.getValue();
 		input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
-		speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geographie, Logik und Gehirntraining.", username);
+		speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", username);
 		} else {
 			speechText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
 		}
