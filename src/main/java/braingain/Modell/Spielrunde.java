@@ -22,7 +22,7 @@ public class Spielrunde {
 	Frage defaultFrage;
 
 	/**
-	 * Initialisiert eine neue Spielrunde, hier werden die Array-Lists erstellt für
+	 * Initialisiert eine neue Spielrunde, hier werden die Array-Lists erstellt fuer
 	 * Spieler und Fragen.
 	 */
 	public Spielrunde() {
@@ -34,10 +34,10 @@ public class Spielrunde {
 	}
 
 	/**
-	 * Fügt einen Spieler hinzu.
+	 * Fuegt einen Spieler hinzu.
 	 *
-	 * @param Den Spieler der hinzugefügt werden soll
-	 * @return true, wenn der Spieler hinzugefügt werden konnte
+	 * @param Den Spieler der hinzugefuegt werden soll
+	 * @return true, wenn der Spieler hinzugefuegt werden konnte
 	 */
 	public boolean addPlayer(Spieler s) {
 		boolean succeded = false;
@@ -48,19 +48,19 @@ public class Spielrunde {
 	}
 
 	/**
-	 * Fügt eine Frage hinzu.
+	 * Fuegt eine Frage hinzu.
 	 *
-	 * @param Die Frage die hinzugefügt werden soll
-	 * @return true, wenn die Frage hinzugefügt wernden konnte
+	 * @param Die Frage die hinzugefuegt werden soll
+	 * @return true, wenn die Frage hinzugefuegt wernden konnte
 	 */
 	public boolean addFrage(Frage f) {
 		return fragen.add(f);
 	}
 
 	/**
-	 * Diese Methode ermittelt den/die Spieler mit der höchsten Punktezahl.
+	 * Diese Methode ermittelt den/die Spieler mit der hoechsten Punktezahl.
 	 *
-	 * @return Den/Die Spieler mit der höchsten Punktezahl
+	 * @return Den/Die Spieler mit der hoechsten Punktezahl
 	 */
 	public ArrayList<Spieler> getHighscoreSpieler() {
 		ArrayList<Spieler> highscoreSpieler = new ArrayList<Spieler>();
@@ -77,7 +77,7 @@ public class Spielrunde {
 	}
 
 	/**
-	 * Diese Methode ermittelt die höchste Punktzahl und die Spieler, welche diese
+	 * Diese Methode ermittelt die hoechste Punktzahl und die Spieler, welche diese
 	 * haben.
 	 *
 	 * @return Ein String-Array, an der ersten Stelle steht die Punktzahl und danach
@@ -97,9 +97,9 @@ public class Spielrunde {
 	}
 
 	/**
-	 * Ermittelt die nächste Frage.
+	 * Ermittelt die naechste Frage.
 	 *
-	 * @return Die nächste Frage die hinzugefügt wurde
+	 * @return Die naechste Frage die hinzugefuegt wurde
 	 */
 	public String fetchFrage() {
 		//String newFrage = fragen.get(counter).getFrage();
@@ -208,7 +208,7 @@ public class Spielrunde {
 	}
 
 	/**
-	 * Diese Methode erhöht den Counter um eins.
+	 * Diese Methode erhoeht den Counter um eins.
 	 */
 	public void increaseCounter() {
 		this.counter++;
