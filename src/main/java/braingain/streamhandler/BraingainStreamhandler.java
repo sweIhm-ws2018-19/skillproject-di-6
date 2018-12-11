@@ -37,7 +37,7 @@ private static Skill getSkill() {
 	return Skills.standard()
 		.addRequestHandlers(
 				new AnzahlDerSpielerSetzenHandler(sr),
-				new CancelandStopIntentHandler(sr),
+				new CancelandStopIntentHandler(),
 				new FallbackIntentHandler(sr),
 				new HelpIntentHandler(sr),
 				new KategorieEinstellenHandler(sr),
@@ -45,8 +45,8 @@ private static Skill getSkill() {
 				new LevelEinstellenHandler(sr),
 				new SessionEndedRequestHandler(sr),
 				new UsernamenSpeichernHandler(sr))
-				.withTableName("HighScore")
-				.withAutoCreateTable(true)
+				//.withTableName("HighScore")
+				//.withAutoCreateTable(true)
 				.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
 				.build();
 }
