@@ -106,6 +106,7 @@ public class Frage {
 	static {
 		makeNewMap();
 		readQuestions();
+		iterate();
 	}
 
 	/**

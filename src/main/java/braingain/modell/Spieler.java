@@ -4,47 +4,48 @@ package braingain.modell;
  * The Class Spieler.
  */
 public class Spieler {
-	
+
 	private final String name;
 	private int punktestand;
 	private int highscore;
-	
+
 	/**
 	 * Initialisiert einen neuen Spieler, mit Namen, PunkteStand und Highscore.
 	 *
-	 * @param name the name
+	 * @param name        the name
 	 * @param punktestand the punktestand
-	 * @param highscore the highscore
+	 * @param highscore   the highscore
 	 */
 	public Spieler(String name, int punktestand, int highscore) {
-		
+
 		this.name = name;
 		this.punktestand = punktestand;
 		this.highscore = highscore;
-		
+
 	}
-	
+
 	/**
-	 * Initialisiert einen neuem Spieler, nur mit Namen und gibt ihm keine Punkte und keinen Highscore
+	 * Initialisiert einen neuem Spieler, nur mit Namen und gibt ihm keine Punkte
+	 * und keinen Highscore
 	 * 
 	 * @param name the name
 	 */
-	
+
 	public Spieler(String name) {
 		this.name = name;
 		this.punktestand = 0;
 		this.highscore = 0;
 	}
-	
+
 	/**
 	 * Diese Methode testet, ob man richtig oder falsch geantwortet hat.
 	 *
 	 * @param richtigBeantwortet the richtig beantwortet
 	 */
-	public void beantwortet(boolean richtigBeantwortet){
+	public void beantwortet(boolean richtigBeantwortet) {
 		punktestand = richtigBeantwortet ? punktestand + 1 : punktestand - 1;
 	}
-	
+
 	/**
 	 * Gets the name.
 	 *
@@ -76,7 +77,7 @@ public class Spieler {
 	 * Sets the highscore.
 	 */
 	public void setHighscore() {
-		if(punktestand > highscore) {
+		if (punktestand > highscore) {
 			highscore = punktestand;
 		}
 	}

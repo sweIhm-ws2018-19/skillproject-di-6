@@ -14,21 +14,25 @@ public class Spielrunde {
 	private int counter;
 	Kategorie kategorie;
 	Level level;
+	Frage defaultFrage;
 
 	/**
-	 * Initialisiert eine neue Spielrunde, hier werden die Array-Lists erstellt für
+	 * Initialisiert eine neue Spielrunde, hier werden die Array-Lists erstellt fuer
 	 * Spieler und Fragen.
 	 */
 	public Spielrunde() {
 		spieler = new ArrayList<Spieler>();
 		fragen = new ArrayList<Frage>();
+		counter = 0;
+		aktuellerSpieler = 0;
+		defaultFrage = new Frage("Was ist 1 + 1?", "2");
 	}
 
 	/**
-	 * Fügt einen Spieler hinzu.
+	 * Fuegt einen Spieler hinzu.
 	 *
-	 * @param Den Spieler der hinzugefügt werden soll
-	 * @return true, wenn der Spieler hinzugefügt werden konnte
+	 * @param Den Spieler der hinzugefuegt werden soll
+	 * @return true, wenn der Spieler hinzugefuegt werden konnte
 	 */
 	public boolean addPlayer(Spieler s) {
 		boolean succeded = false;
@@ -39,19 +43,19 @@ public class Spielrunde {
 	}
 
 	/**
-	 * Fügt eine Frage hinzu.
+	 * Fuegt eine Frage hinzu.
 	 *
-	 * @param Die Frage die hinzugefügt werden soll
-	 * @return true, wenn die Frage hinzugefügt wernden konnte
+	 * @param Die Frage die hinzugefuegt werden soll
+	 * @return true, wenn die Frage hinzugefuegt wernden konnte
 	 */
 	public boolean addFrage(Frage f) {
 		return fragen.add(f);
 	}
 
 	/**
-	 * Diese Methode ermittelt den/die Spieler mit der höchsten Punktezahl.
+	 * Diese Methode ermittelt den/die Spieler mit der hoechsten Punktezahl.
 	 *
-	 * @return Den/Die Spieler mit der höchsten Punktezahl
+	 * @return Den/Die Spieler mit der hoechsten Punktezahl
 	 */
 	public ArrayList<Spieler> getHighscoreSpieler() {
 		ArrayList<Spieler> highscoreSpieler = new ArrayList<Spieler>();
@@ -68,7 +72,7 @@ public class Spielrunde {
 	}
 
 	/**
-	 * Diese Methode ermittelt die höchste Punktzahl und die Spieler, welche diese
+	 * Diese Methode ermittelt die hoechste Punktzahl und die Spieler, welche diese
 	 * haben.
 	 *
 	 * @return Ein String-Array, an der ersten Stelle steht die Punktzahl und danach
@@ -88,20 +92,21 @@ public class Spielrunde {
 	}
 
 	/**
-	 * Ermittelt die nächste Frage.
+	 * Ermittelt die naechste Frage.
 	 *
-	 * @return Die nächste Frage die hinzugefügt wurde
+	 * @return Die naechste Frage die hinzugefuegt wurde
 	 */
 	public String fetchFrage() {
-		String newFrage = fragen.get(counter).getFrage();
+		// String newFrage = fragen.get(counter).getFrage();
+		String newFrage = defaultFrage.getFrage();
 		return newFrage;
 	}
-	
+
 	/**
 	 * Aktualisiert alle Fragen
 	 */
-	
-	public void refreshFragen(){
+
+	public void refreshFragen() {
 		fragen = Frage.alleFragen.get(kategorie).get(level);
 	}
 
@@ -198,7 +203,7 @@ public class Spielrunde {
 	}
 
 	/**
-	 * Diese Methode erhöht den Counter um eins.
+	 * Diese Methode erhoeht den Counter um eins.
 	 */
 	public void increaseCounter() {
 		this.counter++;
@@ -212,34 +217,35 @@ public class Spielrunde {
 	public int getCounter() {
 		return this.counter;
 	}
-	
+
 	public void naechsterSpieler() {
 		aktuellerSpieler += 1;
-		if(aktuellerSpieler == anzahlSpieler) {
+		if (aktuellerSpieler == anzahlSpieler) {
 			aktuellerSpieler -= anzahlSpieler;
 		}
 	}
 
 	/**
-	 * Testet ob die gegeben Antwort die richtige ist und aktualisieert dann damit den Punktestand.
+	 * Testet ob die gegeben Antwort die richtige ist und aktualisieert dann damit
+	 * den Punktestand.
 	 *
 	 * @param Die gegeben Antwort
-	 * @return 
 	 */
 	public boolean checkAntwort(String antwort) {
 		// TODO: kontrolliere die Antwort und aktualisiere in Spieler den Punktestand...
-		ArrayList<String> antworten = fragen.get(counter).getAntwortenArrayList();
-		boolean ubereinstimmung = false;
-		int antwortZahl = antworten.size();
-		while(!ubereinstimmung && antwortZahl>0) {
-			antwortZahl -= 1;
-			ubereinstimmung = antworten.get(antwortZahl).equalsIgnoreCase(antwort);
-		}
-		spieler.get(aktuellerSpieler).beantwortet(ubereinstimmung);
-		return ubereinstimmung;
+		/*
+		 * ArrayList<String> antworten = fragen.get(counter).getAntwortenArrayList();
+		 * boolean ubereinstimmung = false; int antwortZahl = antworten.size();
+		 * while(!ubereinstimmung && antwortZahl>0) { antwortZahl -= 1; ubereinstimmung
+		 * = antworten.get(antwortZahl).equalsIgnoreCase(antwort); }
+		 * spieler.get(aktuellerSpieler).beantwortet(ubereinstimmung); return
+		 * ubereinstimmung;
+		 */
+		return antwort.contains(defaultFrage.getAntwortString());
 	}
-	
+
 	public String getRichtigeAntwort() {
-		return fragen.get(counter).getAntwortString();
+		// return fragen.get(counter).getAntwortString();
+		return defaultFrage.getAntwortString();
 	}
 }

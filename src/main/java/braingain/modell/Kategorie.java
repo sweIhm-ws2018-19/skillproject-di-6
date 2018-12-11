@@ -1,20 +1,20 @@
 package braingain.modell;
 
-// TODO: Auto-generated Javadoc
+//TODO: Auto-generated Javadoc
 /**
  * The Enum Kategorie.
  */
 public enum Kategorie {
-	
+
 	/** Kategorie logik. */
 	LOGIK(new String[] { "logik", "logic" }),
-	
+
 	/** Kategorie mathe. */
 	MATHE(new String[] { "mathe", "mathematik" }),
-	
+
 	/** Kategorie geografie. */
 	GEOGRAFIE(new String[] { "geo", "geografie", "geographie", "erdkunde" }),
-	
+
 	/** Kategorie gedaechtnistraining. */
 	GEDAECHTNISTRAINING(new String[] { "gedaechtnistraining", "gehirntraining" });
 
@@ -38,8 +38,10 @@ public enum Kategorie {
 	public String[] value() {
 		return value;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see java.lang.Enum#toString()
 	 */
 	public String toString() {
