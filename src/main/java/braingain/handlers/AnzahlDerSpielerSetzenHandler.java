@@ -29,13 +29,12 @@ import com.amazon.ask.model.Slot;
 
 import braingain.modell.Spielrunde;
 
-
 public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
 	private static final String LIST_OF_PLAYERNUMBERS = "numberOfPlayers";
-	
+
 	Spielrunde sr;
-	
+
 	public AnzahlDerSpielerSetzenHandler(Spielrunde sr) {
 		this.sr = sr;
 	}
@@ -48,44 +47,35 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		String speechText;
-		//int numberOfPlayers;
-		
-		Request request = input.getRequestEnvelope().getRequest();
-		IntentRequest intentRequest = (IntentRequest) request;
+
+		IntentRequest intentRequest = (IntentRequest) input.getRequestEnvelope().getRequest();
 		Intent intent = intentRequest.getIntent();
 		Map<String, Slot> slots = intent.getSlots();
 
-		// Get the level slot from the list of slots.
 		Slot selectedPlayerSlot = slots.get(LIST_OF_PLAYERNUMBERS);
-		
-		if(selectedPlayerSlot != null) {
+
+		if (selectedPlayerSlot != null) {
 			String numberOfPlayers = selectedPlayerSlot.getValue();
-			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
-			speechText = String.format("OK. Ihr spielt nun zu %s. Sagt mir nun einer zur Zeit eure Namen. Sagt zum Beispiel ich heisse Max.", numberOfPlayers);
-			sr.setAnzahlSpieler(Integer.parseInt(numberOfPlayers));
+			if (numberOfPlayers.equals("alleine")) {
+				sr.setAnzahlSpieler(1);
+			} else {
+				sr.setAnzahlSpieler(Integer.parseInt(numberOfPlayers));
+			}
+			input.getAttributesManager()
+					.setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
+			if (sr.getAnzahlSpieler() == 1) {
+				speechText = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen.";
+			} else {
+				speechText = String.format(
+						"OK. Ihr spielt nun zu %s. Sagt mir nun nacheinander eure Namen. Zum Beispiel: Ich heisse Max.",
+						numberOfPlayers);
+			}
+
 		} else {
 			speechText = "Ich habe deine Antwort leider nicht verstanden. Wie viele Spieler seid ihr?";
 		}
-		
-		
-/*
-		try {
-			numberOfPlayers = (int) input.getAttributesManager().getSessionAttributes().get(NumberOfPlayers);
-		
-			if(numberOfPlayers == 0 || numberOfPlayers > 4) {
-				speechText = String.format("Die angegebene Spielerzahl %s kann nicht akzeptiert werden. Die Spieleranzahl ist auf 1 bis 4 Spieler begrenzt.", numberOfPlayers);
-			}else {
-				speechText = String.format("OK. Ihr spielt nun zu %s", numberOfPlayers);
-			}
-		
-		}catch (Exception e) {
-			speechText = "Es geschah ein Fehler: "+ e.getMessage();
-		}*/
-		
-		
-		return input.getResponseBuilder().withSpeech(speechText)
-				.withShouldEndSession(false)
-				.build();
-		
+
+		return input.getResponseBuilder().withSpeech(speechText).withShouldEndSession(false).build();
+
 	}
 }

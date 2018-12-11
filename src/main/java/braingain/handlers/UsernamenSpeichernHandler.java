@@ -25,6 +25,8 @@ import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
+import braingain.modell.Kategorie;
+import braingain.modell.Spieler;
 import braingain.modell.Spielrunde;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -33,6 +35,7 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 
 	public static final String LIST_OF_NAMES = "username";
 	private Spielrunde sr;
+	private int spielerGenannt = 1;
 
 	public UsernamenSpeichernHandler(Spielrunde sr) {
 		this.sr = sr;
@@ -47,31 +50,52 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 	public Optional<Response> handle(HandlerInput input) {
 
 		String speechText;
-		//String name = (String) input.getAttributesManager().getSessionAttributes().get(NAME);
 		Request request = input.getRequestEnvelope().getRequest();
 		IntentRequest intentRequest = (IntentRequest) request;
 		Intent intent = intentRequest.getIntent();
 		Map<String, Slot> slots = intent.getSlots();
 
-		// Get the color slot from the list of slots.
 		Slot selectedNameSlot = slots.get(LIST_OF_NAMES);
-		
-		if(selectedNameSlot != null) {
-		String username = selectedNameSlot.getValue();
-		input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
-		speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", username);
+
+		if (selectedNameSlot != null) {
+			String username = selectedNameSlot.getValue();
+			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
+			sr.addPlayer(new Spieler(username));
+
+			if (sr.getAnzahlSpieler() == 1) {
+				speechText = String.format("Du heisst %s. ", username) + "Waehle nun deine Kategorie. Es gibt "
+						+ Kategorie.values()[0].toString();
+				for (int i = 1; i < Kategorie.values().length - 1; i++) {
+					speechText += ", " + Kategorie.values()[i].toString();
+				}
+				speechText += " und " + Kategorie.values()[Kategorie.values().length - 1].toString() + ".";
+			}else if (spielerGenannt < sr.getAnzahlSpieler()) {
+				spielerGenannt++;
+				speechText = String.format("Du heisst %s, bitte sagt mir nun den naechsten Namen.", username);
+			} else {
+
+				speechText = String.format("Du heisst %s. Das sind nun alle Spieler. Eure Namen sind: ", username);
+				
+				switch(sr.getAnzahlSpieler()) {
+				case 2: speechText += sr.getPlayer()[0] + " und " + sr.getPlayer()[1];
+					break;
+				case 3: speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + " und " + sr.getPlayer()[2];
+					break;
+				case 4: speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + ", " + sr.getPlayer()[2] + " und " + sr.getPlayer()[4];
+					break;
+				default: speechText += "Fehler.";
+					break;
+				}
+				speechText += ". Waehlt nun eure Kategorie. Es gibt " + Kategorie.values()[0].toString();
+
+				for (int i = 1; i < Kategorie.values().length - 1; i++) {
+					speechText += ", " + Kategorie.values()[i].toString();
+				}
+				speechText += " und " + Kategorie.values()[Kategorie.values().length - 1].toString() + ".";
+			}
 		} else {
 			speechText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
 		}
-
-
-		/*if (name != null && !name.isEmpty()) {
-			speechText = String.format("Dein Name ist %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", name);
-		} else {
-			speechText = "Um deinen Namen zu speichern musst du ihn mir sagen.";
-		}*/
-		return input.getResponseBuilder().withSpeech(speechText)
-				.withShouldEndSession(false)
-				.build();
+		return input.getResponseBuilder().withSpeech(speechText).withShouldEndSession(false).build();
 	}
 }

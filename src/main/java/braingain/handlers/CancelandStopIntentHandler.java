@@ -13,34 +13,27 @@
 
 package braingain.handlers;
 
+import static com.amazon.ask.request.Predicates.intentName;
+
+import java.util.Optional;
+
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
-import braingain.modell.Spielrunde;
-
-import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.intentName;
-
 public class CancelandStopIntentHandler implements RequestHandler {
-    
-	private Spielrunde sr;
-	
-	public CancelandStopIntentHandler(Spielrunde sr) {
-		this.sr = sr;
+
+	public CancelandStopIntentHandler() {
 	}
 
 	@Override
-    public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.StopIntent").or(intentName("AMAZON.CancelIntent")));
-    }
+	public boolean canHandle(HandlerInput input) {
+		return input.matches(intentName("AMAZON.StopIntent").or(intentName("AMAZON.CancelIntent")));
+	}
 
-    @Override
-    public Optional<Response> handle(HandlerInput input) {
-        return input.getResponseBuilder()
-                .withSpeech("Auf Wiedersehen")
-                .withSimpleCard("ColorSession", "Auf Wiedersehen")
-                .build();
-    }
+	@Override
+	public Optional<Response> handle(HandlerInput input) {
+		return input.getResponseBuilder().withSpeech("Auf Wiedersehen")
+				.withSimpleCard("ColorSession", "Auf Wiedersehen").build();
+	}
 }

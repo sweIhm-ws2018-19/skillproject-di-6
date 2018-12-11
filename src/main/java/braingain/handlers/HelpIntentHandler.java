@@ -24,27 +24,23 @@ import java.util.Optional;
 import static com.amazon.ask.request.Predicates.intentName;
 
 public class HelpIntentHandler implements RequestHandler {
-	
+
 	private Spielrunde sr;
-	
+
 	public HelpIntentHandler(Spielrunde sr) {
 		this.sr = sr;
 	}
 
 	@Override
-    public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.HelpIntent"));
-    }
+	public boolean canHandle(HandlerInput input) {
+		return input.matches(intentName("AMAZON.HelpIntent"));
+	}
 
-    @Override
-    public Optional<Response> handle(HandlerInput input) {
-        String speechText = "Du kannst mit mir dein Gehirn trainieren. Zuerst musst du mir sagen, wie viele Spieler ihr seid, dann eure Namen, die Kategorie, welche ihr spielen wollt und das Level.";
-        String repromptText = "Bitte sage mir, wie viele Spieler ihr seid.";
-        return input.getResponseBuilder()
-                .withSimpleCard("BraingainSession", speechText)
-                .withSpeech(speechText)
-                .withReprompt(repromptText)
-                .withShouldEndSession(false)
-                .build();
-    }
+	@Override
+	public Optional<Response> handle(HandlerInput input) {
+		String speechText = "Du kannst mit mir dein Gehirn trainieren. Zuerst musst du mir sagen, wie viele Spieler ihr seid, dann eure Namen, die Kategorie, welche ihr spielen wollt und das Level.";
+		String repromptText = "Bitte sage mir, wie viele Spieler ihr seid.";
+		return input.getResponseBuilder().withSimpleCard("BraingainSession", speechText).withSpeech(speechText)
+				.withReprompt(repromptText).withShouldEndSession(false).build();
+	}
 }
