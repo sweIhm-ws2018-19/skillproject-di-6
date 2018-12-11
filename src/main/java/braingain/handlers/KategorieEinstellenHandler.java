@@ -43,25 +43,16 @@ public class KategorieEinstellenHandler implements RequestHandler {
 		boolean isAskResponse = false;
 		if(sr.getAnzahlSpieler()==1) {
 			// Check for favorite color and create output to user.
-			if (selectedCathegorySlot != null && selectedCathegorySlot.getResolutions().toString().contains("ER_SUCCESS_MATCH")) {
+			if (selectedCathegorySlot != null) {
 				// Store the user's favorite color in the Session and create response.
 				String gewaehlteKategorie = selectedCathegorySlot.getValue();
-				boolean kategorieExists = sr.setKategorie(gewaehlteKategorie);
-				if (kategorieExists) {
-					input.getAttributesManager()
-							.setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
-
-					speechText = String.format(
-							"Du hast die Kategorie %s gewaehlt. Waehle nun das Level. Es gibt einfach, mittel, anspruchsvoll und schwer.",
-							gewaehlteKategorie);
-					repromptText = "Waehle jetzt deine Kategorie.";
-
-				} else {
-					// Render an error since we don't know what the users category is.
-					speechText = "Ich kenne die Kategorie nicht. Bitte versuche es noch einmal.";
-					repromptText = "Ich habe die Kategorie nicht verstanden. Sage mir die Kategorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich waehle die Katgorie Logik.";
-					isAskResponse = true;
-				}
+				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
+	
+				speechText = String
+						.format("Du hast die Kategorie %s gewaehlt. Waehle nun das Level. Es gibt einfach, mittel, anspruchsvoll und schwer.", gewaehlteKategorie);
+				repromptText = "Waehle jetzt deine Kategorie.";
+				sr.setKategorie(gewaehlteKategorie);
+	
 			} else {
 				// Render an error since we don't know what the users favorite color is.
 				speechText = "Ich kenne die Kategorie nicht. Bitte versuche es noch einmal.";
@@ -71,7 +62,7 @@ public class KategorieEinstellenHandler implements RequestHandler {
 
 		}else {
 			// Check for favorite color and create output to user.
-						if (selectedCathegorySlot != null && selectedCathegorySlot.getResolutions().toString().contains("ER_SUCCESS_MATCH")) {
+						if (selectedCathegorySlot != null) {
 							// Store the user's favorite color in the Session and create response.
 							String gewaehlteKategorie = selectedCathegorySlot.getValue();
 							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
@@ -79,7 +70,7 @@ public class KategorieEinstellenHandler implements RequestHandler {
 							speechText = String
 									.format("Ihr habt die Kategorie %s gewaehlt. Waehlt nun euer Level. Es gibt einfach, mittel, anspruchsvoll und schwer.", gewaehlteKategorie);
 							repromptText = "Waehlt jetzt eure Kategorie.";
-				
+							sr.setKategorie(gewaehlteKategorie);
 						} else {
 							// Render an error since we don't know what the users favorite color is.
 							speechText = "Ich kenne die Kategorie nicht. Bitte versuche es noch einmal.";
