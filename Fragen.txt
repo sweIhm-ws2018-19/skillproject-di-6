@@ -1,4 +1,4 @@
-1 Logik
+﻿1 Logik
 2 Mathe
 3 Geografie
 4 Gedächtnistraining
@@ -7,6 +7,7 @@
 02 Mittel
 03 Anspruchvoll
 04 Schwer
+
 
 111 Sie machen bei einem Marathonlauf mit und überholen kurz vor dem Ziel den Zweiten. 
 	Wievielter sind Sie dann?
