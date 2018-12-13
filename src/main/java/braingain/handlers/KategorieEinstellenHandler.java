@@ -37,15 +37,12 @@ public class KategorieEinstellenHandler implements RequestHandler {
 		Intent intent = intentRequest.getIntent();
 		Map<String, Slot> slots = intent.getSlots();
 
-		// Get the color slot from the list of slots.
 		Slot selectedCathegorySlot = slots.get(LIST_OF_CATEGORIES);
 
 		String speechText, repromptText;
 		boolean isAskResponse = false;
 		if(sr.getAnzahlSpieler()==1) {
-			// Check for favorite color and create output to user.
 			if (selectedCathegorySlot != null) {
-				// Store the user's favorite color in the Session and create response.
 				String gewaehlteKategorie = selectedCathegorySlot.getValue();
 				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
 	
@@ -55,16 +52,13 @@ public class KategorieEinstellenHandler implements RequestHandler {
 				sr.setKategorie(gewaehlteKategorie);
 	
 			} else {
-				// Render an error since we don't know what the users favorite color is.
 				speechText = "Ich kenne die Kategorie nicht. Bitte versuche es noch einmal.";
 				repromptText = "Ich habe die Kategorie nicht verstanden. Sage mir die Kategorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich waehle die Katgorie Logik.";
 				isAskResponse = true;
 			}
 
 		}else {
-			// Check for favorite color and create output to user.
 						if (selectedCathegorySlot != null) {
-							// Store the user's favorite color in the Session and create response.
 							String gewaehlteKategorie = selectedCathegorySlot.getValue();
 							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
 				
@@ -73,7 +67,6 @@ public class KategorieEinstellenHandler implements RequestHandler {
 							repromptText = "Waehlt jetzt eure Kategorie.";
 							sr.setKategorie(gewaehlteKategorie);
 						} else {
-							// Render an error since we don't know what the users favorite color is.
 							speechText = "Ich kenne die Kategorie nicht. Bitte versuche es noch einmal.";
 							repromptText = "Ich habe die Kategorie nicht verstanden. Sage mir die Kategorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich waehle die Kategorie Logik.";
 							isAskResponse = true;

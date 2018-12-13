@@ -23,7 +23,6 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 
@@ -55,7 +54,7 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 		Slot selectedPlayerSlot = slots.get(LIST_OF_PLAYERNUMBERS);
 
 		if (selectedPlayerSlot != null) {
-			String numberOfPlayers = selectedPlayerSlot.getValue();
+			String numberOfPlayers = selectedPlayerSlot.getName();
 			if (numberOfPlayers.equals("alleine")) {
 				sr.setAnzahlSpieler(1);
 			} else {
@@ -64,7 +63,7 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 			input.getAttributesManager()
 					.setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
 			if (sr.getAnzahlSpieler() == 1) {
-				speechText = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen.";
+				speechText = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen. ";
 			} else {
 				speechText = String.format(
 						"OK. Ihr spielt nun zu %s. Sagt mir nun nacheinander eure Namen. Zum Beispiel: Ich heisse Max.",
