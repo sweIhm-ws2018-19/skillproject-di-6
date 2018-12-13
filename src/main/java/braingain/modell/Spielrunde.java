@@ -1,6 +1,7 @@
 package braingain.modell;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  * The Class Spielrunde.
@@ -9,12 +10,15 @@ public class Spielrunde {
 
 	public ArrayList<Spieler> spieler;
 	public ArrayList<Frage> fragen;
+	private Spieler aktuellerSpieler;
 	private int anzahlSpieler;
-	private int aktuellerSpieler;
 	private int counter;
+	private static final int maxNumberOfQuestions = 5;
 	Kategorie kategorie;
 	Level level;
 	Frage defaultFrage;
+	
+	private HashMap<Integer, Frage> Questions;
 
 	/**
 	 * Initialisiert eine neue Spielrunde, hier werden die Array-Lists erstellt fuer
@@ -24,7 +28,6 @@ public class Spielrunde {
 		spieler = new ArrayList<Spieler>();
 		fragen = new ArrayList<Frage>();
 		counter = 0;
-		aktuellerSpieler = 0;
 		defaultFrage = new Frage("Was ist 1 + 1?", "2");
 	}
 
@@ -45,7 +48,8 @@ public class Spielrunde {
 	/**
 	 * Fuegt eine Frage hinzu.
 	 *
-	 * @param Die Frage die hinzugefuegt werden soll
+	 * @param Die
+	 *            Frage die hinzugefuegt werden soll
 	 * @return true, wenn die Frage hinzugefuegt wernden konnte
 	 */
 	public boolean addFrage(Frage f) {
@@ -113,7 +117,8 @@ public class Spielrunde {
 	/**
 	 * Sets the anzahl spieler.
 	 *
-	 * @param anzahlSpieler the new anzahl spieler
+	 * @param anzahlSpieler
+	 *            the new anzahl spieler
 	 */
 	public void setAnzahlSpieler(int anzahlSpieler) {
 		this.anzahlSpieler = anzahlSpieler;
@@ -131,7 +136,8 @@ public class Spielrunde {
 	/**
 	 * Sets the kategorie.
 	 *
-	 * @param Die Kategorie die gesetzt werden soll
+	 * @param Die
+	 *            Kategorie die gesetzt werden soll
 	 * @return true, wenn diese Kategorie existiert
 	 */
 	public boolean setKategorie(String kategorie) {
@@ -147,7 +153,8 @@ public class Spielrunde {
 	/**
 	 * Ermittelt den Namen der eingespeicherten Kategorie.
 	 *
-	 * @param Den eingespeicherten Namen der Kategorie den man haben will.
+	 * @param Den
+	 *            eingespeicherten Namen der Kategorie den man haben will.
 	 * @return Den eingespeicherten Namen der Kategorie
 	 */
 	public Kategorie getKategorie(String propose) {
@@ -164,7 +171,8 @@ public class Spielrunde {
 	/**
 	 * Sets the level.
 	 *
-	 * @param level the level
+	 * @param level
+	 *            the level
 	 * @return true, if successful
 	 */
 	public boolean setLevel(String level) {
@@ -180,7 +188,8 @@ public class Spielrunde {
 	/**
 	 * Ermittelt den Namen des eingespeicherten Levels.
 	 *
-	 * @param Den eingespeicherten Namen des Levels den man haben will.
+	 * @param Den
+	 *            eingespeicherten Namen des Levels den man haben will.
 	 * @return Den eingespeicherten Namen des Levels
 	 */
 	public Level getLevel(String propose) {
@@ -196,7 +205,8 @@ public class Spielrunde {
 	/**
 	 * Sets the counter.
 	 *
-	 * @param counter the new counter
+	 * @param counter
+	 *            the new counter
 	 */
 	public void setCounter(int counter) {
 		this.counter = counter;
@@ -218,18 +228,26 @@ public class Spielrunde {
 		return this.counter;
 	}
 
-	public void naechsterSpieler() {
-		aktuellerSpieler += 1;
-		if (aktuellerSpieler == anzahlSpieler) {
-			aktuellerSpieler -= anzahlSpieler;
+	/**
+	 * Es wir ein naechster Spieler gesetzt, der zufaellig gefunden wird, allerdings
+	 * nur, wenn der Count des Spielers nicht groesser als einen bestimmten Wert
+	 * ist.
+	 */
+	public void setRandomnextPlayer() {
+		aktuellerSpieler = spieler.get((int)Math.random()*anzahlSpieler);
+		
+		while(aktuellerSpieler.getNumberOfQuestionsAsked() == maxNumberOfQuestions) {
+			aktuellerSpieler = spieler.get((int)Math.random()*anzahlSpieler);
 		}
+		aktuellerSpieler.increaseNumberOfQuestionsAskedByOne();
 	}
 
 	/**
 	 * Testet ob die gegeben Antwort die richtige ist und aktualisieert dann damit
 	 * den Punktestand.
 	 *
-	 * @param Die gegeben Antwort
+	 * @param Die
+	 *            gegeben Antwort
 	 */
 	public boolean checkAntwort(String antwort) {
 		// TODO: kontrolliere die Antwort und aktualisiere in Spieler den Punktestand...
@@ -248,13 +266,22 @@ public class Spielrunde {
 		// return fragen.get(counter).getAntwortString();
 		return defaultFrage.getAntwortString();
 	}
-	
+
 	public String[] getPlayer() {
 		String[] playerArray = new String[anzahlSpieler];
-		for(int i = 0; i < anzahlSpieler; i++) {
+		for (int i = 0; i < anzahlSpieler; i++) {
 			playerArray[i] = spieler.get(i).getName();
 		}
 		return playerArray;
 	}
 	
+	/**
+	 * Diese Methode fuellt unsere HasMap von int und fragen aus den TextDateien, im recourses Ordner
+	 */
+	
+	public void buildQuestions() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

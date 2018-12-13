@@ -54,7 +54,8 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 		Slot selectedPlayerSlot = slots.get(LIST_OF_PLAYERNUMBERS);
 
 		if (selectedPlayerSlot != null) {
-			String numberOfPlayers = selectedPlayerSlot.getResolutions().getResolutionsPerAuthority().get(2).getValues().get(0).getValue().getName();
+			//String numberOfPlayers = selectedPlayerSlot.getResolutions().getResolutionsPerAuthority().get(2).getValues().get(0).getValue().getName();
+			String numberOfPlayers = selectedPlayerSlot.getResolutions().getResolutionsPerAuthority().get(0).getValues().get(0).getValue().getName();
 			sr.setAnzahlSpieler(Integer.parseInt(numberOfPlayers));
 			if (sr.getAnzahlSpieler() == 1) {
 				speechText = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen.";

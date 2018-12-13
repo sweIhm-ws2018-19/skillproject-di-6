@@ -8,19 +8,22 @@ public class Spieler {
 	private final String name;
 	private int punktestand;
 	private int highscore;
+	private int numberOfQuestionsAsked;
 
 	/**
-	 * Initialisiert einen neuen Spieler, mit Namen, PunkteStand und Highscore.
+	 * Initialisiert einen neuen Spieler, mit Namen, PunkteStand und Highscore und den numberOfQuestionsAsked gleich 0.
 	 *
 	 * @param name        the name
 	 * @param punktestand the punktestand
 	 * @param highscore   the highscore
+	 * @param numberOfQuestionsAsked
 	 */
 	public Spieler(String name, int punktestand, int highscore) {
 
 		this.name = name;
 		this.punktestand = punktestand;
 		this.highscore = highscore;
+		this.numberOfQuestionsAsked = 0;
 
 	}
 
@@ -81,5 +84,17 @@ public class Spieler {
 			highscore = punktestand;
 		}
 	}
-
+	
+	public int getNumberOfQuestionsAsked() {
+		return this.numberOfQuestionsAsked;
+	}
+	
+	public void increaseNumberOfQuestionsAskedByOne() {
+		this.numberOfQuestionsAsked++;
+	}
+	
+	public void setNumberOfQuestionsAsked(int numberOfQuestionsAsked) {
+		this.numberOfQuestionsAsked = numberOfQuestionsAsked;
+	}
+	
 }
