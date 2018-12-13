@@ -60,7 +60,6 @@ public class LevelEinstellenHandler implements RequestHandler {
 						gewaehltesLevel);
 				sr.setLevel(gewaehltesLevel);
 				sr.buildQuestions();
-				sr.refreshFragen();
 			}
 			responseBuilder.withSimpleCard("LevelSession", speechText).withSpeech(speechText).withShouldEndSession(false);
 		} else {
