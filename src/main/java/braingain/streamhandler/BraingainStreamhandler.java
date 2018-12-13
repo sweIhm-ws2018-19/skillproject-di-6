@@ -29,19 +29,21 @@ import braingain.handlers.SessionEndedRequestHandler;
 import braingain.handlers.UsernamenSpeichernHandler;
 
 public class BraingainStreamhandler extends SkillStreamHandler {
-
+	
+	public static Spielrunde sr;
+	
 private static Skill getSkill() {
-	Spielrunde sr = new Spielrunde();
+	sr = new Spielrunde();
 	return Skills.standard()
 		.addRequestHandlers(
 				new AnzahlDerSpielerSetzenHandler(sr),
 				new CancelandStopIntentHandler(),
-				new FallbackIntentHandler(sr),
-				new HelpIntentHandler(sr),
+				new FallbackIntentHandler(),
+				new HelpIntentHandler(),
 				new KategorieEinstellenHandler(sr),
 				new LaunchRequestHandler(sr),
 				new LevelEinstellenHandler(sr),
-				new SessionEndedRequestHandler(sr),
+				new SessionEndedRequestHandler(),
 				new UsernamenSpeichernHandler(sr))
 				.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
 				.build();
