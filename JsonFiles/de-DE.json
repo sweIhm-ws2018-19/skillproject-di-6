@@ -27,7 +27,6 @@
                         "Wir sind {numberOfPlayers}",
                         "Wir sind zu {numberOfPlayers}",
                         "Es spielen {numberOfPlayers}",
-                        "{numberOfPlayers}",
                         "Ich spiele {numberOfPlayers}",
                         "Wir wollen zu {numberOfPlayers} spielen",
                         "Wir spielen zu {numberOfPlayers}",
@@ -44,10 +43,9 @@
                         }
                     ],
                     "samples": [
-                        "{username}",
                         "Mein Username ist {username}",
                         "Mein Spielername ist {username}",
-                        "Ich hei√üe {username}",
+                        "Ich heiﬂe {username}",
                         "Ich bin {username}"
                     ]
                 },
@@ -62,7 +60,7 @@
                     "samples": [
                         "{gewaehlteKategorie}",
                         "Ich will in Kategorie {gewaehlteKategorie} spielen",
-                        "Wir spielen {gewaehlteKategorie}",
+                        "Wir w‰hlen {gewaehlteKategorie}",
                         "Wir wollen {gewaehlteKategorie} spielen",
                         "Die Kategorie ist {gewaehlteKategorie}"
                     ]
@@ -78,7 +76,7 @@
                     "samples": [
                         "{gewaehltesLevel}",
                         "Ich will in Level {gewaehltesLevel} spielen",
-                        "Wir spielen {gewaehltesLevel}",
+                        "Wir w‰hlen {gewaehltesLevel}",
                         "Wir wollen {gewaehltesLevel} spielen",
                         "Das Level ist {gewaehltesLevel}"
                     ]
@@ -113,7 +111,7 @@
                         "starte training",
                         "starte fragen",
                         "naechste Frage",
-                        "n√§chste Frage"
+                        "n‰chste Frage"
                     ]
                 },
                 {
