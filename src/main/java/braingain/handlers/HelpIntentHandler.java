@@ -13,22 +13,19 @@
 
 package braingain.handlers;
 
+import static com.amazon.ask.request.Predicates.intentName;
+
+import java.util.Optional;
+
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
-import braingain.modell.Spielrunde;
-
-import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.intentName;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class HelpIntentHandler implements RequestHandler {
 
-	private Spielrunde sr;
-
-	public HelpIntentHandler(Spielrunde sr) {
-		this.sr = sr;
+	public HelpIntentHandler() {
 	}
 
 	@Override
@@ -38,9 +35,7 @@ public class HelpIntentHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String speechText = "Du kannst mit mir dein Gehirn trainieren. Zuerst musst du mir sagen, wie viele Spieler ihr seid, dann eure Namen, die Kategorie, welche ihr spielen wollt und das Level.";
-		String repromptText = "Bitte sage mir, wie viele Spieler ihr seid.";
-		return input.getResponseBuilder().withSimpleCard("BraingainSession", speechText).withSpeech(speechText)
-				.withReprompt(repromptText).withShouldEndSession(false).build();
+		return input.getResponseBuilder().withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.HELP)
+				.withSpeech(PhrasesAndConstants.HELP).withShouldEndSession(false).build();
 	}
 }

@@ -1,21 +1,19 @@
 package braingain.handlers;
 
+import static com.amazon.ask.request.Predicates.intentName;
+
+import java.util.Collections;
+import java.util.Optional;
+
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
 
 import braingain.modell.Spielrunde;
-
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.intentName;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class LevelEinstellenHandler implements RequestHandler {
 
@@ -31,17 +29,15 @@ public class LevelEinstellenHandler implements RequestHandler {
 	}
 
 	public Optional<Response> handle(HandlerInput input) {
-		Request request = input.getRequestEnvelope().getRequest();
-		IntentRequest intentRequest = (IntentRequest) request;
-		Intent intent = intentRequest.getIntent();
-		Map<String, Slot> slots = intent.getSlots();
-
-		Slot selectedLevelSlot = slots.get(LIST_OF_LEVEL);
-		ResponseBuilder responseBuilder = input.getResponseBuilder();
-
 		String speechText, repromptText;
 
-		if (selectedLevelSlot != null) {
+		Slot selectedLevelSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()
+				.get(LIST_OF_LEVEL);
+
+		ResponseBuilder responseBuilder = input.getResponseBuilder();
+
+		if (selectedLevelSlot != null && sr.getNumberOfPlayers() != 0 && sr.allPlayersSet()
+				&& sr.getCategory() != null && sr.getLevel() == null) {
 
 			String gewaehltesLevel = selectedLevelSlot.getResolutions().getResolutionsPerAuthority().get(0).getValues()
 					.get(0).getValue().getName();
@@ -58,17 +54,28 @@ public class LevelEinstellenHandler implements RequestHandler {
 							sr.getLevel().toString());
 				}
 				sr.buildQuestions();
-				responseBuilder.withSimpleCard("LevelSession", speechText).withSpeech(speechText)
+				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
 						.withShouldEndSession(false);
 			} else {
 				repromptText = String.format("Das Level %s kenne ich nicht.", gewaehltesLevel);
-				responseBuilder.withSimpleCard("LevelSession", repromptText).withReprompt(repromptText)
+				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, repromptText).withReprompt(repromptText)
 						.withShouldEndSession(false);
 			}
+		} else if (sr.getNumberOfPlayers() == 0) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_NUMBER_OF_PLAYERS)
+					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS).withShouldEndSession(false);
+		} else if (!sr.allPlayersSet()) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_PLAYER_NAMES)
+					.withSpeech(PhrasesAndConstants.SET_PLAYER_NAMES).withShouldEndSession(false);
+		} else if (sr.getCategory() == null) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_CATEGORY)
+					.withSpeech(PhrasesAndConstants.SET_CATEGORY).withShouldEndSession(false);
+		} else if (sr.getLevel() != null) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.RESET_LEVEL)
+			.withSpeech(PhrasesAndConstants.RESET_LEVEL).withShouldEndSession(false);
 		} else {
-			repromptText = "Ich habe das Level nicht verstanden. Sage mir das Level, in welchem du abgefragt werden willst. Sage zum Beispiel: Mittel.";
-			responseBuilder.withSimpleCard("LevelSession", repromptText).withReprompt(repromptText)
-					.withShouldEndSession(false);
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_LEVEL)
+					.withReprompt(PhrasesAndConstants.REPROMPT_LEVEL).withShouldEndSession(false);
 		}
 
 		return responseBuilder.build();

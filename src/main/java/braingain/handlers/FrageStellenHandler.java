@@ -5,6 +5,8 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
 import braingain.modell.Spielrunde;
+import phrasesAndConstants.PhrasesAndConstants;
+
 import java.util.Optional;
 
 import static com.amazon.ask.request.Predicates.intentName;
@@ -26,7 +28,7 @@ public class FrageStellenHandler implements RequestHandler {
 	public Optional<Response> handle(HandlerInput input) {
 		String speechText = "No Questions available yet.";
 
-		return input.getResponseBuilder().withSpeech(speechText).withSimpleCard("FrageSession", speechText)
+		return input.getResponseBuilder().withSpeech(speechText).withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText)
 				.withShouldEndSession(false).build();
 	}
 }

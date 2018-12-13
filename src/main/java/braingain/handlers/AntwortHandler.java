@@ -16,6 +16,7 @@ import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
 
 import braingain.modell.Spielrunde;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class AntwortHandler implements RequestHandler {
 
@@ -52,10 +53,10 @@ public class AntwortHandler implements RequestHandler {
 				speechText = String.format("Deine Antwort war leider falsch. Die richtige Antwort ist %s",
 						sr.getRightAnswer());
 			}
-			responseBuilder.withSimpleCard("Anwser", speechText).withSpeech(speechText).withShouldEndSession(false);
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText).withShouldEndSession(false);
 		} else {
 			repromptText = "Ich habe deine Antwort leider nicht verstanden. Bitte wiederhole deine Antwort.";
-			responseBuilder.withSimpleCard("Answer", repromptText).withSpeech(repromptText).withShouldEndSession(false);
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, repromptText).withSpeech(repromptText).withShouldEndSession(false);
 		}
 		return responseBuilder.build();
 	}

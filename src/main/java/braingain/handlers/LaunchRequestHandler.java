@@ -23,23 +23,24 @@ import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
 import braingain.modell.Spielrunde;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class LaunchRequestHandler implements RequestHandler {
-	
-	private Spielrunde sr;
-	
-	public LaunchRequestHandler(Spielrunde sr){
+
+	Spielrunde sr;
+
+	public LaunchRequestHandler(Spielrunde sr) {
 		this.sr = sr;
 	}
+
 	public boolean canHandle(HandlerInput input) {
 		return input.matches(requestType(LaunchRequest.class));
 	}
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String speechText = "Hallo. Mit mir trainierst du dein Gehirn. Bitte sage mir, mit wie vielen Spielern du spielst. Es koennen maximal 4 Spieler spielen.";
-		String repromptText = "Bitte sage mir wie viele Leute spielen.";
-		return input.getResponseBuilder().withSimpleCard("BrainSession", speechText).withSpeech(speechText)
-				.withReprompt(repromptText).build();
+		sr.reset();
+		return input.getResponseBuilder().withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.WELCOME)
+				.withSpeech(PhrasesAndConstants.WELCOME).withReprompt("The repromt").build();
 	}
 }

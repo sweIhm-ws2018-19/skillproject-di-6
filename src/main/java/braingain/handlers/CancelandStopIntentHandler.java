@@ -21,6 +21,8 @@ import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
+import phrasesAndConstants.PhrasesAndConstants;
+
 public class CancelandStopIntentHandler implements RequestHandler {
 
 	public CancelandStopIntentHandler() {
@@ -33,7 +35,7 @@ public class CancelandStopIntentHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		return input.getResponseBuilder().withSpeech("Auf Wiedersehen")
-				.withSimpleCard("BraingainSession", "Auf Wiedersehen").withShouldEndSession(true).build();
+		return input.getResponseBuilder().withSpeech(PhrasesAndConstants.GOOD_BYE)
+				.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.GOOD_BYE).withShouldEndSession(true).build();
 	}
 }

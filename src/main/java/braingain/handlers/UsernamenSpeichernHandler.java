@@ -13,15 +13,14 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
 
 package braingain.handlers;
 
+import static com.amazon.ask.request.Predicates.intentName;
+
 import java.util.Collections;
-import java.util.Map;
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
@@ -29,14 +28,13 @@ import com.amazon.ask.response.ResponseBuilder;
 import braingain.modell.Kategorie;
 import braingain.modell.Spieler;
 import braingain.modell.Spielrunde;
-
-import static com.amazon.ask.request.Predicates.intentName;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class UsernamenSpeichernHandler implements RequestHandler {
 
 	public static final String LIST_OF_NAMES = "username";
 	private Spielrunde sr;
-	private int spielerGenannt = 1;
+	public int spielerGenannt = 1;
 
 	public UsernamenSpeichernHandler(Spielrunde sr) {
 		this.sr = sr;
@@ -49,28 +47,22 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String speechText, repromptText;
-		Request request = input.getRequestEnvelope().getRequest();
-		IntentRequest intentRequest = (IntentRequest) request;
-		Intent intent = intentRequest.getIntent();
-		Map<String, Slot> slots = intent.getSlots();
-		
-		ResponseBuilder responseBuilder = input.getResponseBuilder();
-		
-		Slot selectedNameSlot = slots.get(LIST_OF_NAMES);
+		String speechText;
 
-		if (selectedNameSlot != null) {
+		Slot selectedNameSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()
+				.get(LIST_OF_NAMES);
+
+		ResponseBuilder responseBuilder = input.getResponseBuilder();
+
+		if (selectedNameSlot != null && sr.getNumberOfPlayers() != 0 && sr.getNumberOfPlayers() != sr.getPlayer().length
+				&& sr.getCategory() == null && sr.getLevel() == null) {
 			String username = selectedNameSlot.getValue();
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
 			sr.addPlayer(new Spieler(username));
 
 			if (sr.getNumberOfPlayers() == 1) {
 				speechText = String.format("Du heisst %s. ", username) + "Waehle nun deine Kategorie. Es gibt "
-						+ Kategorie.values()[0].toString();
-				for (int i = 1; i < Kategorie.values().length - 1; i++) {
-					speechText += ", " + Kategorie.values()[i].toString();
-				}
-				speechText += " und " + Kategorie.values()[Kategorie.values().length - 1].toString() + ".";
+						+ Kategorie.getKategorien();
 			} else if (spielerGenannt < sr.getNumberOfPlayers()) {
 				spielerGenannt++;
 				speechText = String.format("Spieler %s heisst %s, bitte sagt mir nun den naechsten Namen.",
@@ -93,19 +85,30 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 					speechText += "Fehler.";
 					break;
 				}
-				
-				speechText += "Waehlt nun eure Kategorie. Es gibt " + Kategorie.values()[0].toString();
 
-				for (int i = 1; i < Kategorie.values().length - 1; i++) {
-					speechText += ", " + Kategorie.values()[i].toString();
-				}
-				speechText += " und " + Kategorie.values()[Kategorie.values().length - 1].toString() + ".";
+				speechText += "Waehlt nun eure Kategorie. Es gibt " + Kategorie.getKategorien();
 				spielerGenannt = 1;
 			}
-			responseBuilder.withSimpleCard("SaveUserName", speechText).withSpeech(speechText).withShouldEndSession(false);
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
+					.withShouldEndSession(false);
+		} else if (sr.getNumberOfPlayers() == 0) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_NUMBER_OF_PLAYERS)
+					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS).withShouldEndSession(false);
+		} else if (sr.getCategory() == null) {
+			responseBuilder
+					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
+							PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_CATEGORY)
+					.withSpeech(PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_CATEGORY)
+					.withShouldEndSession(false);
+		} else if (sr.getLevel() == null) {
+			responseBuilder
+					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
+							PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_LEVEL)
+					.withSpeech(PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_LEVEL)
+					.withShouldEndSession(false);
 		} else {
-			repromptText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
-			responseBuilder.withSimpleCard("SaveUserName", repromptText).withSpeech(repromptText).withShouldEndSession(false);
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_SAVE_USERNAME)
+					.withSpeech(PhrasesAndConstants.REPROMPT_SAVE_USERNAME).withShouldEndSession(false);
 		}
 		return responseBuilder.build();
 	}

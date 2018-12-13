@@ -13,23 +13,18 @@
 
 package braingain.handlers;
 
+import static com.amazon.ask.request.Predicates.requestType;
+
+import java.util.Optional;
+
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.SessionEndedRequest;
 
-import braingain.modell.Spielrunde;
-
-import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.requestType;
-
 public class SessionEndedRequestHandler implements RequestHandler {
 	
-	private Spielrunde sr;
-	
-	public SessionEndedRequestHandler(Spielrunde sr) {
-		this.sr = sr;
+	public SessionEndedRequestHandler() {
 	}
 
 	@Override
@@ -39,7 +34,6 @@ public class SessionEndedRequestHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		// any cleanup logic goes here
 		return input.getResponseBuilder().build();
 	}
 }
