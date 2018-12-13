@@ -47,4 +47,15 @@ public enum Level {
 	public String toString() {
 		return value[0];
 	}
+
+	public static String getLevels() {
+		String s = "";
+		int l = values().length;
+		for (int i = 0; i < l - 2; i++) {
+			s += values()[i] + ", ";
+		}
+		s += values()[l - 2] + " und " + values()[l - 1] + ". ";
+		return s;
+	}
+
 }

@@ -47,4 +47,15 @@ public enum Kategorie {
 	public String toString() {
 		return value[0];
 	}
+	
+	public static String getKategorien() {
+		String s = "";
+		int k = values().length;
+		for(int i = 0; i < k - 2; i++) {
+			s += Kategorie.values()[i] + ", ";
+		}
+		s += values()[k - 2] + " und " + values()[k - 1];
+		return s;
+	}
+	
 }
