@@ -54,21 +54,17 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 		Slot selectedPlayerSlot = slots.get(LIST_OF_PLAYERNUMBERS);
 
 		if (selectedPlayerSlot != null) {
-			String numberOfPlayers = selectedPlayerSlot.getName();
-			if (numberOfPlayers.equals("alleine")) {
-				sr.setAnzahlSpieler(1);
-			} else {
-				sr.setAnzahlSpieler(Integer.parseInt(numberOfPlayers));
-			}
-			input.getAttributesManager()
-					.setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
+			String numberOfPlayers = selectedPlayerSlot.getResolutions().getResolutionsPerAuthority().get(2).getValues().get(0).getValue().getName();
+			sr.setAnzahlSpieler(Integer.parseInt(numberOfPlayers));
 			if (sr.getAnzahlSpieler() == 1) {
-				speechText = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen. ";
+				speechText = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen.";
 			} else {
 				speechText = String.format(
 						"OK. Ihr spielt nun zu %s. Sagt mir nun nacheinander eure Namen. Zum Beispiel: Ich heisse Max.",
 						numberOfPlayers);
 			}
+			input.getAttributesManager()
+					.setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
 
 		} else {
 			speechText = "Ich habe deine Antwort leider nicht verstanden. Wie viele Spieler seid ihr?";
