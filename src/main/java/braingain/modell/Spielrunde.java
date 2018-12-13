@@ -8,27 +8,27 @@ import java.util.HashMap;
  */
 public class Spielrunde {
 
-	public ArrayList<Spieler> spieler;
-	public ArrayList<Frage> fragen;
-	private Spieler aktuellerSpieler;
-	private int anzahlSpieler;
-	private int counter;
-	private static final int maxNumberOfQuestions = 5;
-	Kategorie kategorie;
-	Level level;
-	Frage defaultFrage;
-	
+	public ArrayList<Spieler> player;
 	private HashMap<Integer, Frage> Questions;
+	
+	private Spieler currentPlayer;
+	private Kategorie categorie;
+	private Level level;
+	
+	private int numberOfPlayers;
+	//private int counter;
+	
+	private static final int MAX_QUESTIONS = 5;
+
 
 	/**
 	 * Initialisiert eine neue Spielrunde, hier werden die Array-Lists erstellt fuer
 	 * Spieler und Fragen.
 	 */
 	public Spielrunde() {
-		spieler = new ArrayList<Spieler>();
-		fragen = new ArrayList<Frage>();
-		counter = 0;
-		defaultFrage = new Frage("Was ist 1 + 1?", "2");
+		player = new ArrayList<Spieler>();
+		numberOfPlayers = 0;
+		//counter = 0;
 	}
 
 	/**
@@ -38,24 +38,9 @@ public class Spielrunde {
 	 * @return true, wenn der Spieler hinzugefuegt werden konnte
 	 */
 	public boolean addPlayer(Spieler s) {
-		boolean succeded = false;
-		if (spieler.size() < anzahlSpieler) {
-			succeded = this.spieler.add(s);
-		}
-		return succeded;
+		return this.player.add(s);
 	}
-
-	/**
-	 * Fuegt eine Frage hinzu.
-	 *
-	 * @param Die
-	 *            Frage die hinzugefuegt werden soll
-	 * @return true, wenn die Frage hinzugefuegt wernden konnte
-	 */
-	public boolean addFrage(Frage f) {
-		return fragen.add(f);
-	}
-
+	
 	/**
 	 * Diese Methode ermittelt den/die Spieler mit der hoechsten Punktezahl.
 	 *
@@ -63,8 +48,8 @@ public class Spielrunde {
 	 */
 	public ArrayList<Spieler> getHighscoreSpieler() {
 		ArrayList<Spieler> highscoreSpieler = new ArrayList<Spieler>();
-		highscoreSpieler.add(spieler.get(0));
-		for (Spieler s : spieler) {
+		highscoreSpieler.add(player.get(0));
+		for (Spieler s : player) {
 			if (s.getPunktestand() > highscoreSpieler.get(0).getPunktestand()) {
 				highscoreSpieler.clear();
 				highscoreSpieler.add(s);
@@ -100,28 +85,18 @@ public class Spielrunde {
 	 *
 	 * @return Die naechste Frage die hinzugefuegt wurde
 	 */
-	public String fetchFrage() {
-		// String newFrage = fragen.get(counter).getFrage();
-		String newFrage = defaultFrage.getFrage();
-		return newFrage;
-	}
-
-	/**
-	 * Aktualisiert alle Fragen
-	 */
-
-	public void refreshFragen() {
-		fragen = Frage.alleFragen.get(kategorie).get(level);
+	public Frage nextRandomQuestion() {
+		// TODO
+		return null;
 	}
 
 	/**
 	 * Sets the anzahl spieler.
 	 *
-	 * @param anzahlSpieler
-	 *            the new anzahl spieler
+	 * @param anzahlSpieler the new anzahl spieler
 	 */
-	public void setAnzahlSpieler(int anzahlSpieler) {
-		this.anzahlSpieler = anzahlSpieler;
+	public void setNumberOfPlayers(int numberOfPlayers) {
+		this.numberOfPlayers = numberOfPlayers;
 	}
 
 	/**
@@ -129,22 +104,21 @@ public class Spielrunde {
 	 *
 	 * @return the anzahl spieler
 	 */
-	public int getAnzahlSpieler() {
-		return anzahlSpieler;
+	public int getNumberOfPlayers() {
+		return numberOfPlayers;
 	}
 
 	/**
 	 * Sets the kategorie.
 	 *
-	 * @param Die
-	 *            Kategorie die gesetzt werden soll
+	 * @param Die Kategorie die gesetzt werden soll
 	 * @return true, wenn diese Kategorie existiert
 	 */
 	public boolean setKategorie(String kategorie) {
 		boolean isKategorieSet = false;
 		Kategorie temp = getKategorie(kategorie.toLowerCase());
 		if (temp != null) {
-			this.kategorie = temp;
+			this.categorie = temp;
 			isKategorieSet = true;
 		}
 		return isKategorieSet;
@@ -153,8 +127,7 @@ public class Spielrunde {
 	/**
 	 * Ermittelt den Namen der eingespeicherten Kategorie.
 	 *
-	 * @param Den
-	 *            eingespeicherten Namen der Kategorie den man haben will.
+	 * @param Den eingespeicherten Namen der Kategorie den man haben will.
 	 * @return Den eingespeicherten Namen der Kategorie
 	 */
 	public Kategorie getKategorie(String propose) {
@@ -168,11 +141,14 @@ public class Spielrunde {
 		return null;
 	}
 
+	public Kategorie getCategorie() {
+		return this.categorie;
+	}
+
 	/**
 	 * Sets the level.
 	 *
-	 * @param level
-	 *            the level
+	 * @param level the level
 	 * @return true, if successful
 	 */
 	public boolean setLevel(String level) {
@@ -188,8 +164,7 @@ public class Spielrunde {
 	/**
 	 * Ermittelt den Namen des eingespeicherten Levels.
 	 *
-	 * @param Den
-	 *            eingespeicherten Namen des Levels den man haben will.
+	 * @param Den eingespeicherten Namen des Levels den man haben will.
 	 * @return Den eingespeicherten Namen des Levels
 	 */
 	public Level getLevel(String propose) {
@@ -202,86 +177,88 @@ public class Spielrunde {
 		return null;
 	}
 
-	/**
-	 * Sets the counter.
-	 *
-	 * @param counter
-	 *            the new counter
-	 */
-	public void setCounter(int counter) {
-		this.counter = counter;
+	public Level getLevel() {
+		return this.level;
 	}
-
-	/**
-	 * Diese Methode erhoeht den Counter um eins.
-	 */
-	public void increaseCounter() {
-		this.counter++;
-	}
-
-	/**
-	 * Gets the counter.
-	 *
-	 * @return the counter
-	 */
-	public int getCounter() {
-		return this.counter;
-	}
+//
+//	/**
+//	 * Sets the counter.
+//	 *
+//	 * @param counter the new counter
+//	 */
+//	public void setCounter(int counter) {
+//		this.counter = counter;
+//	}
+//
+//	/**
+//	 * Diese Methode erhoeht den Counter um eins.
+//	 */
+//	public void increaseCounter() {
+//		this.counter++;
+//	}
+//
+//	/**
+//	 * Gets the counter.
+//	 *
+//	 * @return the counter
+//	 */
+//	public int getCounter() {
+//		return this.counter;
+//	}
 
 	/**
 	 * Es wir ein naechster Spieler gesetzt, der zufaellig gefunden wird, allerdings
 	 * nur, wenn der Count des Spielers nicht groesser als einen bestimmten Wert
 	 * ist.
 	 */
-	public void setRandomnextPlayer() {
-		aktuellerSpieler = spieler.get((int)Math.random()*anzahlSpieler);
-		
-		while(aktuellerSpieler.getNumberOfQuestionsAsked() == maxNumberOfQuestions) {
-			aktuellerSpieler = spieler.get((int)Math.random()*anzahlSpieler);
+	public void setNextRandomCurrentPlayer() {
+		currentPlayer = player.get((int) Math.random() * numberOfPlayers);
+
+		while (currentPlayer.getNumberOfQuestionsAsked() == MAX_QUESTIONS) {
+			currentPlayer = player.get((int) Math.random() * numberOfPlayers);
 		}
-		aktuellerSpieler.increaseNumberOfQuestionsAskedByOne();
+		currentPlayer.increaseNumberOfQuestionsAskedByOne();
 	}
 
 	/**
 	 * Testet ob die gegeben Antwort die richtige ist und aktualisieert dann damit
 	 * den Punktestand.
 	 *
-	 * @param Die
-	 *            gegeben Antwort
+	 * @param Die gegeben Antwort
 	 */
-	public boolean checkAntwort(String antwort) {
-		// TODO: kontrolliere die Antwort und aktualisiere in Spieler den Punktestand...
-		/*
-		 * ArrayList<String> antworten = fragen.get(counter).getAntwortenArrayList();
-		 * boolean ubereinstimmung = false; int antwortZahl = antworten.size();
-		 * while(!ubereinstimmung && antwortZahl>0) { antwortZahl -= 1; ubereinstimmung
-		 * = antworten.get(antwortZahl).equalsIgnoreCase(antwort); }
-		 * spieler.get(aktuellerSpieler).beantwortet(ubereinstimmung); return
-		 * ubereinstimmung;
-		 */
-		return antwort.contains(defaultFrage.getAntwortString());
+	public boolean checkAnswer(String antwort) {
+		// TODO: kontrolliere die Antwort und aktualisiere in Spieler den Punktestand.
+		return false;
 	}
-
-	public String getRichtigeAntwort() {
-		// return fragen.get(counter).getAntwortString();
-		return defaultFrage.getAntwortString();
+	
+	/**
+	 * 
+	 * @return The right answer.
+	 */
+	public String getRightAnswer() {
+		// TODO
+		return null;
 	}
 
 	public String[] getPlayer() {
-		String[] playerArray = new String[anzahlSpieler];
-		for (int i = 0; i < anzahlSpieler; i++) {
-			playerArray[i] = spieler.get(i).getName();
+		String[] playerArray = new String[numberOfPlayers];
+		for (int i = 0; i < numberOfPlayers; i++) {
+			playerArray[i] = player.get(i).getName();
 		}
 		return playerArray;
 	}
 	
-	/**
-	 * Diese Methode fuellt unsere HasMap von int und fragen aus den TextDateien, im recourses Ordner
-	 */
+	public String getPlayerAt(int position) {
+		return player.get(position).getName();
+	}
 	
+	/**
+	 * Diese Methode fuellt unsere HasMap von int und fragen aus den TextDateien, im
+	 * recourses Ordner
+	 */
 	public void buildQuestions() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
