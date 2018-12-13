@@ -24,6 +24,7 @@ import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
+import com.amazon.ask.response.ResponseBuilder;
 
 import braingain.modell.Kategorie;
 import braingain.modell.Spieler;
@@ -48,13 +49,14 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-
-		String speechText;
+		String speechText, repromptText;
 		Request request = input.getRequestEnvelope().getRequest();
 		IntentRequest intentRequest = (IntentRequest) request;
 		Intent intent = intentRequest.getIntent();
 		Map<String, Slot> slots = intent.getSlots();
-
+		
+		ResponseBuilder responseBuilder = input.getResponseBuilder();
+		
 		Slot selectedNameSlot = slots.get(LIST_OF_NAMES);
 
 		if (selectedNameSlot != null) {
@@ -62,40 +64,49 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
 			sr.addPlayer(new Spieler(username));
 
-			if (sr.getAnzahlSpieler() == 1) {
+			if (sr.getNumberOfPlayers() == 1) {
 				speechText = String.format("Du heisst %s. ", username) + "Waehle nun deine Kategorie. Es gibt "
 						+ Kategorie.values()[0].toString();
 				for (int i = 1; i < Kategorie.values().length - 1; i++) {
 					speechText += ", " + Kategorie.values()[i].toString();
 				}
 				speechText += " und " + Kategorie.values()[Kategorie.values().length - 1].toString() + ".";
-			}else if (spielerGenannt < sr.getAnzahlSpieler()) {
+			} else if (spielerGenannt < sr.getNumberOfPlayers()) {
 				spielerGenannt++;
-				speechText = String.format("Du heisst %s, bitte sagt mir nun den naechsten Namen.", username);
+				speechText = String.format("Spieler %s heisst %s, bitte sagt mir nun den naechsten Namen.",
+						spielerGenannt - 1, username);
 			} else {
-
-				speechText = String.format("Du heisst %s. Das sind nun alle Spieler. Eure Namen sind: ", username);
-				
-				switch(sr.getAnzahlSpieler()) {
-				case 2: speechText += sr.getPlayer()[0] + " und " + sr.getPlayer()[1];
+				speechText = String.format("Spieler %s heisst %s. Das sind nun alle Spieler. Eure Namen sind: ",
+						spielerGenannt, username);
+				switch (sr.getNumberOfPlayers()) {
+				case 2:
+					speechText += sr.getPlayer()[0] + " und " + sr.getPlayer()[1] + ". ";
 					break;
-				case 3: speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + " und " + sr.getPlayer()[2];
+				case 3:
+					speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + " und " + sr.getPlayer()[2] + ". ";
 					break;
-				case 4: speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + ", " + sr.getPlayer()[2] + " und " + sr.getPlayer()[4];
+				case 4:
+					speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + ", " + sr.getPlayer()[2] + " und "
+							+ sr.getPlayer()[3] + ". ";
 					break;
-				default: speechText += "Fehler.";
+				default:
+					speechText += "Fehler.";
 					break;
 				}
-				speechText += ". Waehlt nun eure Kategorie. Es gibt " + Kategorie.values()[0].toString();
+				
+				speechText += "Waehlt nun eure Kategorie. Es gibt " + Kategorie.values()[0].toString();
 
 				for (int i = 1; i < Kategorie.values().length - 1; i++) {
 					speechText += ", " + Kategorie.values()[i].toString();
 				}
 				speechText += " und " + Kategorie.values()[Kategorie.values().length - 1].toString() + ".";
+				spielerGenannt = 1;
 			}
+			responseBuilder.withSimpleCard("SaveUserName", speechText).withSpeech(speechText).withShouldEndSession(false);
 		} else {
-			speechText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
+			repromptText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
+			responseBuilder.withSimpleCard("SaveUserName", repromptText).withSpeech(repromptText).withShouldEndSession(false);
 		}
-		return input.getResponseBuilder().withSpeech(speechText).withShouldEndSession(false).build();
+		return responseBuilder.build();
 	}
 }
