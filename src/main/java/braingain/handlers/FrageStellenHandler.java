@@ -24,7 +24,7 @@ public class FrageStellenHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String speechText = sr.fetchFrage();
+		String speechText = "No Questions available yet.";
 
 		return input.getResponseBuilder().withSpeech(speechText).withSimpleCard("FrageSession", speechText)
 				.withShouldEndSession(false).build();
