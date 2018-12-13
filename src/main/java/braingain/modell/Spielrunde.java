@@ -12,7 +12,7 @@ public class Spielrunde {
 	private HashMap<Integer, Frage> Questions;
 	
 	private Spieler currentPlayer;
-	private Kategorie categorie;
+	private Kategorie category;
 	private Level level;
 	
 	private int numberOfPlayers;
@@ -27,6 +27,8 @@ public class Spielrunde {
 	 */
 	public Spielrunde() {
 		player = new ArrayList<Spieler>();
+		category = null;
+		level = null;
 		numberOfPlayers = 0;
 		//counter = 0;
 	}
@@ -118,7 +120,7 @@ public class Spielrunde {
 		boolean isKategorieSet = false;
 		Kategorie temp = getKategorie(kategorie.toLowerCase());
 		if (temp != null) {
-			this.categorie = temp;
+			this.category = temp;
 			isKategorieSet = true;
 		}
 		return isKategorieSet;
@@ -141,8 +143,8 @@ public class Spielrunde {
 		return null;
 	}
 
-	public Kategorie getCategorie() {
-		return this.categorie;
+	public Kategorie getCategory() {
+		return this.category;
 	}
 
 	/**
@@ -241,8 +243,8 @@ public class Spielrunde {
 	}
 
 	public String[] getPlayer() {
-		String[] playerArray = new String[numberOfPlayers];
-		for (int i = 0; i < numberOfPlayers; i++) {
+		String[] playerArray = new String[player.size()];
+		for (int i = 0; i < player.size(); i++) {
 			playerArray[i] = player.get(i).getName();
 		}
 		return playerArray;
@@ -250,6 +252,18 @@ public class Spielrunde {
 	
 	public String getPlayerAt(int position) {
 		return player.get(position).getName();
+	}
+	
+	public boolean allPlayersSet() {
+		return player.size() == numberOfPlayers;
+	}
+	
+	public void reset() {
+		player = new ArrayList<Spieler>();
+		currentPlayer = null;
+		category = null;
+		level = null;
+		numberOfPlayers = 0;
 	}
 	
 	/**
