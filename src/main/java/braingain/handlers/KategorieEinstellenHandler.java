@@ -21,16 +21,15 @@ public class KategorieEinstellenHandler implements RequestHandler {
 
 	private static final Object LIST_OF_CATEGORIES = "gewaehlteKategorie";
 	private Spielrunde sr;
-	
-	public KategorieEinstellenHandler(Spielrunde sr){
+
+	public KategorieEinstellenHandler(Spielrunde sr) {
 		this.sr = sr;
 	}
-	
+
 	public boolean canHandle(HandlerInput input) {
 		return input.matches(intentName("KategorieEinstellenIntent"));
 	}
 
-	
 	public Optional<Response> handle(HandlerInput input) {
 		Request request = input.getRequestEnvelope().getRequest();
 		IntentRequest intentRequest = (IntentRequest) request;
@@ -38,49 +37,32 @@ public class KategorieEinstellenHandler implements RequestHandler {
 		Map<String, Slot> slots = intent.getSlots();
 
 		Slot selectedCathegorySlot = slots.get(LIST_OF_CATEGORIES);
-
 		String speechText, repromptText;
-		boolean isAskResponse = false;
-		if(sr.getAnzahlSpieler()==1) {
-			if (selectedCathegorySlot != null) {
-				String gewaehlteKategorie = selectedCathegorySlot.getValue();
-				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
-	
-				speechText = String
-						.format("Du hast die Kategorie %s gewaehlt. Waehle nun das Level. Es gibt einfach, mittel, anspruchsvoll und schwer.", gewaehlteKategorie);
-				repromptText = "Waehle jetzt deine Kategorie.";
-				sr.setKategorie(gewaehlteKategorie);
-	
-			} else {
-				speechText = "Ich kenne die Kategorie nicht. Bitte versuche es noch einmal.";
-				repromptText = "Ich habe die Kategorie nicht verstanden. Sage mir die Kategorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich waehle die Katgorie Logik.";
-				isAskResponse = true;
-			}
 
-		}else {
-						if (selectedCathegorySlot != null) {
-							String gewaehlteKategorie = selectedCathegorySlot.getValue();
-							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
-				
-							speechText = String
-									.format("Ihr habt die Kategorie %s gewaehlt. Waehlt nun euer Level. Es gibt einfach, mittel, anspruchsvoll und schwer.", gewaehlteKategorie);
-							repromptText = "Waehlt jetzt eure Kategorie.";
-							sr.setKategorie(gewaehlteKategorie);
-						} else {
-							speechText = "Ich kenne die Kategorie nicht. Bitte versuche es noch einmal.";
-							repromptText = "Ich habe die Kategorie nicht verstanden. Sage mir die Kategorie, in welcher du abgefragt werden willst. Sage zum Beispiel: ich waehle die Kategorie Logik.";
-							isAskResponse = true;
-						}
-				
-		}
-		
-		
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
 
-		responseBuilder.withSimpleCard("KategorieSession", speechText).withSpeech(speechText).withShouldEndSession(false);
+		if (selectedCathegorySlot != null) {
 
-		if (isAskResponse) {
-			responseBuilder.withShouldEndSession(false).withReprompt(repromptText);
+			String gewaehlteKategorie = selectedCathegorySlot.getResolutions().getResolutionsPerAuthority().get(0)
+					.getValues().get(0).getValue().getName();
+			input.getAttributesManager()
+					.setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
+			if (sr.setKategorie(gewaehlteKategorie)) {
+				speechText = sr.getNumberOfPlayers() == 1 ? "Du hast " : "Ihr habt ";
+
+				speechText += String.format(
+						"die Kategorie %s gewaehlt. Waehlt nun das Level. Es gibt einfach, mittel, anspruchsvoll und schwer.",
+						sr.getCategorie().toString());
+
+				responseBuilder.withSimpleCard("KategorieSession", speechText).withSpeech(speechText)
+						.withShouldEndSession(false);
+			}else {
+				speechText = "Diese Kategorie kenne ich nicht, bitte erneut eingeben";
+			}
+		} else {
+			repromptText = "Ich habe die Kategorie nicht verstanden. Sage zum Beispiel: ich waehle die Katgorie Logik.";
+			responseBuilder.withSimpleCard("KategorieSession", repromptText).withSpeech(repromptText)
+					.withShouldEndSession(false);
 		}
 		return responseBuilder.build();
 	}
