@@ -25,6 +25,7 @@ import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
+import com.amazon.ask.response.ResponseBuilder;
 
 import braingain.modell.Spielrunde;
 
@@ -45,33 +46,35 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String speechText;
+		String speechText, repromptText;
 
 		IntentRequest intentRequest = (IntentRequest) input.getRequestEnvelope().getRequest();
 		Intent intent = intentRequest.getIntent();
 		Map<String, Slot> slots = intent.getSlots();
-
+		
+		ResponseBuilder responseBuilder = input.getResponseBuilder();
+		
 		Slot selectedPlayerSlot = slots.get(LIST_OF_PLAYERNUMBERS);
 
 		if (selectedPlayerSlot != null) {
-			//String numberOfPlayers = selectedPlayerSlot.getResolutions().getResolutionsPerAuthority().get(2).getValues().get(0).getValue().getName();
 			String numberOfPlayers = selectedPlayerSlot.getResolutions().getResolutionsPerAuthority().get(0).getValues().get(0).getValue().getName();
-			sr.setAnzahlSpieler(Integer.parseInt(numberOfPlayers));
-			if (sr.getAnzahlSpieler() == 1) {
+			sr.setNumberOfPlayers(Integer.parseInt(numberOfPlayers));
+			if (sr.getNumberOfPlayers() == 1) {
 				speechText = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen.";
 			} else {
 				speechText = String.format(
 						"OK. Ihr spielt nun zu %s. Sagt mir nun nacheinander eure Namen. Zum Beispiel: Ich heisse Max.",
-						numberOfPlayers);
+						sr.getNumberOfPlayers());
 			}
 			input.getAttributesManager()
 					.setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
-
+			responseBuilder.withSimpleCard("NumberOfPlayers", speechText).withSpeech(speechText).withShouldEndSession(false);
 		} else {
-			speechText = "Ich habe deine Antwort leider nicht verstanden. Wie viele Spieler seid ihr?";
+			repromptText = "Ich habe deine Antwort leider nicht verstanden. Wie viele Spieler seid ihr?";
+			responseBuilder.withSimpleCard("NumberOfPlayers", repromptText).withSpeech(repromptText).withShouldEndSession(false);
 		}
 
-		return input.getResponseBuilder().withSpeech(speechText).withShouldEndSession(false).build();
+		return responseBuilder.build();
 
 	}
 }
