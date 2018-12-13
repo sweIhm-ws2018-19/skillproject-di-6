@@ -7,16 +7,16 @@ package braingain.modell;
 public enum Level {
 
 	/** Level einfach */
-	EINFACH(new String[] { "einfach", "simpel" }),
+	EINFACH(new String[] { "Einfach", "einfach", "simpel" }),
 
 	/** Level mittel. */
-	MITTEL(new String[] { "mittel", "mittelschwer" }),
+	MITTEL(new String[] { "Mittel", "mittel", "mittelschwer" }),
 
 	/** Level anspruchsvoll. */
-	ANSPRUCHSVOLL(new String[] { "anspruchsvoll" }),
+	Schwer(new String[] { "Schwer", "schwer", "schwierig" }),
 
 	/** Level schwer. */
-	SCHWER(new String[] { "schwer", "schwierig" });
+	Experte(new String[] { "Experte", "experte", "Expert", });
 
 	/** Welche Namen es noch haben kann. */
 	private String[] value;
