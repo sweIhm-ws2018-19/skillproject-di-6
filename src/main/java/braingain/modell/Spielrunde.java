@@ -1,6 +1,16 @@
 package braingain.modell;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map.Entry;
 
 /**
  * The Class Spielrunde.
@@ -9,6 +19,7 @@ public class Spielrunde {
 
 	public ArrayList<Spieler> spieler;
 	public ArrayList<Frage> fragen;
+	HashMap<String, Integer> spielerTrophy = new HashMap<>();
 	private int anzahlSpieler;
 	private int aktuellerSpieler;
 	private int counter;
@@ -41,7 +52,43 @@ public class Spielrunde {
 		}
 		return succeded;
 	}
+	
+	
+	void actualizeSpielerTrophy() {
+		String fileName = System.getProperty("user.dir") + File.separator + "Spieler.txt";
 
+		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
+
+			for (String temp = reader.readLine(); temp != null; temp = reader.readLine()) {
+				String name = temp;
+				int integer = Integer.parseInt(reader.readLine());
+				spielerTrophy.put(name, integer);
+			}
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	void saveSpielerTrophy() {
+		
+		for (Spieler s : spieler) {
+			if(spielerTrophy.get(s.getName()) == null) {
+				spielerTrophy.put(s.getName(), s.getPunktestand());
+			}
+		}
+		String fileName = System.getProperty("user.dir") + File.separator + "Spieler.txt";
+		new File(fileName).mkdir();
+		try (BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(fileName, false)))) {
+			for(Entry<String, Integer> entry : spielerTrophy.entrySet()) {
+			    writer.write(entry.getKey());
+			    writer.write(entry.getValue());
+			}
+		}catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Fuegt eine Frage hinzu.
 	 *
