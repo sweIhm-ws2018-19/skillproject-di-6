@@ -45,28 +45,20 @@ public class AnzahlDerSpielerSetzenHandlerTest {
 	@Test
 	public void testHandle() {
 
-		// String numberOfPlayers =
-		// selectedPlayerSlot.getResolutions().getResolutionsPerAuthority().get(0).getValues()
-		// .get(0).getValue().getName();
-
 		final HandlerInput inputMock = Mockito.mock(HandlerInput.class);
 		final String numberOfPlayers = "3";
 		final Value val = Value.builder().withName(numberOfPlayers).withId(numberOfPlayers).build();
 		final ValueWrapper wrap = ValueWrapper.builder().withValue(val).build();
-		
+
 		final List<ValueWrapper> list = new ArrayList<>();
 		list.add(wrap);
-		
-		
+
 		final RequestEnvelope requestEnvelopeMock = RequestEnvelope.builder().withRequest(IntentRequest.builder()
-				.withIntent(Intent.builder().putSlotsItem(PhrasesAndConstants.LIST_OF_PLAYERNUMBERS,
-						Slot.builder().withName(PhrasesAndConstants.LIST_OF_PLAYERNUMBERS).withValue(numberOfPlayers)
-								.withResolutions(Resolutions.builder()
-										.addResolutionsPerAuthorityItem(Resolution.builder()
-												.withValues(list).build())
-										.build())
-								.build())
-						.build())
+				.withIntent(Intent.builder().putSlotsItem(PhrasesAndConstants.LIST_OF_PLAYERNUMBERS, Slot.builder()
+						.withName(PhrasesAndConstants.LIST_OF_PLAYERNUMBERS).withValue(numberOfPlayers)
+						.withResolutions(Resolutions.builder()
+								.addResolutionsPerAuthorityItem(Resolution.builder().withValues(list).build()).build())
+						.build()).build())
 				.build()).build();
 
 		final ResponseBuilder responseBuilder = Mockito.mock(ResponseBuilder.class);
