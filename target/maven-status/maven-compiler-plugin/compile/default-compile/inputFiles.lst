@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 H:\Benutzer\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\modell\Kategorie.java
 H:\Benutzer\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\AnzahlDerSpielerSetzenHandler.java
 H:\Benutzer\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\HelpIntentHandler.java
@@ -18,24 +17,3 @@ H:\Benutzer\Semester 3\Software Engineering\skillproject-di-6\src\main\java\brai
 H:\Benutzer\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\modell\Spielrunde.java
 H:\Benutzer\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\UsernamenSpeichernHandler.java
 H:\Benutzer\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\modell\Spielmodus.java
-=======
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\modell\Level.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\AnzahlDerSpielerSetzenHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\streamhandler\BraingainStreamhandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\AntwortHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\modell\Spielmodus.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\modell\Spielrunde.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\phrasesAndConstants\PhrasesAndConstants.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\LevelEinstellenHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\CancelandStopIntentHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\modell\Spieler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\FrageStellenHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\KategorieEinstellenHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\SessionEndedRequestHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\modell\Frage.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\modell\Kategorie.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\LaunchRequestHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\UsernamenSpeichernHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\HelpIntentHandler.java
-C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\skillproject-di-6\src\main\java\braingain\handlers\FallbackIntentHandler.java
->>>>>>> a6d86e032f004d1c8b84dd26fa07553f2af3fc4e
