@@ -24,7 +24,10 @@ import com.amazon.ask.model.SessionEndedRequest;
 
 public class SessionEndedRequestHandler implements RequestHandler {
 	
-	public SessionEndedRequestHandler() {
+	private Spielrunde sr;
+	
+	public SessionEndedRequestHandler(Spielrunde sr) {
+		this.sr = sr;
 	}
 
 	@Override
@@ -34,6 +37,7 @@ public class SessionEndedRequestHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
+		sr.reset();
 		return input.getResponseBuilder().build();
 	}
 }
