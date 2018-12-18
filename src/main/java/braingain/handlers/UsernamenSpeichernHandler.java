@@ -34,9 +34,11 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 
 	public static final String LIST_OF_NAMES = "username";
 	private Spielrunde sr;
+	private LaunchRequestHandler lrh;
 
-	public UsernamenSpeichernHandler(Spielrunde sr) {
-		this.sr = sr;
+	public UsernamenSpeichernHandler(LaunchRequestHandler lrh) {
+		this.lrh = lrh;
+		this.sr = lrh.sr;
 	}
 
 	@Override
@@ -53,13 +55,13 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
 
-		if (selectedNameSlot != null && sr.getNumberOfPlayers() != 0 && sr.getNumberOfPlayers() != sr.getPlayer().length
-				&& sr.getCategory() == null && sr.getLevel() == null) {
+		if (selectedNameSlot != null && lrh.sr.getNumberOfPlayers() != 0 && lrh.sr.getNumberOfPlayers() != lrh.sr.getPlayer().length
+				&& lrh.sr.getCategory() == null && lrh.sr.getLevel() == null) {
 			String username = selectedNameSlot.getValue();
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
-			sr.addPlayer(new Spieler(username));
+			lrh.sr.addPlayer(new Spieler(username));
 
-			if (sr.getNumberOfPlayers() == 1) {
+			if (lrh.sr.getNumberOfPlayers() == 1) {
 				speechText = String.format("Du heisst %s. ", username) + "Waehle nun deine Kategorie. Es gibt "
 						+ Kategorie.getKategorien();
 			} else if (sr.getSpielerGenannt() < sr.getNumberOfPlayers()) {
@@ -71,14 +73,14 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 						sr.getSpielerGenannt(), username);
 				switch (sr.getNumberOfPlayers()) {
 				case 2:
-					speechText += sr.getPlayer()[0] + " und " + sr.getPlayer()[1] + ". ";
+					speechText += lrh.sr.getPlayer()[0] + " und " + lrh.sr.getPlayer()[1] + ". ";
 					break;
 				case 3:
-					speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + " und " + sr.getPlayer()[2] + ". ";
+					speechText += lrh.sr.getPlayer()[0] + ", " + lrh.sr.getPlayer()[1] + " und " + lrh.sr.getPlayer()[2] + ". ";
 					break;
 				case 4:
-					speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + ", " + sr.getPlayer()[2] + " und "
-							+ sr.getPlayer()[3] + ". ";
+					speechText += lrh.sr.getPlayer()[0] + ", " + lrh.sr.getPlayer()[1] + ", " + lrh.sr.getPlayer()[2] + " und "
+							+ lrh.sr.getPlayer()[3] + ". ";
 					break;
 				default:
 					speechText += "Fehler.";
@@ -90,16 +92,16 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 			}
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
 					.withShouldEndSession(false);
-		} else if (sr.getNumberOfPlayers() == 0) {
+		} else if (lrh.sr.getNumberOfPlayers() == 0) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_NUMBER_OF_PLAYERS)
 					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS).withShouldEndSession(false);
-		} else if (sr.getCategory() == null) {
+		} else if (lrh.sr.getCategory() == null) {
 			responseBuilder
 					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
 							PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_CATEGORY)
 					.withSpeech(PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_CATEGORY)
 					.withShouldEndSession(false);
-		} else if (sr.getLevel() == null) {
+		} else if (lrh.sr.getLevel() == null) {
 			responseBuilder
 					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
 							PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_LEVEL)
