@@ -3,6 +3,8 @@ package braingain.modell;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import phrasesAndConstants.PhrasesAndConstants;
+
 /**
  * The Class Spielrunde.
  */
@@ -14,12 +16,9 @@ public class Spielrunde {
 	private Spieler currentPlayer;
 	private Kategorie category;
 	private Level level;
-	private int spielerGenannt = 1;
+	private int playersCounted = 1;
 	
 	private int numberOfPlayers;
-	
-	private static final int MAX_QUESTIONS = 5;
-
 
 	/**
 	 * Initialisiert eine neue Spielrunde, hier werden die Array-Lists erstellt fuer
@@ -191,7 +190,7 @@ public class Spielrunde {
 	public void setNextRandomCurrentPlayer() {
 		currentPlayer = player.get((int) Math.random() * numberOfPlayers);
 
-		while (currentPlayer.getNumberOfQuestionsAsked() == MAX_QUESTIONS) {
+		while (currentPlayer.getNumberOfQuestionsAsked() == PhrasesAndConstants.MAX_NUMBERS_OF_QUESTION) {
 			currentPlayer = player.get((int) Math.random() * numberOfPlayers);
 		}
 		currentPlayer.increaseNumberOfQuestionsAskedByOne();
@@ -233,22 +232,22 @@ public class Spielrunde {
 		return player.size() == numberOfPlayers;
 	}
 	
-	public int getSpielerGenannt() {
-		return this.spielerGenannt;
+	public int getPlayersCounted() {
+		return this.playersCounted;
 	}
 	
-	public void increaseSpielerGenannt() {
-		this.spielerGenannt++;
+	public void increasePlayersCounted() {
+		this.playersCounted++;
 	}
 	
-	public void setSpielerGenannt(int spielerGenannt) {
-		this.spielerGenannt = spielerGenannt;
+	public void setPlayersCounted(int spielerGenannt) {
+		this.playersCounted = spielerGenannt;
 	}
 	
-	public void resetSpielerGenannt() {
-		this.spielerGenannt = 1;
+	public void resetPlayersCounted() {
+		this.playersCounted = 1;
 	}
-
+	
 	/**
 	 * Diese Methode fuellt unsere HasMap von int und fragen aus den TextDateien, im
 	 * recourses Ordner

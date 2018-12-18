@@ -13,10 +13,10 @@ public enum Level {
 	MITTEL(new String[] { "Mittel", "mittel", "mittelschwer" }),
 
 	/** Level anspruchsvoll. */
-	Schwer(new String[] { "Schwer", "schwer", "schwierig" }),
+	SCHWER(new String[] { "Schwer", "schwer", "schwierig" }),
 
 	/** Level schwer. */
-	Experte(new String[] { "Experte", "experte", "Expert", });
+	EXPERTE(new String[] { "Experte", "experte", "Expert", });
 
 	/** Welche Namen es noch haben kann. */
 	private String[] value;
