@@ -45,7 +45,6 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		lrh.sr.reset();
 		String speechText;
 	
 		Slot selectedPlayerSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()

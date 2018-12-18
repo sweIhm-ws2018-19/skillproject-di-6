@@ -17,7 +17,6 @@ public class Spielrunde {
 	private int spielerGenannt = 1;
 	
 	private int numberOfPlayers;
-	//private int counter;
 	
 	private static final int MAX_QUESTIONS = 5;
 
@@ -183,32 +182,7 @@ public class Spielrunde {
 	public Level getLevel() {
 		return this.level;
 	}
-//
-//	/**
-//	 * Sets the counter.
-//	 *
-//	 * @param counter the new counter
-//	 */
-//	public void setCounter(int counter) {
-//		this.counter = counter;
-//	}
-//
-//	/**
-//	 * Diese Methode erhoeht den Counter um eins.
-//	 */
-//	public void increaseCounter() {
-//		this.counter++;
-//	}
-//
-//	/**
-//	 * Gets the counter.
-//	 *
-//	 * @return the counter
-//	 */
-//	public int getCounter() {
-//		return this.counter;
-//	}
-
+	
 	/**
 	 * Es wir ein naechster Spieler gesetzt, der zufaellig gefunden wird, allerdings
 	 * nur, wenn der Count des Spielers nicht groesser als einen bestimmten Wert
@@ -274,16 +248,7 @@ public class Spielrunde {
 	public void resetSpielerGenannt() {
 		this.spielerGenannt = 1;
 	}
-	
-	public void reset() {
-		player = new ArrayList<Spieler>();
-		currentPlayer = null;
-		category = null;
-		level = null;
-		numberOfPlayers = 0;
-		spielerGenannt = 1;
-	}
-	
+
 	/**
 	 * Diese Methode fuellt unsere HasMap von int und fragen aus den TextDateien, im
 	 * recourses Ordner

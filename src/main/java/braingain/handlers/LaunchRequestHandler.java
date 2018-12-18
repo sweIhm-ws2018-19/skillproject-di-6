@@ -39,7 +39,6 @@ public class LaunchRequestHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		//sr.reset();
 		return input.getResponseBuilder().withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.WELCOME)
 				.withSpeech(PhrasesAndConstants.WELCOME).withReprompt("The repromt").build();
 	}
