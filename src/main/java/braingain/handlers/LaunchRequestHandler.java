@@ -27,10 +27,10 @@ import phrasesAndConstants.PhrasesAndConstants;
 
 public class LaunchRequestHandler implements RequestHandler {
 
-	Spielrunde sr;
+	Spielrunde round;
 
 	public LaunchRequestHandler() {
-		this.sr = new Spielrunde();
+		this.round = new Spielrunde();
 	}
 
 	public boolean canHandle(HandlerInput input) {
@@ -39,6 +39,7 @@ public class LaunchRequestHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
+		round.resetPlayersCounted();
 		return input.getResponseBuilder().withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.WELCOME)
 				.withSpeech(PhrasesAndConstants.WELCOME).withReprompt("The repromt").build();
 	}

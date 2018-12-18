@@ -22,9 +22,11 @@ public class AntwortHandler implements RequestHandler {
 
 	public static final Object ANTWORT = "antwort";
 	private LaunchRequestHandler lrh;
+	private Spielrunde round;
 
 	public AntwortHandler(LaunchRequestHandler lrh) {
 		this.lrh = lrh;
+		this.round = lrh.round;
 	}
 
 	public boolean canHandle(HandlerInput input) {
@@ -32,31 +34,32 @@ public class AntwortHandler implements RequestHandler {
 	}
 
 	public Optional<Response> handle(HandlerInput input) {
-
-		String speechText, repromptText;
+		
+		String speechText;
 		Request request = input.getRequestEnvelope().getRequest();
 		IntentRequest intentRequest = (IntentRequest) request;
 		Intent intent = intentRequest.getIntent();
 		Map<String, Slot> slots = intent.getSlots();
-		
+
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
-		
+
 		Slot antwortSlot = slots.get(ANTWORT);
 
 		if (antwortSlot != null) {
 			String antwort = antwortSlot.getValue();
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(antwort, ANTWORT));
-			
-			if (lrh.sr.checkAnswer(antwort)) {
-				speechText = "Deine Antwort ist richtig!";
+
+			if (round.checkAnswer(antwort)) {
+				speechText = PhrasesAndConstants.RIGHT_ANSWER;
 			} else {
-				speechText = String.format("Deine Antwort war leider falsch. Die richtige Antwort ist %s",
-						lrh.sr.getRightAnswer());
+				speechText = String.format(PhrasesAndConstants.WRONG_ANSWER + " Die richtige Antwort ist %s",
+						round.getRightAnswer());
 			}
-			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText).withShouldEndSession(false);
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
+					.withShouldEndSession(false);
 		} else {
-			repromptText = "Ich habe deine Antwort leider nicht verstanden. Bitte wiederhole deine Antwort.";
-			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, repromptText).withSpeech(repromptText).withShouldEndSession(false);
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_ANSWER)
+					.withSpeech(PhrasesAndConstants.REPROMPT_ANSWER).withShouldEndSession(false);
 		}
 		return responseBuilder.build();
 	}

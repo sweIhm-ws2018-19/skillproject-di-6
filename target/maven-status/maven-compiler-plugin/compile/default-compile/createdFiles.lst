@@ -3,8 +3,8 @@ braingain\handlers\AnzahlDerSpielerSetzenHandler.class
 braingain\handlers\FrageStellenHandler.class
 braingain\modell\Level.class
 braingain\handlers\HelpIntentHandler.class
-braingain\handlers\LaunchRequestHandler.class
 braingain\handlers\FallbackIntentHandler.class
+braingain\handlers\LaunchRequestHandler.class
 braingain\handlers\LevelEinstellenHandler.class
 braingain\handlers\CancelandStopIntentHandler.class
 braingain\handlers\KategorieEinstellenHandler.class
@@ -14,5 +14,5 @@ braingain\handlers\AntwortHandler.class
 braingain\modell\Kategorie.class
 braingain\modell\Spielmodus.class
 braingain\streamhandler\BraingainStreamhandler.class
-braingain\modell\Spieler.class
 braingain\modell\Frage.class
+braingain\modell\Spieler.class

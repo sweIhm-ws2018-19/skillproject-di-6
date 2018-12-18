@@ -33,12 +33,12 @@ import phrasesAndConstants.PhrasesAndConstants;
 public class UsernamenSpeichernHandler implements RequestHandler {
 
 	public static final String LIST_OF_NAMES = "username";
-	private Spielrunde sr;
 	private LaunchRequestHandler lrh;
+	private Spielrunde round;
 
 	public UsernamenSpeichernHandler(LaunchRequestHandler lrh) {
 		this.lrh = lrh;
-		this.sr = lrh.sr;
+		this.round = lrh.round;
 	}
 
 	@Override
@@ -55,57 +55,56 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
 
-		if (selectedNameSlot != null && lrh.sr.getNumberOfPlayers() != 0 && lrh.sr.getNumberOfPlayers() != lrh.sr.getPlayer().length
-				&& lrh.sr.getCategory() == null && lrh.sr.getLevel() == null) {
+		if (selectedNameSlot != null && round.getNumberOfPlayers() != 0 && round.getNumberOfPlayers() != round.getPlayer().length
+				&& round.getCategory() == null && round.getLevel() == null) {
 			String username = selectedNameSlot.getValue();
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
-			lrh.sr.addPlayer(new Spieler(username));
+			round.addPlayer(new Spieler(username));
 
-			if (lrh.sr.getNumberOfPlayers() == 1) {
+			if (round.getNumberOfPlayers() == 1) {
 				speechText = String.format("Du heisst %s. ", username) + "Waehle nun deine Kategorie. Es gibt "
 						+ Kategorie.getKategorien();
-			} else if (sr.getSpielerGenannt() < sr.getNumberOfPlayers()) {
-				sr.increaseSpielerGenannt();
+			} else if (round.getPlayersCounted() < round.getNumberOfPlayers()) {
+				round.increasePlayersCounted();
 				speechText = String.format("Spieler %s heisst %s, bitte sagt mir nun den naechsten Namen.",
-						sr.getSpielerGenannt() - 1, username);
+						round.getPlayersCounted() - 1, username);
 			} else {
 				speechText = String.format("Spieler %s heisst %s. Das sind nun alle Spieler. Eure Namen sind: ",
-						sr.getSpielerGenannt(), username);
-				switch (sr.getNumberOfPlayers()) {
+						round.getPlayersCounted(), username);
+				switch (round.getNumberOfPlayers()) {
 				case 2:
-					speechText += lrh.sr.getPlayer()[0] + " und " + lrh.sr.getPlayer()[1] + ". ";
+					speechText += round.getPlayer()[0] + " und " + round.getPlayer()[1] + ". ";
 					break;
 				case 3:
-					speechText += lrh.sr.getPlayer()[0] + ", " + lrh.sr.getPlayer()[1] + " und " + lrh.sr.getPlayer()[2] + ". ";
+					speechText += round.getPlayer()[0] + ", " + round.getPlayer()[1] + " und " + round.getPlayer()[2] + ". ";
 					break;
 				case 4:
-					speechText += lrh.sr.getPlayer()[0] + ", " + lrh.sr.getPlayer()[1] + ", " + lrh.sr.getPlayer()[2] + " und "
-							+ lrh.sr.getPlayer()[3] + ". ";
+					speechText += round.getPlayer()[0] + ", " + round.getPlayer()[1] + ", " + round.getPlayer()[2] + " und "
+							+ round.getPlayer()[3] + ". ";
 					break;
 				default:
 					speechText += "Fehler.";
 					break;
 				}
-
+				
 				speechText += "Waehlt nun eure Kategorie. Es gibt " + Kategorie.getKategorien();
-				sr.resetSpielerGenannt();
 			}
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
 					.withShouldEndSession(false);
-		} else if (lrh.sr.getNumberOfPlayers() == 0) {
+		} else if (round.getNumberOfPlayers() == 0) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_NUMBER_OF_PLAYERS)
 					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS).withShouldEndSession(false);
-		} else if (lrh.sr.getCategory() == null) {
+		} else if (round.getCategory() == null) {
 			responseBuilder
 					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
-							PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_CATEGORY)
-					.withSpeech(PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_CATEGORY)
+							PhrasesAndConstants.SET_NEW_NAME + " " + PhrasesAndConstants.SET_CATEGORY)
+					.withSpeech(PhrasesAndConstants.SET_NEW_NAME + " " + PhrasesAndConstants.SET_CATEGORY)
 					.withShouldEndSession(false);
-		} else if (lrh.sr.getLevel() == null) {
+		} else if (round.getLevel() == null) {
 			responseBuilder
 					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
-							PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_LEVEL)
-					.withSpeech(PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_LEVEL)
+							PhrasesAndConstants.SET_NEW_NAME + " " + PhrasesAndConstants.SET_LEVEL)
+					.withSpeech(PhrasesAndConstants.SET_NEW_NAME + " " + PhrasesAndConstants.SET_LEVEL)
 					.withShouldEndSession(false);
 		} else {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_SAVE_USERNAME)

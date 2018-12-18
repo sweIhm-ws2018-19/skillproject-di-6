@@ -14,9 +14,11 @@ import static com.amazon.ask.request.Predicates.intentName;
 public class FrageStellenHandler implements RequestHandler {
 
 	private LaunchRequestHandler lrh;
+	private Spielrunde round;
 
 	public FrageStellenHandler(LaunchRequestHandler lrh) {
 		this.lrh = lrh;
+		round = lrh.round;
 	}
 
 	@Override
