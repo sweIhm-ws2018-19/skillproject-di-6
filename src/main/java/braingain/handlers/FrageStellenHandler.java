@@ -13,10 +13,10 @@ import static com.amazon.ask.request.Predicates.intentName;
 
 public class FrageStellenHandler implements RequestHandler {
 
-	private Spielrunde sr;
+	private LaunchRequestHandler lrh;
 
-	public FrageStellenHandler(Spielrunde sr) {
-		this.sr = sr;
+	public FrageStellenHandler(LaunchRequestHandler lrh) {
+		this.lrh = lrh;
 	}
 
 	@Override

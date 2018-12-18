@@ -29,8 +29,8 @@ public class LaunchRequestHandler implements RequestHandler {
 
 	Spielrunde sr;
 
-	public LaunchRequestHandler(Spielrunde sr) {
-		this.sr = sr;
+	public LaunchRequestHandler() {
+		this.sr = new Spielrunde();
 	}
 
 	public boolean canHandle(HandlerInput input) {
@@ -39,7 +39,7 @@ public class LaunchRequestHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		sr.reset();
+		//sr.reset();
 		return input.getResponseBuilder().withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.WELCOME)
 				.withSpeech(PhrasesAndConstants.WELCOME).withReprompt("The repromt").build();
 	}

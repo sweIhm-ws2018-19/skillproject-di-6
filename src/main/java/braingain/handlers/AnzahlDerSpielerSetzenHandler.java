@@ -32,10 +32,10 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
 	private static final String LIST_OF_PLAYERNUMBERS = "numberOfPlayers";
 
-	Spielrunde sr;
+	private LaunchRequestHandler lrh;
 
-	public AnzahlDerSpielerSetzenHandler(Spielrunde sr) {
-		this.sr = sr;
+	public AnzahlDerSpielerSetzenHandler(LaunchRequestHandler lrh) {
+		this.lrh = lrh;
 	}
 
 	@Override
@@ -45,7 +45,7 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		sr.reset();
+		lrh.sr.reset();
 		String speechText;
 	
 		Slot selectedPlayerSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()
@@ -58,13 +58,13 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 					.get(0).getValue().getName();
 			input.getAttributesManager()
 					.setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
-			sr.setNumberOfPlayers(Integer.parseInt(numberOfPlayers));
-			if (sr.getNumberOfPlayers() == 1) {
+			lrh.sr.setNumberOfPlayers(Integer.parseInt(numberOfPlayers));
+			if (lrh.sr.getNumberOfPlayers() == 1) {
 				speechText = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen.";
 			} else {
 				speechText = String.format(
 						"OK. Ihr spielt nun zu %s. Sagt mir nun nacheinander eure Namen. Zum Beispiel: Ich heisse Max.",
-						sr.getNumberOfPlayers());
+						lrh.sr.getNumberOfPlayers());
 			}
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
 					.withShouldEndSession(false);

@@ -19,10 +19,10 @@ import phrasesAndConstants.PhrasesAndConstants;
 public class KategorieEinstellenHandler implements RequestHandler {
 
 	private static final Object LIST_OF_CATEGORIES = "gewaehlteKategorie";
-	private Spielrunde sr;
+	private LaunchRequestHandler lrh;
 
-	public KategorieEinstellenHandler(Spielrunde sr) {
-		this.sr = sr;
+	public KategorieEinstellenHandler(LaunchRequestHandler lrh) {
+		this.lrh = lrh;
 	}
 
 	public boolean canHandle(HandlerInput input) {
@@ -37,17 +37,17 @@ public class KategorieEinstellenHandler implements RequestHandler {
 
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
 
-		if (selectedCathegorySlot != null && sr.getNumberOfPlayers() != 0 && sr.allPlayersSet()
-				&& sr.getCategory() == null) {
+		if (selectedCathegorySlot != null && lrh.sr.getNumberOfPlayers() != 0 && lrh.sr.allPlayersSet()
+				&& lrh.sr.getCategory() == null) {
 
 			String gewaehlteKategorie = selectedCathegorySlot.getResolutions().getResolutionsPerAuthority().get(0)
 					.getValues().get(0).getValue().getName();
 			input.getAttributesManager()
 					.setSessionAttributes(Collections.singletonMap(gewaehlteKategorie, LIST_OF_CATEGORIES));
-			if (sr.setKategorie(gewaehlteKategorie)) {
-				speechText = sr.getNumberOfPlayers() == 1 ? "Du hast " : "Ihr habt ";
-				speechText += String.format("die Kategorie %s gewaehlt. ", sr.getCategory().toString());
-				speechText += sr.getNumberOfPlayers() == 1 ? "Waehle " : "Waehlt";
+			if (lrh.sr.setKategorie(gewaehlteKategorie)) {
+				speechText = lrh.sr.getNumberOfPlayers() == 1 ? "Du hast " : "Ihr habt ";
+				speechText += String.format("die Kategorie %s gewaehlt. ", lrh.sr.getCategory().toString());
+				speechText += lrh.sr.getNumberOfPlayers() == 1 ? "Waehle " : "Waehlt";
 				speechText += " nun das Level. Es gibt " + Level.getLevels();
 
 				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
@@ -57,13 +57,13 @@ public class KategorieEinstellenHandler implements RequestHandler {
 				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, repromptText).withSpeech(repromptText)
 						.withShouldEndSession(false);
 			}
-		} else if (sr.getNumberOfPlayers() == 0) {
+		} else if (lrh.sr.getNumberOfPlayers() == 0) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_NUMBER_OF_PLAYERS)
 					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS).withShouldEndSession(false);
-		} else if (!sr.allPlayersSet()) {
+		} else if (!lrh.sr.allPlayersSet()) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_PLAYER_NAMES)
 					.withSpeech(PhrasesAndConstants.SET_PLAYER_NAMES).withShouldEndSession(false);
-		} else if (sr.getCategory() != null) {
+		} else if (lrh.sr.getCategory() != null) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.RESET_CATEGORY)
 					.withSpeech(PhrasesAndConstants.RESET_CATEGORY).withShouldEndSession(false);
 		} else {
