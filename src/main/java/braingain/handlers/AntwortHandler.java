@@ -21,10 +21,10 @@ import phrasesAndConstants.PhrasesAndConstants;
 public class AntwortHandler implements RequestHandler {
 
 	public static final Object ANTWORT = "antwort";
-	private Spielrunde sr;
+	private LaunchRequestHandler lrh;
 
-	public AntwortHandler(Spielrunde sr) {
-		this.sr = sr;
+	public AntwortHandler(LaunchRequestHandler lrh) {
+		this.lrh = lrh;
 	}
 
 	public boolean canHandle(HandlerInput input) {
@@ -47,11 +47,11 @@ public class AntwortHandler implements RequestHandler {
 			String antwort = antwortSlot.getValue();
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(antwort, ANTWORT));
 			
-			if (sr.checkAnswer(antwort)) {
+			if (lrh.sr.checkAnswer(antwort)) {
 				speechText = "Deine Antwort ist richtig!";
 			} else {
 				speechText = String.format("Deine Antwort war leider falsch. Die richtige Antwort ist %s",
-						sr.getRightAnswer());
+						lrh.sr.getRightAnswer());
 			}
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText).withShouldEndSession(false);
 		} else {

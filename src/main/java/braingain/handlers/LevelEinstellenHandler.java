@@ -18,10 +18,10 @@ import phrasesAndConstants.PhrasesAndConstants;
 public class LevelEinstellenHandler implements RequestHandler {
 
 	private static final Object LIST_OF_LEVEL = "gewaehltesLevel";
-	private Spielrunde sr;
+	private LaunchRequestHandler lrh;
 
-	public LevelEinstellenHandler(Spielrunde sr) {
-		this.sr = sr;
+	public LevelEinstellenHandler(LaunchRequestHandler lrh) {
+		this.lrh = lrh;
 	}
 
 	public boolean canHandle(HandlerInput input) {
@@ -36,24 +36,24 @@ public class LevelEinstellenHandler implements RequestHandler {
 
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
 
-		if (selectedLevelSlot != null && sr.getNumberOfPlayers() != 0 && sr.allPlayersSet()
-				&& sr.getCategory() != null && sr.getLevel() == null) {
+		if (selectedLevelSlot != null && lrh.sr.getNumberOfPlayers() != 0 && lrh.sr.allPlayersSet()
+				&& lrh.sr.getCategory() != null && lrh.sr.getLevel() == null) {
 
 			String gewaehltesLevel = selectedLevelSlot.getResolutions().getResolutionsPerAuthority().get(0).getValues()
 					.get(0).getValue().getName();
 
 			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
-			if (sr.setLevel(gewaehltesLevel)) {
-				if (sr.getNumberOfPlayers() == 1) {
+			if (lrh.sr.setLevel(gewaehltesLevel)) {
+				if (lrh.sr.getNumberOfPlayers() == 1) {
 					speechText = String.format(
 							"Du hast das Level %s gewaehlt. Dir werden nun 10 Fragen gestellt. Sage Los, um zu beginnen.",
-							sr.getLevel().toString());
+							lrh.sr.getLevel().toString());
 				} else {
 					speechText = String.format("Ihr habt das Level %s gewaehlt. Euch werden nun "
-							+ sr.getNumberOfPlayers() * 5 + " Fragen gestellt. Sagt los um zu beginnen.",
-							sr.getLevel().toString());
+							+ lrh.sr.getNumberOfPlayers() * 5 + " Fragen gestellt. Sagt los um zu beginnen.",
+							lrh.sr.getLevel().toString());
 				}
-				sr.buildQuestions();
+				lrh.sr.buildQuestions();
 				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
 						.withShouldEndSession(false);
 			} else {
@@ -61,16 +61,16 @@ public class LevelEinstellenHandler implements RequestHandler {
 				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, repromptText).withReprompt(repromptText)
 						.withShouldEndSession(false);
 			}
-		} else if (sr.getNumberOfPlayers() == 0) {
+		} else if (lrh.sr.getNumberOfPlayers() == 0) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_NUMBER_OF_PLAYERS)
 					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS).withShouldEndSession(false);
-		} else if (!sr.allPlayersSet()) {
+		} else if (!lrh.sr.allPlayersSet()) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_PLAYER_NAMES)
 					.withSpeech(PhrasesAndConstants.SET_PLAYER_NAMES).withShouldEndSession(false);
-		} else if (sr.getCategory() == null) {
+		} else if (lrh.sr.getCategory() == null) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_CATEGORY)
 					.withSpeech(PhrasesAndConstants.SET_CATEGORY).withShouldEndSession(false);
-		} else if (sr.getLevel() != null) {
+		} else if (lrh.sr.getLevel() != null) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.RESET_LEVEL)
 			.withSpeech(PhrasesAndConstants.RESET_LEVEL).withShouldEndSession(false);
 		} else {

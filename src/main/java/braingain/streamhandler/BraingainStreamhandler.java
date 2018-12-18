@@ -18,9 +18,11 @@ import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
 
 import braingain.modell.Spielrunde;
+import braingain.handlers.AntwortHandler;
 import braingain.handlers.AnzahlDerSpielerSetzenHandler;
 import braingain.handlers.CancelandStopIntentHandler;
 import braingain.handlers.FallbackIntentHandler;
+import braingain.handlers.FrageStellenHandler;
 import braingain.handlers.HelpIntentHandler;
 import braingain.handlers.KategorieEinstellenHandler;
 import braingain.handlers.LaunchRequestHandler;
@@ -30,21 +32,22 @@ import braingain.handlers.UsernamenSpeichernHandler;
 
 public class BraingainStreamhandler extends SkillStreamHandler {
 	
-	public static Spielrunde sr;
 	
 private static Skill getSkill() {
-	sr = new Spielrunde();
+	LaunchRequestHandler lrh = new LaunchRequestHandler();
 	return Skills.standard()
 		.addRequestHandlers(
-				new AnzahlDerSpielerSetzenHandler(sr),
+				new AnzahlDerSpielerSetzenHandler(lrh),
+				new AntwortHandler(lrh),
 				new CancelandStopIntentHandler(),
 				new FallbackIntentHandler(),
+				new FrageStellenHandler(lrh),
 				new HelpIntentHandler(),
-				new KategorieEinstellenHandler(sr),
-				new LaunchRequestHandler(sr),
-				new LevelEinstellenHandler(sr),
-				new SessionEndedRequestHandler(sr),
-				new UsernamenSpeichernHandler(sr))
+				new KategorieEinstellenHandler(lrh),
+				lrh,
+				new LevelEinstellenHandler(lrh),
+				new SessionEndedRequestHandler(),
+				new UsernamenSpeichernHandler(lrh))
 				.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
 				.build();
 }
