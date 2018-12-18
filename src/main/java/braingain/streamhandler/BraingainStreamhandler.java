@@ -43,7 +43,7 @@ private static Skill getSkill() {
 				new KategorieEinstellenHandler(sr),
 				new LaunchRequestHandler(sr),
 				new LevelEinstellenHandler(sr),
-				new SessionEndedRequestHandler(),
+				new SessionEndedRequestHandler(sr),
 				new UsernamenSpeichernHandler(sr))
 				.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
 				.build();
