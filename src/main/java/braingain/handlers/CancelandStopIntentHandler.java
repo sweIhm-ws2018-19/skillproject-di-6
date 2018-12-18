@@ -11,36 +11,31 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.braingain.handlers;
+package braingain.handlers;
+
+import static com.amazon.ask.request.Predicates.intentName;
+
+import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 
-import main.java.braingain.Modell.Spielrunde;
-
-import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.intentName;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class CancelandStopIntentHandler implements RequestHandler {
-    
-	private Spielrunde sr;
-	
-	public CancelandStopIntentHandler(Spielrunde sr) {
-		this.sr = sr;
+
+	public CancelandStopIntentHandler() {
 	}
 
 	@Override
-    public boolean canHandle(HandlerInput input) {
-        return input.matches(intentName("AMAZON.StopIntent").or(intentName("AMAZON.CancelIntent")));
-    }
+	public boolean canHandle(HandlerInput input) {
+		return input.matches(intentName("AMAZON.StopIntent").or(intentName("AMAZON.CancelIntent")));
+	}
 
-    @Override
-    public Optional<Response> handle(HandlerInput input) {
-        return input.getResponseBuilder()
-                .withSpeech("Auf Wiedersehen")
-                .withSimpleCard("ColorSession", "Auf Wiedersehen")
-                .build();
-    }
+	@Override
+	public Optional<Response> handle(HandlerInput input) {
+		return input.getResponseBuilder().withSpeech(PhrasesAndConstants.GOOD_BYE)
+				.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.GOOD_BYE).withShouldEndSession(true).build();
+	}
 }

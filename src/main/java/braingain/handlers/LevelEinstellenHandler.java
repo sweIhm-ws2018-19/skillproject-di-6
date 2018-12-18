@@ -1,96 +1,84 @@
-package main.java.braingain.handlers;
+package braingain.handlers;
+
+import static com.amazon.ask.request.Predicates.intentName;
+
+import java.util.Collections;
+import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
-import main.java.braingain.Modell.Spielrunde;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
 
-import java.util.Collections;
-import java.util.Map;
-import java.util.Optional;
-
-import static com.amazon.ask.request.Predicates.intentName;
+import braingain.modell.Spielrunde;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class LevelEinstellenHandler implements RequestHandler {
 
 	private static final Object LIST_OF_LEVEL = "gewaehltesLevel";
 	private Spielrunde sr;
-	
-	public LevelEinstellenHandler(Spielrunde sr){
+
+	public LevelEinstellenHandler(Spielrunde sr) {
 		this.sr = sr;
 	}
-	
+
 	public boolean canHandle(HandlerInput input) {
 		return input.matches(intentName("LevelEinstellenIntent"));
 	}
 
-	
 	public Optional<Response> handle(HandlerInput input) {
-		Request request = input.getRequestEnvelope().getRequest();
-		IntentRequest intentRequest = (IntentRequest) request;
-		Intent intent = intentRequest.getIntent();
-		Map<String, Slot> slots = intent.getSlots();
-
-		// Get the level slot from the list of slots.
-		Slot selectedLevelSlot = slots.get(LIST_OF_LEVEL);
-
 		String speechText, repromptText;
-		boolean isAskResponse = false;
-		if(sr.getAnzahlSpieler()==1) {
-			// Check for level and create output to user.
-			if (selectedLevelSlot != null) {
-				// Store the user's Level in the Session and create response.
-				String gewaehltesLevel = selectedLevelSlot.getValue();
-				input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
-	
-				speechText = String
-						.format("Du hast das Level %s gewaehlt. Sage naechste Frage, um zu beginnen.", gewaehltesLevel);
-				repromptText = "Waehle jetzt dein Level.";
-				sr.setLevel(gewaehltesLevel);
-				sr.refreshFragen();
-			} else {
-				// Render an error since we don't know what the users favorite color is.
-				speechText = "Ich kenne das Level nicht. Bitte versuche es noch einmal.";
-				repromptText = "Ich habe das Level nicht verstanden. Sage mir das Level, in welchem du abgefragt werden willst. Sage zum Beispiel: ich waehle das Level Mittel.";
-				isAskResponse = true;
-			}
 
-		}else {
-			// Check for favorite color and create output to user.
-						if (selectedLevelSlot != null) {
-							// Store the user's favorite color in the Session and create response.
-							String gewaehltesLevel = selectedLevelSlot.getValue();
-							input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
-				
-							speechText = String
-									.format("Ihr habt das Level %s gewaehlt. Mehr kann ich im ersten Sprint noch nicht.", gewaehltesLevel);
-							repromptText = "Waehlt jetzt eurer Level.";
-							sr.setLevel(gewaehltesLevel);
-							sr.refreshFragen();
-						} else {
-							// Render an error since we don't know what the users favorite color is.
-							speechText = "Ich kenne das Level nicht. Bitte versucht es noch einmal.";
-							repromptText = "Ich habe das Level nicht verstanden. Sagt mir das Level, in welchem ihr abgefragt werden wollt. Sagt zum Beispiel: Wir waehlen das Level Mittel.";
-							isAskResponse = true;
-						}
-				
-		}
-		
-		
+		Slot selectedLevelSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()
+				.get(LIST_OF_LEVEL);
+
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
 
-		responseBuilder.withSimpleCard("LevelSession", speechText).withSpeech(speechText).withShouldEndSession(false);
+		if (selectedLevelSlot != null && sr.getNumberOfPlayers() != 0 && sr.allPlayersSet()
+				&& sr.getCategory() != null && sr.getLevel() == null) {
 
-		if (isAskResponse) {
-			responseBuilder.withShouldEndSession(false).withReprompt(repromptText);
+			String gewaehltesLevel = selectedLevelSlot.getResolutions().getResolutionsPerAuthority().get(0).getValues()
+					.get(0).getValue().getName();
+
+			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(gewaehltesLevel, LIST_OF_LEVEL));
+			if (sr.setLevel(gewaehltesLevel)) {
+				if (sr.getNumberOfPlayers() == 1) {
+					speechText = String.format(
+							"Du hast das Level %s gewaehlt. Dir werden nun 10 Fragen gestellt. Sage Los, um zu beginnen.",
+							sr.getLevel().toString());
+				} else {
+					speechText = String.format("Ihr habt das Level %s gewaehlt. Euch werden nun "
+							+ sr.getNumberOfPlayers() * 5 + " Fragen gestellt. Sagt los um zu beginnen.",
+							sr.getLevel().toString());
+				}
+				sr.buildQuestions();
+				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
+						.withShouldEndSession(false);
+			} else {
+				repromptText = String.format("Das Level %s kenne ich nicht.", gewaehltesLevel);
+				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, repromptText).withReprompt(repromptText)
+						.withShouldEndSession(false);
+			}
+		} else if (sr.getNumberOfPlayers() == 0) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_NUMBER_OF_PLAYERS)
+					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS).withShouldEndSession(false);
+		} else if (!sr.allPlayersSet()) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_PLAYER_NAMES)
+					.withSpeech(PhrasesAndConstants.SET_PLAYER_NAMES).withShouldEndSession(false);
+		} else if (sr.getCategory() == null) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_CATEGORY)
+					.withSpeech(PhrasesAndConstants.SET_CATEGORY).withShouldEndSession(false);
+		} else if (sr.getLevel() != null) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.RESET_LEVEL)
+			.withSpeech(PhrasesAndConstants.RESET_LEVEL).withShouldEndSession(false);
+		} else {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_LEVEL)
+					.withReprompt(PhrasesAndConstants.REPROMPT_LEVEL).withShouldEndSession(false);
 		}
+
 		return responseBuilder.build();
 	}
 
 }
-

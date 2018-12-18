@@ -11,28 +11,30 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  the specific language governing permissions and limitations under the License.
 */
 
-package main.java.braingain.handlers;
+package braingain.handlers;
+
+import static com.amazon.ask.request.Predicates.intentName;
 
 import java.util.Collections;
-import java.util.Map;
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
+import com.amazon.ask.response.ResponseBuilder;
 
-import main.java.braingain.Modell.Spielrunde;
-
-import static com.amazon.ask.request.Predicates.intentName;
+import braingain.modell.Kategorie;
+import braingain.modell.Spieler;
+import braingain.modell.Spielrunde;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class UsernamenSpeichernHandler implements RequestHandler {
 
 	public static final String LIST_OF_NAMES = "username";
 	private Spielrunde sr;
+	public int spielerGenannt = 1;
 
 	public UsernamenSpeichernHandler(Spielrunde sr) {
 		this.sr = sr;
@@ -45,33 +47,69 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-
 		String speechText;
-		//String name = (String) input.getAttributesManager().getSessionAttributes().get(NAME);
-		Request request = input.getRequestEnvelope().getRequest();
-		IntentRequest intentRequest = (IntentRequest) request;
-		Intent intent = intentRequest.getIntent();
-		Map<String, Slot> slots = intent.getSlots();
 
-		// Get the color slot from the list of slots.
-		Slot selectedNameSlot = slots.get(LIST_OF_NAMES);
-		
-		if(selectedNameSlot != null) {
-		String username = selectedNameSlot.getValue();
-		input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
-		speechText = String.format("Du heisst %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", username);
+		Slot selectedNameSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()
+				.get(LIST_OF_NAMES);
+
+		ResponseBuilder responseBuilder = input.getResponseBuilder();
+
+		if (selectedNameSlot != null && sr.getNumberOfPlayers() != 0 && sr.getNumberOfPlayers() != sr.getPlayer().length
+				&& sr.getCategory() == null && sr.getLevel() == null) {
+			String username = selectedNameSlot.getValue();
+			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
+			sr.addPlayer(new Spieler(username));
+
+			if (sr.getNumberOfPlayers() == 1) {
+				speechText = String.format("Du heisst %s. ", username) + "Waehle nun deine Kategorie. Es gibt "
+						+ Kategorie.getKategorien();
+			} else if (spielerGenannt < sr.getNumberOfPlayers()) {
+				spielerGenannt++;
+				speechText = String.format("Spieler %s heisst %s, bitte sagt mir nun den naechsten Namen.",
+						spielerGenannt - 1, username);
+			} else {
+				speechText = String.format("Spieler %s heisst %s. Das sind nun alle Spieler. Eure Namen sind: ",
+						spielerGenannt, username);
+				switch (sr.getNumberOfPlayers()) {
+				case 2:
+					speechText += sr.getPlayer()[0] + " und " + sr.getPlayer()[1] + ". ";
+					break;
+				case 3:
+					speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + " und " + sr.getPlayer()[2] + ". ";
+					break;
+				case 4:
+					speechText += sr.getPlayer()[0] + ", " + sr.getPlayer()[1] + ", " + sr.getPlayer()[2] + " und "
+							+ sr.getPlayer()[3] + ". ";
+					break;
+				default:
+					speechText += "Fehler.";
+					break;
+				}
+
+				speechText += "Waehlt nun eure Kategorie. Es gibt " + Kategorie.getKategorien();
+				spielerGenannt = 1;
+			}
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
+					.withShouldEndSession(false);
+		} else if (sr.getNumberOfPlayers() == 0) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_NUMBER_OF_PLAYERS)
+					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS).withShouldEndSession(false);
+		} else if (sr.getCategory() == null) {
+			responseBuilder
+					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
+							PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_CATEGORY)
+					.withSpeech(PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_CATEGORY)
+					.withShouldEndSession(false);
+		} else if (sr.getLevel() == null) {
+			responseBuilder
+					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
+							PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_LEVEL)
+					.withSpeech(PhrasesAndConstants.USERNAMES_ARE_SET + " " + PhrasesAndConstants.SET_LEVEL)
+					.withShouldEndSession(false);
 		} else {
-			speechText = "Ich habe deinen Namen leider nicht verstanden. Bitte wiederhole deinen Namen.";
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_SAVE_USERNAME)
+					.withSpeech(PhrasesAndConstants.REPROMPT_SAVE_USERNAME).withShouldEndSession(false);
 		}
-
-
-		/*if (name != null && !name.isEmpty()) {
-			speechText = String.format("Dein Name ist %s. Wenn ihr alle Namen genannt habt, waehlt eure Kategorie. Es gibt Mathe, Geografie, Logik und Gehirntraining.", name);
-		} else {
-			speechText = "Um deinen Namen zu speichern musst du ihn mir sagen.";
-		}*/
-		return input.getResponseBuilder().withSpeech(speechText)
-				.withShouldEndSession(false)
-				.build();
+		return responseBuilder.build();
 	}
 }

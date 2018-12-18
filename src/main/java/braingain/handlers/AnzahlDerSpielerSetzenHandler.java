@@ -11,31 +11,29 @@ Copyright 2018 Amazon.com, Inc. or its affiliates. All Rights Reserved.
  the specific language governing permissions and limitations under the License.
 */
 
-package main.java.braingain.handlers;
+package braingain.handlers;
 
 import static com.amazon.ask.request.Predicates.intentName;
 
 import java.util.Collections;
-import java.util.Map;
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
+import com.amazon.ask.response.ResponseBuilder;
 
-import main.java.braingain.Modell.Spielrunde;
-
+import braingain.modell.Spielrunde;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
 	private static final String LIST_OF_PLAYERNUMBERS = "numberOfPlayers";
-	
+
 	Spielrunde sr;
-	
+
 	public AnzahlDerSpielerSetzenHandler(Spielrunde sr) {
 		this.sr = sr;
 	}
@@ -47,45 +45,34 @@ public class AnzahlDerSpielerSetzenHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
+		sr.reset();
 		String speechText;
-		//int numberOfPlayers;
-		
-		Request request = input.getRequestEnvelope().getRequest();
-		IntentRequest intentRequest = (IntentRequest) request;
-		Intent intent = intentRequest.getIntent();
-		Map<String, Slot> slots = intent.getSlots();
+	
+		Slot selectedPlayerSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()
+				.get(LIST_OF_PLAYERNUMBERS);
 
-		// Get the level slot from the list of slots.
-		Slot selectedPlayerSlot = slots.get(LIST_OF_PLAYERNUMBERS);
-		
-		if(selectedPlayerSlot != null) {
-			String numberOfPlayers = selectedPlayerSlot.getValue();
-			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
-			speechText = String.format("OK. Ihr spielt nun zu %s. Sagt mir nun einer zur Zeit eure Namen. Sagt zum Beispiel ich heisse Max.", numberOfPlayers);
-			sr.setAnzahlSpieler(Integer.parseInt(numberOfPlayers));
-		} else {
-			speechText = "Ich habe deine Antwort leider nicht verstanden. Wie viele Spieler seid ihr?";
-		}
-		
-		
-/*
-		try {
-			numberOfPlayers = (int) input.getAttributesManager().getSessionAttributes().get(NumberOfPlayers);
-		
-			if(numberOfPlayers == 0 || numberOfPlayers > 4) {
-				speechText = String.format("Die angegebene Spielerzahl %s kann nicht akzeptiert werden. Die Spieleranzahl ist auf 1 bis 4 Spieler begrenzt.", numberOfPlayers);
-			}else {
-				speechText = String.format("OK. Ihr spielt nun zu %s", numberOfPlayers);
+		ResponseBuilder responseBuilder = input.getResponseBuilder();
+
+		if (selectedPlayerSlot != null) {
+			String numberOfPlayers = selectedPlayerSlot.getResolutions().getResolutionsPerAuthority().get(0).getValues()
+					.get(0).getValue().getName();
+			input.getAttributesManager()
+					.setSessionAttributes(Collections.singletonMap(numberOfPlayers, LIST_OF_PLAYERNUMBERS));
+			sr.setNumberOfPlayers(Integer.parseInt(numberOfPlayers));
+			if (sr.getNumberOfPlayers() == 1) {
+				speechText = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen.";
+			} else {
+				speechText = String.format(
+						"OK. Ihr spielt nun zu %s. Sagt mir nun nacheinander eure Namen. Zum Beispiel: Ich heisse Max.",
+						sr.getNumberOfPlayers());
 			}
-		
-		}catch (Exception e) {
-			speechText = "Es geschah ein Fehler: "+ e.getMessage();
-		}*/
-		
-		
-		return input.getResponseBuilder().withSpeech(speechText)
-				.withShouldEndSession(false)
-				.build();
-		
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
+					.withShouldEndSession(false);
+		} else {
+			responseBuilder
+					.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_NUMBER_OF_PLAYERS)
+					.withSpeech(PhrasesAndConstants.REPROMPT_NUMBER_OF_PLAYERS).withShouldEndSession(false);
+		}
+		return responseBuilder.build();
 	}
 }
