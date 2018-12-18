@@ -22,14 +22,9 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.SessionEndedRequest;
 
-import braingain.modell.Spielrunde;
-
 public class SessionEndedRequestHandler implements RequestHandler {
 	
-	private Spielrunde sr;
-	
-	public SessionEndedRequestHandler(Spielrunde sr) {
-		this.sr = sr;
+	public SessionEndedRequestHandler() {
 	}
 
 	@Override
@@ -39,7 +34,6 @@ public class SessionEndedRequestHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		sr.reset();
 		return input.getResponseBuilder().build();
 	}
 }

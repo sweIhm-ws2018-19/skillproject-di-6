@@ -18,6 +18,7 @@ import phrasesAndConstants.PhrasesAndConstants;
 public class LevelEinstellenHandler implements RequestHandler {
 
 	private static final Object LIST_OF_LEVEL = "gewaehltesLevel";
+	private final int NumberOfQuestionsPerPlayer = 3;
 	private Spielrunde sr;
 
 	public LevelEinstellenHandler(Spielrunde sr) {
@@ -50,7 +51,7 @@ public class LevelEinstellenHandler implements RequestHandler {
 							sr.getLevel().toString());
 				} else {
 					speechText = String.format("Ihr habt das Level %s gewaehlt. Euch werden nun "
-							+ sr.getNumberOfPlayers() * 5 + " Fragen gestellt. Sagt los um zu beginnen.",
+							+ sr.getNumberOfPlayers() * NumberOfQuestionsPerPlayer + " Fragen gestellt. Sagt los um zu beginnen.",
 							sr.getLevel().toString());
 				}
 				sr.buildQuestions();

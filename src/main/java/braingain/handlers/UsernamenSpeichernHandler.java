@@ -34,7 +34,6 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 
 	public static final String LIST_OF_NAMES = "username";
 	private Spielrunde sr;
-	public int spielerGenannt = 1;
 
 	public UsernamenSpeichernHandler(Spielrunde sr) {
 		this.sr = sr;
@@ -63,13 +62,13 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 			if (sr.getNumberOfPlayers() == 1) {
 				speechText = String.format("Du heisst %s. ", username) + "Waehle nun deine Kategorie. Es gibt "
 						+ Kategorie.getKategorien();
-			} else if (spielerGenannt < sr.getNumberOfPlayers()) {
-				spielerGenannt++;
+			} else if (sr.getSpielerGenannt() < sr.getNumberOfPlayers()) {
+				sr.increaseSpielerGenannt();
 				speechText = String.format("Spieler %s heisst %s, bitte sagt mir nun den naechsten Namen.",
-						spielerGenannt - 1, username);
+						sr.getSpielerGenannt() - 1, username);
 			} else {
 				speechText = String.format("Spieler %s heisst %s. Das sind nun alle Spieler. Eure Namen sind: ",
-						spielerGenannt, username);
+						sr.getSpielerGenannt(), username);
 				switch (sr.getNumberOfPlayers()) {
 				case 2:
 					speechText += sr.getPlayer()[0] + " und " + sr.getPlayer()[1] + ". ";
@@ -87,7 +86,7 @@ public class UsernamenSpeichernHandler implements RequestHandler {
 				}
 
 				speechText += "Waehlt nun eure Kategorie. Es gibt " + Kategorie.getKategorien();
-				spielerGenannt = 1;
+				sr.resetSpielerGenannt();
 			}
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
 					.withShouldEndSession(false);

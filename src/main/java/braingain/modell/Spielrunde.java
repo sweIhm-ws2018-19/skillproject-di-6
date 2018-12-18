@@ -14,6 +14,7 @@ public class Spielrunde {
 	private Spieler currentPlayer;
 	private Kategorie category;
 	private Level level;
+	private int spielerGenannt = 1;
 	
 	private int numberOfPlayers;
 	//private int counter;
@@ -258,12 +259,29 @@ public class Spielrunde {
 		return player.size() == numberOfPlayers;
 	}
 	
+	public int getSpielerGenannt() {
+		return this.spielerGenannt;
+	}
+	
+	public void increaseSpielerGenannt() {
+		this.spielerGenannt++;
+	}
+	
+	public void setSpielerGenannt(int spielerGenannt) {
+		this.spielerGenannt = spielerGenannt;
+	}
+	
+	public void resetSpielerGenannt() {
+		this.spielerGenannt = 1;
+	}
+	
 	public void reset() {
 		player = new ArrayList<Spieler>();
 		currentPlayer = null;
 		category = null;
 		level = null;
 		numberOfPlayers = 0;
+		spielerGenannt = 1;
 	}
 	
 	/**

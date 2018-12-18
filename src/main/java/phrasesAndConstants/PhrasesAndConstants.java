@@ -11,7 +11,7 @@ public class PhrasesAndConstants {
 
 	public static final String CARD_TITLE = "Braingain";
 
-	public static final String WELCOME = "Hallo. Mit mir gaint dein Brain. Bitte sage mir, wie viele Spieler spielen. Es können maximal 4 Spieler spielen.";
+	public static final String WELCOME = "Hallo. Mit mir gaint dein Brain. Bitte sage mir, wie viele Spieler spielen. Es koennen maximal 4 Spieler spielen.";
 	public static final String HELP = "Mit mir wird dein Gehirn trainiert. Zuerst muss ich wissen wie viele Leute spielen, dann Welche Kategorie ihr wählt und zuletzt noch welches Level.";
 	public static final String USERNAMES_ARE_SET = "Wenn du einem Namen aendern willst, musst du zum Beispiel sagen Spieler 1 heisst Peter.";
 	public static final String SET_NUMBER_OF_PLAYERS = "Bitte lege zuerst die Spieleranzahl fest. Es koennen maximal 4 Spieler spielen.";
