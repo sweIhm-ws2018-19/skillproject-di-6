@@ -3,7 +3,7 @@ package phrasesAndConstants;
 import braingain.modell.Kategorie;
 import braingain.modell.Level;
 
-public class PhrasesAndConstants {
+public final class PhrasesAndConstants {
 
 	private PhrasesAndConstants() {
 		throw new IllegalStateException("Utility class");
