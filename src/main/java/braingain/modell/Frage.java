@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -12,14 +13,18 @@ import java.util.Iterator;
 /**
  * The Class Frage.
  */
-public class Frage {
+public class Frage implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private String frage;
 	private ArrayList<String> antworten;
 
-	public static HashMap<Kategorie, HashMap<Level, ArrayList<Frage>>> alleFragen;
+	/*public static HashMap<Kategorie, HashMap<Level, ArrayList<Frage>>> alleFragen;
 	private static Kategorie[] KategorieValues = Kategorie.values();
-	private static Level[] LevelValues = Level.values();
+	private static Level[] LevelValues = Level.values();*/
 
 	/**
 	 * Initialisiert eine neue Frage, mit einer Frage und einer Antwort als String.
@@ -103,17 +108,17 @@ public class Frage {
 		return antworten;
 	}
 
-	static {
+	/*static {
 		makeNewMap();
 		readQuestions();
 		iterate();
-	}
+	}*/
 
 	/**
 	 * initialisiert alleFragen
 	 *
 	 */
-	static void makeNewMap() {
+/*	static void makeNewMap() {
 		alleFragen = new HashMap<>();
 		for (Kategorie k : KategorieValues) {
 			alleFragen.put(k, new HashMap<>());
@@ -121,7 +126,7 @@ public class Frage {
 				alleFragen.get(k).put(l, new ArrayList<Frage>());
 			}
 		}
-	}
+	}*/
 
 	/**
 	 * fuellt alleFragen
@@ -131,17 +136,17 @@ public class Frage {
 	 * @param kat     integer, der fuer die Kategorie steht
 	 * @param level   integer, der fuer den Schwierigkeitsgrad steht
 	 */
-	private static void newQuestion(String frage, String antwort, Kategorie kat, Level level) {
+	/*private static void newQuestion(String frage, String antwort, Kategorie kat, Level level) {
 		alleFragen.get(kat).get(level).add(new Frage(frage, antwort));
-	}
+	}*/
 
 	/**
 	 * Methode, die Fragen aus Datei Fragen.txt einliesst, und einsortiert in
 	 * alleFragen
 	 *
 	 */
-	static void readQuestions() {
-		String fileName = System.getProperty("user.dir") + File.separator + "Fragen.txt";
+/*	static void readQuestions() {
+		String fileName = "resources" + File.separator + "Fragen.txt";
 
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
 
@@ -159,13 +164,13 @@ public class Frage {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 
 	/**
 	 * Hilfsfunktion, um die Richtigkeit der Uebernahme zu ueberpruefen
 	 *
 	 */
-	private static void iterate() {
+	/*private static void iterate() {
 		for (Kategorie k : KategorieValues) {
 			for (Level l : LevelValues) {
 				for (Frage f : alleFragen.get(k).get(l)) {
@@ -176,5 +181,5 @@ public class Frage {
 				}
 			}
 		}
-	}
+	}*/
 }

@@ -53,7 +53,7 @@ public class LevelEinstellenHandler implements RequestHandler {
 						.format("Du hast das Level %s gewaehlt. Sage naechste Frage, um zu beginnen.", gewaehltesLevel);
 				repromptText = "Waehle jetzt dein Level.";
 				sr.setLevel(gewaehltesLevel);
-				sr.refreshFragen();
+				sr.buildQuestions();
 			} else {
 				// Render an error since we don't know what the users favorite color is.
 				speechText = "Ich kenne das Level nicht. Bitte versuche es noch einmal.";
@@ -72,7 +72,7 @@ public class LevelEinstellenHandler implements RequestHandler {
 									.format("Ihr habt das Level %s gewaehlt. Mehr kann ich im ersten Sprint noch nicht.", gewaehltesLevel);
 							repromptText = "Waehlt jetzt eurer Level.";
 							sr.setLevel(gewaehltesLevel);
-							sr.refreshFragen();
+							sr.buildQuestions();
 						} else {
 							// Render an error since we don't know what the users favorite color is.
 							speechText = "Ich kenne das Level nicht. Bitte versucht es noch einmal.";

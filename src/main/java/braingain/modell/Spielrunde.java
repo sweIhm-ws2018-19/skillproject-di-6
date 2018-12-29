@@ -7,10 +7,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map.Entry;
+import java.util.TreeMap;
 
 /**
  * The Class Spielrunde.
@@ -26,6 +29,8 @@ public class Spielrunde {
 	Kategorie kategorie;
 	Level level;
 	Frage defaultFrage;
+	HashMap<Frage, Integer> aktuelleFragen;
+	
 
 	/**
 	 * Initialisiert eine neue Spielrunde, hier werden die Array-Lists erstellt fuer
@@ -152,10 +157,10 @@ public class Spielrunde {
 	/**
 	 * Aktualisiert alle Fragen
 	 */
-
+/*
 	public void refreshFragen() {
 		fragen = Frage.alleFragen.get(kategorie).get(level);
-	}
+	}*/
 
 	/**
 	 * Sets the anzahl spieler.
@@ -302,6 +307,25 @@ public class Spielrunde {
 			playerArray[i] = spieler.get(i).getName();
 		}
 		return playerArray;
+	}
+	
+	/**
+	 * Diese Methode fuellt unsere HashMap von int und fragen aus den TextDateien, im
+	 * recourses Ordner
+	 */
+	public void buildQuestions() {
+		
+		String pathname = "resources"+ File.separator + kategorie + File.separator + level + ".fragen";
+		try {
+				ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(pathname));
+				aktuelleFragen = (HashMap<Frage, Integer>)objectInputStream.readObject();
+				objectInputStream.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+
 	}
 	
 }
