@@ -17,38 +17,42 @@ import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
 
-import braingain.handlers.AntwortHandler;
-import braingain.handlers.AnzahlDerSpielerSetzenHandler;
+import braingain.handlers.AnswerHandler;
+import braingain.handlers.AskQuestionHandler;
+import braingain.handlers.BackPackingHandler;
 import braingain.handlers.CancelandStopIntentHandler;
 import braingain.handlers.FallbackIntentHandler;
-import braingain.handlers.FrageStellenHandler;
 import braingain.handlers.HelpIntentHandler;
-import braingain.handlers.KategorieEinstellenHandler;
 import braingain.handlers.LaunchRequestHandler;
-import braingain.handlers.LevelEinstellenHandler;
+import braingain.handlers.SaveUsernameHandler;
 import braingain.handlers.SessionEndedRequestHandler;
-import braingain.handlers.UsernamenSpeichernHandler;
+import braingain.handlers.SetCategoryHandler;
+import braingain.handlers.SetLevelHandler;
+import braingain.handlers.SetNumberOfPlayersHandler;
+import braingain.modell.Gameround;
 
 public class BraingainStreamhandler extends SkillStreamHandler {
 	
+	private static Gameround round;
 	
 private static Skill getSkill() {
-	LaunchRequestHandler lrh = new LaunchRequestHandler();
+	round = new Gameround();
 	return Skills.standard()
 		.addRequestHandlers(
-				new AnzahlDerSpielerSetzenHandler(lrh),
-				new AntwortHandler(lrh),
-				new CancelandStopIntentHandler(),
-				new FallbackIntentHandler(),
-				new FrageStellenHandler(lrh),
-				new HelpIntentHandler(),
-				new KategorieEinstellenHandler(lrh),
-				lrh,
-				new LevelEinstellenHandler(lrh),
-				new SessionEndedRequestHandler(),
-				new UsernamenSpeichernHandler(lrh))
-				.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
-				.build();
+			new CancelandStopIntentHandler(),
+			new FallbackIntentHandler(),
+			new HelpIntentHandler(),
+			new SessionEndedRequestHandler(),
+			new AnswerHandler(round),
+			new AskQuestionHandler(round),
+			new BackPackingHandler(round),
+			new LaunchRequestHandler(round),
+			new SaveUsernameHandler(round),
+			new SetCategoryHandler(round),
+			new SetLevelHandler(round),
+			new SetNumberOfPlayersHandler(round))
+			.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
+			.build();
 }
 
 	public BraingainStreamhandler() {
