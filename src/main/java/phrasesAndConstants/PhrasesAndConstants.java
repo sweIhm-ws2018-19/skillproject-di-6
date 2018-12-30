@@ -79,6 +79,7 @@ public final class PhrasesAndConstants {
 	public static final String WRONG_ANSWER = "Deine Antwort ist leider falsch. Die richtige Antwort ist,";
 	
 	public static final String HIGHSCORE = "Dein highscore ist ";
+	public static final String NEW_HIGHSCORE = "Dein neue Highscore ist:";
 	
 	public static final String GOOD_BYE = "Auf Wiedersehen. Trainiere bald wieder";
 
