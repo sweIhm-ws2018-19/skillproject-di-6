@@ -70,6 +70,7 @@ public class BackPackingHandler implements RequestHandler {
 					// last Word
 					round.addItemToBackPack(testWord);
 					if (round.getNumberOfPlayers() == 1) {
+						round.getPlayerAt(0).setBackPackPoints(round.getBackPackSize());
 						String item = round.getRandomBackPackWordForAlexa();
 						speechText = String.format("%s %s und %s", PhrasesAndConstants.RIGHT_PACKING,
 								round.backPackingAlexa(), item);
@@ -97,11 +98,11 @@ public class BackPackingHandler implements RequestHandler {
 					speechText = String.format("%s %s. Du hast gesagt %s. ", PhrasesAndConstants.WRONG_PACKING,
 							round.getBackPackingAt(index), testWord);
 					if (round.getNumberOfPlayers() == 1) {
-						speechText += PhrasesAndConstants.HIGHSCORE + round.getBackPackSize();
-						round.setHighscore();
-						if (round.getPlayerAt(0).getBackPackHigscore() > round.getBackPackSize()) {
+						if (round.setBackPackHighscore()) {
 							speechText += String.format("%s %s.", PhrasesAndConstants.NEW_HIGHSCORE,
 									round.getPlayerAt(0).getBackPackHigscore());
+						}else {
+							speechText += PhrasesAndConstants.HIGHSCORE + round.getBackPackSize();
 						}
 					}
 					responseBuilder.withSpeech(speechText).withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText);

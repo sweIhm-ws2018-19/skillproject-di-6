@@ -40,20 +40,32 @@ public class Player {
 		return this.highscore;
 	}
 
-	public void setHighscore() {
-		if (points > highscore) {
-			highscore = points;
+	public boolean setHighscore() {
+		if (this.points > this.highscore) {
+			this.highscore = this.points;
+			return true;
 		}
+		return false;
+	}
+	
+	public void setBackPackPoints(int backPackPoints) {
+		this.backPackPoints = backPackPoints;
+	}
+	
+	public int getBackPackPoints() {
+		return this.backPackPoints;
 	}
 	
 	public int getBackPackHigscore() {
 		return this.backPackHighscore;
 	}
 	
-	public void setHighscoreBackPack() {
+	public boolean setBackPackHighscore() {
 		if (this.backPackPoints > this.backPackHighscore) {
 			this.backPackHighscore = this.backPackPoints;
+			return true;
 		}
+		return false;
 	}
 
 	public int getNumberOfQuestionsAsked() {
