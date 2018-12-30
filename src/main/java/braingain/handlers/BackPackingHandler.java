@@ -76,7 +76,7 @@ public class BackPackingHandler implements RequestHandler {
 						round.addItemToBackPack(item);
 						responseBuilder.withSpeech(speechText).withSimpleCard(PhrasesAndConstants.CARD_TITLE,
 								speechText);
-						//for debbunging ^
+						// for debbunging ^
 //						responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.RIGHT_PACKING)
 //						.withSpeech(speechText);
 					} else {
@@ -98,6 +98,11 @@ public class BackPackingHandler implements RequestHandler {
 							round.getBackPackingAt(index), testWord);
 					if (round.getNumberOfPlayers() == 1) {
 						speechText += PhrasesAndConstants.HIGHSCORE + round.getBackPackSize();
+						round.setHighscore();
+						if (round.getPlayerAt(0).getBackPackHigscore() > round.getBackPackSize()) {
+							speechText += String.format("%s %s.", PhrasesAndConstants.NEW_HIGHSCORE,
+									round.getPlayerAt(0).getBackPackHigscore());
+						}
 					}
 					responseBuilder.withSpeech(speechText).withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText);
 					break;

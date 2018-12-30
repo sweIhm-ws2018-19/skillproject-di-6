@@ -134,7 +134,12 @@ public class Gameround {
 	public Player getCurrentPlayer() {
 		return this.currentPlayer;
 	}
-
+	
+	public void setHighscore() {
+		player.get(0).setHighscore();
+		player.get(0).setHighscoreBackPack();
+	}
+	
 	public int getPlayersCounted() {
 		return this.playersCounted;
 	}
