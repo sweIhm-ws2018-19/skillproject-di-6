@@ -13,6 +13,7 @@
 
 package braingain.handlers;
 
+import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.requestType;
 
 import java.util.Optional;
@@ -22,25 +23,32 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
-import braingain.modell.Spielrunde;
+import braingain.modell.Gameround;
 import phrasesAndConstants.PhrasesAndConstants;
 
 public class LaunchRequestHandler implements RequestHandler {
 
-	Spielrunde round;
+	Gameround round;
 
-	public LaunchRequestHandler() {
-		this.round = new Spielrunde();
+	public LaunchRequestHandler(Gameround round) {
+		this.round = round;
 	}
 
+	@Override
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(requestType(LaunchRequest.class));
+
+		if (input.matches(intentName(PhrasesAndConstants.INTENT_NEW_ROUND))) {
+			round.reset();
+		}
+		return input.matches(requestType(LaunchRequest.class))
+				|| input.matches(intentName(PhrasesAndConstants.INTENT_NEW_ROUND));
 	}
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		round.resetPlayersCounted();
+		round.reset();
 		return input.getResponseBuilder().withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.WELCOME)
-				.withSpeech(PhrasesAndConstants.WELCOME).withReprompt("The repromt").build();
+				.withSpeech(PhrasesAndConstants.WELCOME).withReprompt("Necessary").build();
 	}
+
 }
