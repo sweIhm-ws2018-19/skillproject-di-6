@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import phrasesAndConstants.PhrasesAndConstants;
 
@@ -14,7 +15,7 @@ public class Gameround {
 	private ArrayList<Player> player;
 	private ArrayList<String> backPacking;
 	private HashMap<Question, Integer> allNeededQuestions;
-	private Player currentPlayer;
+	private Player currentPlayer = null;
 	private Question currentQuestion;
 	private Category category;
 	private Level level;
@@ -34,12 +35,12 @@ public class Gameround {
 	}
 
 	public void setNextRandomCurrentPlayer() {
-		currentPlayer = this.player.get((int) Math.random() * this.numberOfPlayers);
+		Player nextPlayer = this.player.get((int) (Math.random() * this.numberOfPlayers));
 
-		while (currentPlayer.getNumberOfQuestionsAsked() == PhrasesAndConstants.MAX_NUMBER_OF_QUESTIONS_MORE_PLAYER) {
-			currentPlayer = this.player.get((int) Math.random() * this.numberOfPlayers);
+		while (nextPlayer.equals(currentPlayer)) {
+			nextPlayer = this.player.get((int) (Math.random() * this.numberOfPlayers));
 		}
-		currentPlayer.increaseNumberOfQuestionsAskedByOne();
+		currentPlayer = nextPlayer;
 	}
 
 	public boolean checkAnswer(String antwort) {
@@ -51,17 +52,67 @@ public class Gameround {
 		// TODO
 		return null;
 	}
-	
-	public boolean itemAtIndexInBackPack(String Item, int index) {
-		return backPacking.get(index).equals(Item);
-	}
-	
+
 	public void addItemToBackPack(String item) {
-		backPacking.add(item);
+		String[] word = item.split("\\W+");
+		String wordAdd;
+		if (word.length == 1) {
+			wordAdd = word[0];
+		} else {
+			wordAdd = word[0] + " " + word[1];
+		}
+		this.backPacking.add(wordAdd);
 	}
-	
+
 	public String getBackPackingAt(int position) {
-		return backPacking.get(position);
+		return this.backPacking.get(position);
+	}
+
+	public boolean checkWord(String word, int index) {
+		String s = this.getWord(index);
+		return word.toLowerCase().contains(s.toLowerCase());
+	}
+
+	private String getWord(int index) {
+		String[] word = this.backPacking.get(index).split("\\W+");
+		if (word.length == 1) {
+			return word[0];
+		} else {
+			return word[1];
+		}
+	}
+
+	private boolean isInside(String word) {
+		for (int i = 0; i < this.backPacking.size(); i++) {
+			if (this.getWord(i).equals(word)) {
+				return true;
+			} else {
+				continue;
+			}
+		}
+		return false;
+	}
+
+	public String getRandomBackPackWordForAlexa() {
+		int max = 0;
+		String testWord = BackPackWords.values()[(int) (Math.random() * BackPackWords.values().length)].toString();
+		while (this.isInside(testWord)) {
+			max++;
+			testWord = BackPackWords.values()[(int) (Math.random() * BackPackWords.values().length)].toString();
+			if(max > 20) {
+				break;
+			}
+		}
+		return testWord;
+	}
+
+	public String backPackingAlexa() {
+		String s = "Ich packe meinen Koffer und nehme mit";
+		Iterator<String> it = backPacking.iterator();
+		while(it.hasNext()) {
+			s += ", " + it.next();
+		}
+		return s;
 	}
 	
 	public ArrayList<Player> getPlayerArrayList() {
@@ -78,6 +129,10 @@ public class Gameround {
 
 	public boolean allPlayerSet() {
 		return this.player.size() == this.numberOfPlayers;
+	}
+
+	public Player getCurrentPlayer() {
+		return this.currentPlayer;
 	}
 
 	public int getPlayersCounted() {
@@ -111,36 +166,41 @@ public class Gameround {
 	public Level getLevel() {
 		return this.level;
 	}
-	
+
 	public void increaseQuestionsAsked() {
 		this.questionsAsked++;
 	}
-	
+
 	public int getQuestionsAsked() {
 		return this.questionsAsked;
 	}
-	
+
 	public void setMaxQuestions(int maxQuestions) {
 		this.maxQuestions = maxQuestions;
 	}
-	
+
 	public int getMaxQuestions() {
 		return this.maxQuestions;
+	}
+
+	public int getBackPackSize() {
+		return this.backPacking.size();
 	}
 	
 	public Question getCurrentQuestion() {
 		return this.currentQuestion;
 	}
-	
+
 	public void setRandomNextCurrentQuestion() {
-		//TODO Get a new Question with an integervalue of 0, no idea how to do this
+		// TODO Get a new Question with an integervalue of 0, no idea how to do this
 	}
-	
+
 	public void buildQuestions() {
-		String pathname = "resources" + File.separator + category + File.separator + level + PhrasesAndConstants.QUESTION_ENDING;
+		String pathname = "resources" + File.separator + category + File.separator + level
+				+ PhrasesAndConstants.QUESTION_ENDING;
 		try {
 			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(pathname));
-			//TODO unchecked Cast
+			// TODO unchecked Cast
 			allNeededQuestions = (HashMap<Question, Integer>) objectInputStream.readObject();
 			objectInputStream.close();
 		} catch (IOException e) {
