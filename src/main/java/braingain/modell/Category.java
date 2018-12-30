@@ -19,7 +19,7 @@ public enum Category {
 
 	/** Kategorie Koffer packen. */
 	KOFFERPACKEN("Kofferpacken");
-	
+
 	/** Welche Namen die Kategorie hat. */
 	private String value;
 
@@ -40,17 +40,17 @@ public enum Category {
 	public String value() {
 		return value;
 	}
-	
+
 	public static Category getCategory(String s) {
 		Category category = null;
 		for (Category categoryLoop : Category.values()) {
-				if (s.equals(categoryLoop.toString())) {
-					category = categoryLoop;
+			if (s.equals(categoryLoop.toString())) {
+				category = categoryLoop;
 			}
 		}
 		return category;
 	}
-	
+
 	/*
 	 * (non-Javadoc)
 	 * 
@@ -59,15 +59,15 @@ public enum Category {
 	public String toString() {
 		return value;
 	}
-	
+
 	public static String getAllCategories() {
 		String s = "";
 		int k = values().length;
-		for(int i = 0; i < k - 2; i++) {
+		for (int i = 0; i < k - 2; i++) {
 			s += Category.values()[i] + ", ";
 		}
 		s += values()[k - 2] + " und " + values()[k - 1];
 		return s;
 	}
-	
+
 }
