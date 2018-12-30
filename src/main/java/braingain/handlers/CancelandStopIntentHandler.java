@@ -24,7 +24,7 @@ import com.amazon.ask.model.Response;
 import phrasesAndConstants.PhrasesAndConstants;
 
 public class CancelandStopIntentHandler implements RequestHandler {
-
+	
 	public CancelandStopIntentHandler() {
 	}
 
