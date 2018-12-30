@@ -12,25 +12,25 @@ import org.mockito.Mockito;
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 
 public class AntwortHandlerTest {
-
-	private AntwortHandler handler;
-	private LaunchRequestHandler lrh = new LaunchRequestHandler();
-	
-	@Before
-	public void setup() {
-		handler = new AntwortHandler(lrh);
-	}
-
-	@Test
-	public void testCanHandle() {
-		final HandlerInput inputMock = Mockito.mock(HandlerInput.class);
-		when(inputMock.matches(any())).thenReturn(true);
-		assertTrue(handler.canHandle(inputMock));
-
-	}
-
-	@Test
-	public void testHandle() {
-	}
+//
+//	private AntwortHandler handler;
+//	private LaunchRequestHandler lrh = new LaunchRequestHandler();
+//	
+//	@Before
+//	public void setup() {
+//		handler = new AntwortHandler(lrh);
+//	}
+//
+//	@Test
+//	public void testCanHandle() {
+//		final HandlerInput inputMock = Mockito.mock(HandlerInput.class);
+//		when(inputMock.matches(any())).thenReturn(true);
+//		assertTrue(handler.canHandle(inputMock));
+//
+//	}
+//
+//	@Test
+//	public void testHandle() {
+//	}
 
 }
