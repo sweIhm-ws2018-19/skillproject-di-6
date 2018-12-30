@@ -38,6 +38,7 @@ public final class PhrasesAndConstants {
 	public static final String EXAMPLE_CHANGE_CATEGORY = "Sage zum Beispiel, Aendere die Kategorie zu Logik.";
 	public static final String EXAMPLE_LEVEL = "Sage zum Beispiel, Aendere das Level Mittel.";
 	public static final String EXAMPLE_CHANGE_LEVEL = "Sage zum Beispiel, Ich waehle lieber das Level Einfach.";
+	public static final String EXAMPLE_BACK_PACKING = "Bitte fange deine Saetze an mit, Ich nehme mit. ";
 
 	public static final String MAX_PLAYERNUMBERS = String.format("Es koennen maximal %s Spieler spielen.",
 			MAX_NUMBER_OF_PLAYERS);
@@ -67,11 +68,18 @@ public final class PhrasesAndConstants {
 	public static final String REPROMPT_DONT_UNDERSTAND = "Das habe ich leider nicht verstanden.";
 
 	public static final String START = "Sage Los um zu beginnen.";
-	public static final String START_BACK_PACKING = "Ich starte gleich. Ich packe meinen Koffer und nehmen mit, ..."; // TODO
+	public static final String START_BACK_PACKING_MORE_PLAYER = EXAMPLE_BACK_PACKING;
+	public static final String START_BACK_PACKING_ONE_PLAYER = EXAMPLE_BACK_PACKING
+			+ "Ich starte gleich. Ich packe meinen Koffer und nehmen mit,";
+	public static final String RIGHT_PACKING = "Alles richtig.";
+	public static final String WRONG_PACKING = "Das ist leider falsch. Das richtige Wort ist";
+	public static final String ADD_ONE_ITEM = "Bitte fuege eine Sache hinzu.";
 
 	public static final String RIGHT_ANSWER = "Deine Antwort ist richtig.";
-	public static final String WRONG_ANSWER = "Deine Antwort ist leider falsch. Die richtige Antwort ist, ";
-
+	public static final String WRONG_ANSWER = "Deine Antwort ist leider falsch. Die richtige Antwort ist,";
+	
+	public static final String HIGHSCORE = "Dein highscore ist ";
+	
 	public static final String GOOD_BYE = "Auf Wiedersehen. Trainiere bald wieder";
 
 }
