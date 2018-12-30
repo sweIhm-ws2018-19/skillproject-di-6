@@ -3,65 +3,64 @@ package braingain.handlers;
 import static com.amazon.ask.request.Predicates.intentName;
 
 import java.util.Collections;
-import java.util.Map;
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 import com.amazon.ask.dispatcher.request.handler.RequestHandler;
-import com.amazon.ask.model.Intent;
 import com.amazon.ask.model.IntentRequest;
-import com.amazon.ask.model.Request;
 import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
 
-import braingain.modell.Spielrunde;
+import braingain.modell.Gameround;
 import phrasesAndConstants.PhrasesAndConstants;
 
-public class AntwortHandler implements RequestHandler {
+public class AnswerHandler implements RequestHandler {
 
-	public static final Object ANTWORT = "antwort";
-	private LaunchRequestHandler lrh;
-	private Spielrunde round;
+	private Gameround round;
 
-	public AntwortHandler(LaunchRequestHandler lrh) {
-		this.lrh = lrh;
-		this.round = lrh.round;
+	public AnswerHandler(Gameround round) {
+		this.round = round;
 	}
 
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(intentName("AntwortIntent"));
+		return input.matches(intentName(PhrasesAndConstants.INTENT_ANSWER));
 	}
 
 	public Optional<Response> handle(HandlerInput input) {
-		
 		String speechText;
-		Request request = input.getRequestEnvelope().getRequest();
-		IntentRequest intentRequest = (IntentRequest) request;
-		Intent intent = intentRequest.getIntent();
-		Map<String, Slot> slots = intent.getSlots();
-
+		Slot answerSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()
+				.get(PhrasesAndConstants.LIST_OF_ANTWORT);
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
 
-		Slot antwortSlot = slots.get(ANTWORT);
-
-		if (antwortSlot != null) {
-			String antwort = antwortSlot.getValue();
-			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(antwort, ANTWORT));
+		if (answerSlot != null) {
+			// TODO aendern
+			String antwort = answerSlot.getValue();
+			input.getAttributesManager()
+					.setSessionAttributes(Collections.singletonMap(antwort, PhrasesAndConstants.LIST_OF_ANTWORT));
 
 			if (round.checkAnswer(antwort)) {
 				speechText = PhrasesAndConstants.RIGHT_ANSWER;
 			} else {
-				speechText = String.format(PhrasesAndConstants.WRONG_ANSWER + " Die richtige Antwort ist %s",
-						round.getRightAnswer());
+				speechText = PhrasesAndConstants.WRONG_ANSWER + round.getRightAnswer();
 			}
-			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
-					.withShouldEndSession(false);
+			round.increaseQuestionsAsked();
+			
+			if(round.getQuestionsAsked() == round.getMaxQuestions()) {
+				speechText += roundIsOver();
+			}
+			
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText);
 		} else {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_ANSWER)
-					.withSpeech(PhrasesAndConstants.REPROMPT_ANSWER).withShouldEndSession(false);
+					.withSpeech(PhrasesAndConstants.REPROMPT_ANSWER);
 		}
-		return responseBuilder.build();
+		return responseBuilder.withShouldEndSession(false).build();
 	}
-
+	
+	private String roundIsOver() {
+		//TODO what to do, when the round is over
+		return null;
+	}
+	
 }
