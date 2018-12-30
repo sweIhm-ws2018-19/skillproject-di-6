@@ -43,7 +43,15 @@ public class SetCategoryHandler implements RequestHandler {
 			speechText = round.getNumberOfPlayers() == 1 ? "Du hast " : "Ihr habt ";
 			speechText += String.format("die Kategorie %s gewaehlt. ", round.getCategory().toString());
 			if (round.getCategory() == Category.KOFFERPACKEN) {
-				speechText += PhrasesAndConstants.START_BACK_PACKING;
+				round.setNextRandomCurrentPlayer();
+				if (round.getNumberOfPlayers() == 1) {
+					String item = round.getRandomBackPackWordForAlexa();
+					round.addItemToBackPack(item);
+					speechText += String.format("%s %s.", PhrasesAndConstants.START_BACK_PACKING_ONE_PLAYER, round.getBackPackingAt(0));
+				} else {
+					speechText += String.format("%s %s startet.", PhrasesAndConstants.START_BACK_PACKING_MORE_PLAYER,
+							round.getCurrentPlayer().getName());
+				}
 			} else {
 				speechText += PhrasesAndConstants.LIST_ALL_LEVELS;
 			}
