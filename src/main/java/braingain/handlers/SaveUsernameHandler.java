@@ -25,91 +25,60 @@ import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
 
-import braingain.modell.Kategorie;
-import braingain.modell.Spieler;
-import braingain.modell.Spielrunde;
+import braingain.modell.Gameround;
+import braingain.modell.Player;
 import phrasesAndConstants.PhrasesAndConstants;
 
-public class UsernamenSpeichernHandler implements RequestHandler {
+public class SaveUsernameHandler implements RequestHandler {
 
-	public static final String LIST_OF_NAMES = "username";
-	private LaunchRequestHandler lrh;
-	private Spielrunde round;
+	private Gameround round;
 
-	public UsernamenSpeichernHandler(LaunchRequestHandler lrh) {
-		this.lrh = lrh;
-		this.round = lrh.round;
+	public SaveUsernameHandler(Gameround round) {
+		this.round = round;
 	}
 
 	@Override
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(intentName("UsernamenSpeichernIntent"));
+		return input.matches(intentName(PhrasesAndConstants.INTENT_SAVE_USERNAME));
 	}
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
 		String speechText;
-
 		Slot selectedNameSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()
-				.get(LIST_OF_NAMES);
-
+				.get(PhrasesAndConstants.LIST_OF_NAMES);
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
 
-		if (selectedNameSlot != null && round.getNumberOfPlayers() != 0 && round.getNumberOfPlayers() != round.getPlayer().length
-				&& round.getCategory() == null && round.getLevel() == null) {
+		if (selectedNameSlot != null && round.getNumberOfPlayers() != 0
+				&& round.getPlayersCounted() < round.getNumberOfPlayers()) {
 			String username = selectedNameSlot.getValue();
-			input.getAttributesManager().setSessionAttributes(Collections.singletonMap(username, LIST_OF_NAMES));
-			round.addPlayer(new Spieler(username));
+			input.getAttributesManager()
+					.setSessionAttributes(Collections.singletonMap(username, PhrasesAndConstants.LIST_OF_NAMES));
+			round.addPlayer(new Player(username));
 
 			if (round.getNumberOfPlayers() == 1) {
-				speechText = String.format("Du heisst %s. ", username) + "Waehle nun deine Kategorie. Es gibt "
-						+ Kategorie.getKategorien();
-			} else if (round.getPlayersCounted() < round.getNumberOfPlayers()) {
-				round.increasePlayersCounted();
-				speechText = String.format("Spieler %s heisst %s, bitte sagt mir nun den naechsten Namen.",
-						round.getPlayersCounted() - 1, username);
+				speechText = String.format("Du heisst %s. %s", username, PhrasesAndConstants.LIST_ALL_CATEGORIES);
 			} else {
-				speechText = String.format("Spieler %s heisst %s. Das sind nun alle Spieler. Eure Namen sind: ",
-						round.getPlayersCounted(), username);
-				switch (round.getNumberOfPlayers()) {
-				case 2:
-					speechText += round.getPlayer()[0] + " und " + round.getPlayer()[1] + ". ";
-					break;
-				case 3:
-					speechText += round.getPlayer()[0] + ", " + round.getPlayer()[1] + " und " + round.getPlayer()[2] + ". ";
-					break;
-				case 4:
-					speechText += round.getPlayer()[0] + ", " + round.getPlayer()[1] + ", " + round.getPlayer()[2] + " und "
-							+ round.getPlayer()[3] + ". ";
-					break;
-				default:
-					speechText += "Fehler.";
-					break;
+				round.increasePlayerCount();
+				speechText = String.format("Spieler %s heisst %s. ", round.getPlayersCounted(), username);
+
+				if (round.getPlayersCounted() < round.getNumberOfPlayers()) {
+					speechText += PhrasesAndConstants.SAY_NEXT_NAME;
+				} else if (round.getPlayersCounted() == round.getNumberOfPlayers()) {
+					speechText += round.getPlayerNames() + PhrasesAndConstants.LIST_ALL_CATEGORIES;
 				}
-				
-				speechText += "Waehlt nun eure Kategorie. Es gibt " + Kategorie.getKategorien();
 			}
-			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText)
-					.withShouldEndSession(false);
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText);
 		} else if (round.getNumberOfPlayers() == 0) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_NUMBER_OF_PLAYERS)
-					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS).withShouldEndSession(false);
-		} else if (round.getCategory() == null) {
-			responseBuilder
-					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
-							PhrasesAndConstants.SET_NEW_NAME + " " + PhrasesAndConstants.SET_CATEGORY)
-					.withSpeech(PhrasesAndConstants.SET_NEW_NAME + " " + PhrasesAndConstants.SET_CATEGORY)
-					.withShouldEndSession(false);
-		} else if (round.getLevel() == null) {
-			responseBuilder
-					.withSimpleCard(PhrasesAndConstants.CARD_TITLE,
-							PhrasesAndConstants.SET_NEW_NAME + " " + PhrasesAndConstants.SET_LEVEL)
-					.withSpeech(PhrasesAndConstants.SET_NEW_NAME + " " + PhrasesAndConstants.SET_LEVEL)
-					.withShouldEndSession(false);
+					.withSpeech(PhrasesAndConstants.SET_NUMBER_OF_PLAYERS);
+		} else if (round.getPlayersCounted() >= round.getNumberOfPlayers()) {
+			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.ALL_PLAYERNAMES_SET)
+					.withSpeech(PhrasesAndConstants.ALL_PLAYERNAMES_SET);
 		} else {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_SAVE_USERNAME)
-					.withSpeech(PhrasesAndConstants.REPROMPT_SAVE_USERNAME).withShouldEndSession(false);
+					.withSpeech(PhrasesAndConstants.REPROMPT_SAVE_USERNAME);
 		}
-		return responseBuilder.build();
+		return responseBuilder.withShouldEndSession(false).build();
 	}
 }
