@@ -29,7 +29,7 @@ public class BackPackingHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String speechText = "BackPackingHandler";
+		String speechText = null;
 		Slot backPackSlot = ((IntentRequest) input.getRequestEnvelope().getRequest()).getIntent().getSlots()
 				.get(PhrasesAndConstants.LIST_OF_BACK_PACKING);
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
@@ -114,6 +114,10 @@ public class BackPackingHandler implements RequestHandler {
 //				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.ADD_ONE_ITEM)
 //						.withSpeech(PhrasesAndConstants.ADD_ONE_ITEM);
 //			}
+			if(speechText == null) {
+				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.ADD_ONE_ITEM)
+				.withSpeech(PhrasesAndConstants.ADD_ONE_ITEM);
+			}
 		} else {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_DONT_UNDERSTAND)
 					.withSpeech(PhrasesAndConstants.REPROMPT_DONT_UNDERSTAND);
