@@ -109,10 +109,11 @@ public class BackPackingHandler implements RequestHandler {
 					break;
 				}
 			}
-			if (index == round.getBackPackSize()) {
-				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.ADD_ONE_ITEM)
-						.withSpeech(PhrasesAndConstants.ADD_ONE_ITEM);
-			}
+			//TODO funktioniert nicht im mehrspieler
+//			if (index == round.getBackPackSize()) {
+//				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.ADD_ONE_ITEM)
+//						.withSpeech(PhrasesAndConstants.ADD_ONE_ITEM);
+//			}
 		} else {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_DONT_UNDERSTAND)
 					.withSpeech(PhrasesAndConstants.REPROMPT_DONT_UNDERSTAND);
