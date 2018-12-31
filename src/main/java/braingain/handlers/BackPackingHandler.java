@@ -82,7 +82,7 @@ public class BackPackingHandler implements RequestHandler {
 //						.withSpeech(speechText);
 					} else {
 						round.setNextRandomCurrentPlayer();
-						speechText = String.format("%s %s. Nun kommt %s", PhrasesAndConstants.RIGHT_PACKING, testWord,
+						speechText = String.format("%s du hast %s. Nun kommt %s", PhrasesAndConstants.RIGHT_PACKING, testWord,
 								round.getCurrentPlayer());
 						responseBuilder.withSpeech(speechText).withSimpleCard(PhrasesAndConstants.CARD_TITLE,
 								speechText);
