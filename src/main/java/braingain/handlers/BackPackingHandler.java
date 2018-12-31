@@ -82,7 +82,7 @@ public class BackPackingHandler implements RequestHandler {
 //						.withSpeech(speechText);
 					} else {
 						round.setNextRandomCurrentPlayer();
-						speechText = String.format("%s du hast %s. Nun kommt %s", PhrasesAndConstants.RIGHT_PACKING, testWord,
+						speechText = String.format("%s du hast %s hinzugefuegt. Nun kommt %s", PhrasesAndConstants.RIGHT_PACKING, testWord,
 								round.getCurrentPlayer());
 						responseBuilder.withSpeech(speechText).withSimpleCard(PhrasesAndConstants.CARD_TITLE,
 								speechText);
@@ -95,7 +95,7 @@ public class BackPackingHandler implements RequestHandler {
 					// Wrong
 					// TODO Maybe add that he only forgot one word
 					// TODO Say the Highscore, when playing alone
-					speechText = String.format("%s %s. Du hast gesagt %s. ", PhrasesAndConstants.WRONG_PACKING,
+					speechText = String.format("%s %s. Du hast %s hinzugefuegt. ", PhrasesAndConstants.WRONG_PACKING,
 							round.getBackPackingAt(index), testWord);
 					if (round.getNumberOfPlayers() == 1) {
 						if (round.setBackPackHighscore()) {
