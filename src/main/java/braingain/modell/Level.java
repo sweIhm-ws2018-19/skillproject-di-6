@@ -1,41 +1,50 @@
 package braingain.modell;
 
-//TODO: Auto-generated Javadoc
 /**
  * The Enum Level.
  */
 public enum Level {
 
-	/** Level einfach */
-	EINFACH(new String[] { "Einfach", "einfach", "simpel" }),
+	/** Level Einfach */
+	EINFACH("Einfach"),
 
-	/** Level mittel. */
-	MITTEL(new String[] { "Mittel", "mittel", "mittelschwer" }),
+	/** Level Mittel. */
+	MITTEL("Mittel"),
 
-	/** Level anspruchsvoll. */
-	Schwer(new String[] { "Schwer", "schwer", "schwierig" }),
+	/** Level Schwer. */
+	SCHWER("Schwer"),
 
-	/** Level schwer. */
-	Experte(new String[] { "Experte", "experte", "Expert", });
+	/** Level Experte. */
+	EXPERTE("Experte");
 
 	/** Welche Namen es noch haben kann. */
-	private String[] value;
+	private String value;
 
 	/**
 	 * Instantiates a new level.
 	 *
 	 * @param kategorien the kategorien
 	 */
-	Level(String[] kategorien) {
-		this.value = kategorien;
+	Level(String level) {
+		this.value = level;
 	}
-
+	
+	public static Level getLevel(String s) {
+		Level level = null;
+		for (Level levelLoop : Level.values()) {
+			if (s.equals(levelLoop.value)) {
+				level = levelLoop;
+			}
+		}
+		return level;
+	}
+	
 	/**
 	 * Value.
 	 *
 	 * @return alle Values
 	 */
-	public String[] value() {
+	public String value() {
 		return value;
 	}
 
@@ -45,10 +54,10 @@ public enum Level {
 	 * @see java.lang.Enum#toString()
 	 */
 	public String toString() {
-		return value[0];
+		return value;
 	}
 
-	public static String getLevels() {
+	public static String getAllLevels() {
 		String s = "";
 		int l = values().length;
 		for (int i = 0; i < l - 2; i++) {
