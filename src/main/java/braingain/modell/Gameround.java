@@ -81,13 +81,12 @@ public class Gameround {
 	}
 
 	/**
-	 * Gets the right answer.
+	 * Gets the right answer, of the current Question.
 	 *
-	 * @return the right answer, a random one if there are more
+	 * @return the right answer, of the Current Question
 	 */
 	public String getRightAnswer() {
-		ArrayList<String> answers = currentQuestion.getAnswersArrayList();
-		return answers.get((int) (Math.random()*answers.size()));
+		return this.currentQuestion.getRightAnswer();
 	}
 
 	/**
