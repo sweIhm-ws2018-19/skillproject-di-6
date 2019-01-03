@@ -41,7 +41,6 @@ public class BackPackingHandler implements RequestHandler {
 			int index = 0;
 
 			for (int i = 0; i < words.length; i++) {
-
 				// Get the word out of the String
 				if (contains(words[i])) {
 					testWord = words[i] + " " + words[i + 1];
