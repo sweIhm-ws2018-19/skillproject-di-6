@@ -47,7 +47,9 @@ public final class PhrasesAndConstants {
 	public static final String HELP = "Mit mir wird dein Gehirn trainiert. Zuerst muss ich wissen wie viele Leute spielen, dann Welche Kategorie ihr waehlt und zuletzt noch welches Level.";
 	public static final String PLAY_ALONE = "OK, Du spielst alleine. Sage mir nun bitte deinen Namen. ";
 	public static final String PLAY_WITH_MORE = "Sagt mir nun nacheinander eure Namen. ";
+	public static final String PLAYERNAMES = "Das sind nun alle Spieler. Eure Namen sind: ";
 	public static final String SAY_NEXT_NAME = "Bitte sagt mir nun den naechsten Namen. ";
+	public static final String ALEXA_BACK_PACK = "Ich packe meinen Koffer und nehme mit";
 
 	public static final String LIST_ALL_CATEGORIES = "Waehle nun die Kategorie. Es gibt " + Category.getAllCategories();
 	public static final String LIST_ALL_LEVELS = "Waehle nun das Level. Es gibt " + Level.getAllLevels();
