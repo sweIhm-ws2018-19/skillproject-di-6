@@ -36,13 +36,6 @@ public class BackPackingHandler implements RequestHandler {
 
 		if (backPackSlot != null) {
 			String backPack = backPackSlot.getValue();
-			// TODO now you have all values and need to iterate and find out what someone
-			// wants to take and then test if all is correct and when so, add the last one
-			// he said in round. super English
-
-			// Der String hat keine Kommas, sollte ein Spieler sage "einen Stuhl", dann muss
-			// man nach "ein" testen, sagt er nur "Stuhl", dann muss man nicht testen
-
 			String[] words = backPack.split("\\W+");
 			String testWord = "";
 			int index = 0;
@@ -65,7 +58,6 @@ public class BackPackingHandler implements RequestHandler {
 					testWord = words[i];
 				}
 
-				// Test the word and make response
 				if (index == round.getBackPackSize()) {
 					// last Word
 					round.addItemToBackPack(testWord);
@@ -78,8 +70,8 @@ public class BackPackingHandler implements RequestHandler {
 						responseBuilder.withSpeech(speechText).withSimpleCard(PhrasesAndConstants.CARD_TITLE,
 								speechText);
 						// for debbunging ^
-//						responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.RIGHT_PACKING)
-//						.withSpeech(speechText);
+						// responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.RIGHT_PACKING)
+						// .withSpeech(speechText);
 					} else {
 						round.setNextRandomCurrentPlayer();
 						speechText = String.format("%s du hast %s hinzugefuegt. Nun kommt %s", PhrasesAndConstants.RIGHT_PACKING, testWord,
@@ -89,12 +81,12 @@ public class BackPackingHandler implements RequestHandler {
 					}
 					index++;
 				} else if (round.checkWord(testWord, index)) {
-					// Right
+					// Right said
 					index++;
 				} else {
-					// Wrong
+					// Wrong said
 					// TODO Maybe add that he only forgot one word
-					// TODO Say the Highscore, when playing alone
+					
 					speechText = String.format("%s %s. Du hast %s hinzugefuegt. ", PhrasesAndConstants.WRONG_PACKING,
 							round.getBackPackingAt(index), testWord);
 					if (round.getNumberOfPlayers() == 1) {
@@ -109,11 +101,6 @@ public class BackPackingHandler implements RequestHandler {
 					break;
 				}
 			}
-			//TODO funktioniert nicht im mehrspieler
-//			if (index == round.getBackPackSize()) {
-//				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.ADD_ONE_ITEM)
-//						.withSpeech(PhrasesAndConstants.ADD_ONE_ITEM);
-//			}
 			if(speechText == null) {
 				responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.ADD_ONE_ITEM)
 				.withSpeech(PhrasesAndConstants.ADD_ONE_ITEM);
@@ -127,7 +114,7 @@ public class BackPackingHandler implements RequestHandler {
 	}
 
 	private boolean contains(String s) {
-		return s.equals("ein") || s.equals("eine") || s.equals("einen");
+		return s.equals("ein") || s.equals("eine") || s.equals("einen") || s.equals("einem");
 	}
 
 }
