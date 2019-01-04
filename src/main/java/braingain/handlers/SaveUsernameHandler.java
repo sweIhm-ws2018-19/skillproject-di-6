@@ -25,6 +25,7 @@ import com.amazon.ask.model.Response;
 import com.amazon.ask.model.Slot;
 import com.amazon.ask.response.ResponseBuilder;
 
+import braingain.modell.Datenbank;
 import braingain.modell.Gameround;
 import braingain.modell.Player;
 import phrasesAndConstants.PhrasesAndConstants;
@@ -51,7 +52,7 @@ public class SaveUsernameHandler implements RequestHandler {
 
 		if (selectedNameSlot != null && round.getNumberOfPlayers() != 0
 				&& round.getPlayersCounted() < round.getNumberOfPlayers()) {
-			Datenbank db = new Datenbank();
+			Datenbank db = new Datenbank(round);
 			String username = selectedNameSlot.getValue();
 			input.getAttributesManager()
 					.setSessionAttributes(Collections.singletonMap(username, PhrasesAndConstants.LIST_OF_NAMES));
