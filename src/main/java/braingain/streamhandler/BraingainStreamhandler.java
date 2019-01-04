@@ -16,6 +16,7 @@ package braingain.streamhandler;
 import com.amazon.ask.Skill;
 import com.amazon.ask.SkillStreamHandler;
 import com.amazon.ask.Skills;
+import com.amazon.ask.exception.PersistenceException;
 
 import braingain.handlers.AnswerHandler;
 import braingain.handlers.AskQuestionHandler;
@@ -35,7 +36,7 @@ public class BraingainStreamhandler extends SkillStreamHandler {
 	
 	private static Gameround round;
 	
-private static Skill getSkill() {
+private static Skill getSkill() throws PersistenceException{
 	round = new Gameround();
 	return Skills.standard()
 		.addRequestHandlers(
@@ -51,10 +52,10 @@ private static Skill getSkill() {
 			new SetCategoryHandler(round),
 			new SetLevelHandler(round),
 			new SetNumberOfPlayersHandler(round))
-			.withTableName("HighScore")
-			.withAutoCreateTable(true)
-			.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
-			.build();
+//		.withTableName("Highscore")
+//		.withAutoCreateTable(true)
+		.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
+		.build();
 }
 
 	public BraingainStreamhandler() {
