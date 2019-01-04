@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -23,7 +22,8 @@ public class Gameround {
 	private ArrayList<String> backPacking;
 	
 	/** The ArrayListArray for the Questions. */
-	private ArrayList<Question>[] allNeededQuestion = new ArrayList<Question>()[2];
+	private ArrayList<Question> questionsAsked;
+	private ArrayList<Question> questionsNotAsked;
 	
 	/** The current player. */
 	private Player currentPlayer;
@@ -37,7 +37,7 @@ public class Gameround {
 	/** The level. */
 	private Level level;
 	
-	private int numberOfPlayers = 0, playersCounted = 0, questionsAsked = 0, maxQuestions = 0;
+	private int numberOfPlayers = 0, playersCounted = 0, questionsAskedInt = 0, maxQuestions = 0;
 	
 	/**
 	 * Instantiates a new gameround.
@@ -45,7 +45,8 @@ public class Gameround {
 	public Gameround() {
 		this.player = new ArrayList<Player>();
 		this.backPacking = new ArrayList<String>();
-		this.allNeededQuestion = new ArrayList<Question>()[2];
+		this.questionsAsked = new ArrayList<Question>();
+		this.questionsNotAsked = new ArrayList<Question>();
 	}
 
 	/**
@@ -329,7 +330,7 @@ public class Gameround {
 	 * Increases questions asked by one.
 	 */
 	public void increaseQuestionsAsked() {
-		this.questionsAsked++;
+		this.questionsAskedInt++;
 	}
 
 	/**
@@ -338,7 +339,7 @@ public class Gameround {
 	 * @return the Number of Questions that have already been asked.
 	 */
 	public int getQuestionsAsked() {
-		return this.questionsAsked;
+		return this.questionsAskedInt;
 	}
 
 	/**
@@ -381,7 +382,12 @@ public class Gameround {
 	 * Sets random the next current question.
 	 */
 	public void setRandomNextCurrentQuestion() {
-		if()
+		if(!questionsNotAsked.isEmpty()) {
+			this.currentQuestion = questionsNotAsked.get((int)(Math.random() * questionsNotAsked.size()));
+			this.questionsAsked.add(currentQuestion);
+		}else {
+			this.currentQuestion = questionsAsked.get((int)(Math.random() * questionsAsked.size()));
+		}
 	}
 
 	/**
@@ -393,11 +399,9 @@ public class Gameround {
 		try {
 			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(pathname));
 			// TODO unchecked Cast
-			allNeededQuestions = (HashMap<Question, Integer>) objectInputStream.readObject();
+			// allNeededQuestions = (HashMap<Question, Integer>) objectInputStream.readObject();
 			objectInputStream.close();
 		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -457,7 +461,7 @@ public class Gameround {
 		this.level = null;
 		this.numberOfPlayers = 0;
 		this.playersCounted = 0;
-		this.questionsAsked = 0;
+		this.questionsAskedInt = 0;
 		this.maxQuestions = 0;
 	}
 
