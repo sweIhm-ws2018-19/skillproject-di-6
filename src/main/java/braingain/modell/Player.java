@@ -22,7 +22,7 @@ public class Player {
 	
 	/** The number of questions asked. */
 	private int numberOfQuestionsAsked = 0;
-
+	
 	/**
 	 * Instantiates a new player.
 	 *
@@ -30,19 +30,24 @@ public class Player {
 	 * @param points the points of the Player
 	 * @param highscore the highscore of the Player
 	 */
+	
 	public Player(String name, int points, int highscore) {
 		this.name = name;
 		this.points = points;
 		this.highscore = highscore;
 	}
-
+	
+	public Player(String name, int highscore) {
+		new Player(name, 0, highscore);
+	}
+	
 	/**
 	 * Instantiates a new player.
 	 *
 	 * @param name the name of the Player
 	 */
 	public Player(String name) {
-		this.name = name;
+		new Player(name, 0, 0);
 	}
 
 	/**
