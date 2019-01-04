@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -21,8 +22,8 @@ public class Gameround {
 	/** The ArrayList for the backPackingGame. */
 	private ArrayList<String> backPacking;
 	
-	/** The HashMap for the Questions. */
-	private HashMap<Question, Integer> allNeededQuestions;
+	/** The ArrayListArray for the Questions. */
+	private ArrayList<Question>[] allNeededQuestion = new ArrayList<Question>()[2];
 	
 	/** The current player. */
 	private Player currentPlayer;
@@ -43,8 +44,8 @@ public class Gameround {
 	 */
 	public Gameround() {
 		this.player = new ArrayList<Player>();
-		this.allNeededQuestions = new HashMap<Question, Integer>();
 		this.backPacking = new ArrayList<String>();
+		this.allNeededQuestion = new ArrayList<Question>()[2];
 	}
 
 	/**
@@ -76,8 +77,7 @@ public class Gameround {
 	 * @return true, if correct
 	 */
 	public boolean checkAnswer(String answer) {
-		// TODO: kontrolliere die Antwort und aktualisiere in Spieler den Punktestand.
-		return false;
+		return this.currentQuestion.checkAnswer(answer);
 	}
 
 	/**
@@ -243,7 +243,7 @@ public class Gameround {
 	 * @return true, if there is a new Highscore to be set
 	 */
 	public boolean setHighscore() {
-		return player.get(0).setHighscore();
+		return this.player.get(0).setHighscore();
 	}
 	
 	/**
@@ -252,7 +252,7 @@ public class Gameround {
 	 * @return true, if there is a new Backpack Highscore to be set
 	 */
 	public boolean setBackPackHighscore() {
-		return player.get(0).setBackPackHighscore();
+		return this.player.get(0).setBackPackHighscore();
 	}
 	
 	/**
@@ -381,7 +381,7 @@ public class Gameround {
 	 * Sets random the next current question.
 	 */
 	public void setRandomNextCurrentQuestion() {
-		// TODO Get a new Question with an integervalue of 0, no idea how to do this
+		if()
 	}
 
 	/**

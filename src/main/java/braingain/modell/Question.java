@@ -1,6 +1,7 @@
 package braingain.modell;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * The Class Question.
@@ -46,6 +47,16 @@ public class Question {
 	public Question(String question, ArrayList<String> answers) {
 		this.question = question;
 		this.answers = answers;
+	}
+	
+	public boolean checkAnswer(String answer) {
+		Iterator<String> it = answers.iterator();
+		while(it.hasNext()) {
+			if(it.next().toLowerCase().contains(answer.toLowerCase())) {
+				return true;
+			};
+		}
+		return false;
 	}
 	
 	/**
