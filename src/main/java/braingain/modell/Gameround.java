@@ -5,7 +5,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 
 import phrasesAndConstants.PhrasesAndConstants;
@@ -21,8 +20,10 @@ public class Gameround {
 	/** The ArrayList for the backPackingGame. */
 	private ArrayList<String> backPacking;
 	
-	/** The ArrayListArray for the Questions. */
+	/** The ArrayList for the Questions Asked. */
 	private ArrayList<Question> questionsAsked;
+	
+	/** The ArrayList for the Questions not Asked. */
 	private ArrayList<Question> questionsNotAsked;
 	
 	/** The current player. */
@@ -398,7 +399,7 @@ public class Gameround {
 				+ PhrasesAndConstants.QUESTION_ENDING;
 		try {
 			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(pathname));
-			// TODO unchecked Cast
+			// TODO read in with Arraylist
 			// allNeededQuestions = (HashMap<Question, Integer>) objectInputStream.readObject();
 			objectInputStream.close();
 		} catch (IOException e) {
