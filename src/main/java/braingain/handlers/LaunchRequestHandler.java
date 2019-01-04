@@ -11,8 +11,9 @@
      the specific language governing permissions and limitations under the License.
 */
 
-package main.java.braingain.handlers;
+package braingain.handlers;
 
+import static com.amazon.ask.request.Predicates.intentName;
 import static com.amazon.ask.request.Predicates.requestType;
 
 import java.util.Optional;
@@ -22,24 +23,32 @@ import com.amazon.ask.dispatcher.request.handler.RequestHandler;
 import com.amazon.ask.model.LaunchRequest;
 import com.amazon.ask.model.Response;
 
-import main.java.braingain.Modell.Spielrunde;
+import braingain.modell.Gameround;
+import phrasesAndConstants.PhrasesAndConstants;
 
 public class LaunchRequestHandler implements RequestHandler {
-	
-	private Spielrunde sr;
-	
-	public LaunchRequestHandler(Spielrunde sr){
-		this.sr = sr;
+
+	Gameround round;
+
+	public LaunchRequestHandler(Gameround round) {
+		this.round = round;
 	}
+
+	@Override
 	public boolean canHandle(HandlerInput input) {
-		return input.matches(requestType(LaunchRequest.class));
+
+		if (input.matches(intentName(PhrasesAndConstants.INTENT_NEW_ROUND))) {
+			round.reset();
+		}
+		return input.matches(requestType(LaunchRequest.class))
+				|| input.matches(intentName(PhrasesAndConstants.INTENT_NEW_ROUND));
 	}
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String speechText = "Hallo. Mit mir trainierst du dein Gehirn. Bitte sage mir, mit wie vielen Spielern du spielst. Es koennen maximal 4 Spieler spielen.";
-		String repromptText = "Bitte sage mir wie viele Leute spielen.";
-		return input.getResponseBuilder().withSimpleCard("BrainSession", speechText).withSpeech(speechText)
-				.withReprompt(repromptText).build();
+		round.reset();
+		return input.getResponseBuilder().withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.WELCOME)
+				.withSpeech(PhrasesAndConstants.WELCOME).withReprompt("Necessary").build();
 	}
+
 }
