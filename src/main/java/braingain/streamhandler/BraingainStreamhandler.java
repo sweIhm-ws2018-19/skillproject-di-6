@@ -36,7 +36,7 @@ public class BraingainStreamhandler extends SkillStreamHandler {
 	
 	private static Gameround round;
 	
-private static Skill getSkill() throws PersistenceException{
+private static Skill getSkill() {
 	round = new Gameround();
 	return Skills.standard()
 		.addRequestHandlers(
