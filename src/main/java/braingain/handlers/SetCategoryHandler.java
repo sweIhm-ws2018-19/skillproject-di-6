@@ -3,6 +3,7 @@ package braingain.handlers;
 import static com.amazon.ask.request.Predicates.intentName;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.Optional;
 
 import com.amazon.ask.dispatcher.request.handler.HandlerInput;
@@ -14,6 +15,8 @@ import com.amazon.ask.response.ResponseBuilder;
 
 import braingain.modell.Category;
 import braingain.modell.Gameround;
+import braingain.modell.MemoryTraining;
+import braingain.modell.Player;
 import phrasesAndConstants.PhrasesAndConstants;
 
 public class SetCategoryHandler implements RequestHandler {
@@ -42,15 +45,33 @@ public class SetCategoryHandler implements RequestHandler {
 			round.setCategory(Category.getCategory(choosencategoryString));
 			speechText = round.getNumberOfPlayers() == 1 ? "Du hast " : "Ihr habt ";
 			speechText += String.format("die Kategorie %s gewaehlt. ", round.getCategory().toString());
-			if (round.getCategory() == Category.KOFFERPACKEN) {
+			Iterator<Player> it = round.getPlayerArrayList().iterator();
+			while(it.hasNext()) {
+				speechText += it.next().getName();
+			}
+			
+			if (round.getCategory() == Category.GEDAECHTNISTRAINING) {
+				round.setMemoryTraining(MemoryTraining.getRandomMemoryTraining());
 				round.setNextRandomCurrentPlayer();
-				if (round.getNumberOfPlayers() == 1) {
-					String item = round.getRandomBackPackWordForAlexa();
-					round.addItemToBackPack(item);
-					speechText += String.format("%s %s.", PhrasesAndConstants.START_BACK_PACKING_ONE_PLAYER, round.getBackPackingAt(0));
-				} else {
-					speechText += String.format("%s %s startet.", PhrasesAndConstants.START_BACK_PACKING_MORE_PLAYER,
-							round.getCurrentPlayer().getName());
+				
+				switch(round.getMemoryTraining()) {
+				case KOFFERPACKEN:
+					if (round.getNumberOfPlayers() == 1) {
+						String item = round.getRandomBackPackWordForAlexa();
+						round.addItemToBackPack(item);
+						speechText += String.format("%s %s.", PhrasesAndConstants.START_BACK_PACKING_ONE_PLAYER, round.getBackPackingAt(0));
+					} else {
+						speechText += String.format("%s %s startet.", PhrasesAndConstants.START_BACK_PACKING_MORE_PLAYER,
+								round.getCurrentPlayer().getName());
+					}
+					break;
+				case WORTDOMINO:
+					speechText += "Jetzt spielst du Doppelwortkette " + round.getCurrentPlayer().getName();
+					//TODO what happens when you play WortDomino
+					break;
+				default:
+					break;
+				
 				}
 			} else {
 				speechText += PhrasesAndConstants.LIST_ALL_LEVELS;

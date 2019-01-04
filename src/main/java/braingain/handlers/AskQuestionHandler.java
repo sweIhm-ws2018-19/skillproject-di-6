@@ -47,7 +47,7 @@ public class AskQuestionHandler implements RequestHandler {
 		} else if (round.getCategory() == null) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_CATEGORY)
 					.withSpeech(PhrasesAndConstants.SET_CATEGORY);
-		} else if (round.getLevel() == null && round.getCategory() != Category.KOFFERPACKEN) {
+		} else if (round.getLevel() == null && round.getCategory() != Category.GEDAECHTNISTRAINING) {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.SET_LEVEL)
 					.withSpeech(PhrasesAndConstants.SET_LEVEL);
 		} else {

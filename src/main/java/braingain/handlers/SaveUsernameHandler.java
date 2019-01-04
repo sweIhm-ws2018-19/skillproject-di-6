@@ -52,7 +52,8 @@ public class SaveUsernameHandler implements RequestHandler {
 
 		if (selectedNameSlot != null && round.getNumberOfPlayers() != 0
 				&& round.getPlayersCounted() < round.getNumberOfPlayers()) {
-			Datenbank db = new Datenbank(round);
+			//Datenbank db = new Datenbank(round);
+			//TODO Namen werden nicht gespeichert
 			String username = selectedNameSlot.getValue();
 			input.getAttributesManager()
 					.setSessionAttributes(Collections.singletonMap(username, PhrasesAndConstants.LIST_OF_NAMES));

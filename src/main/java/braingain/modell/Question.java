@@ -11,6 +11,9 @@ public class Question {
 	/** The question. */
 	private String question;
 	
+	/** The answer. */
+	private String answer;
+	
 	/** The answers of the Question. */
 	private ArrayList<String> answers = new ArrayList<String>();
 	

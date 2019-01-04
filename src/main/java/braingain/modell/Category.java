@@ -17,8 +17,7 @@ public enum Category {
 	/** Kategorie gedaechtnistraining. */
 	GEDAECHTNISTRAINING("Gedaechtnistraining"),
 
-	/** Kategorie Koffer packen. */
-	KOFFERPACKEN("Kofferpacken");
+	;
 
 	/** Welche Namen die Kategorie hat. */
 	private String value;
@@ -37,7 +36,7 @@ public enum Category {
 	 *
 	 * @return Den Namen
 	 */
-	public String value() {
+	public String getValue() {
 		return value;
 	}
 

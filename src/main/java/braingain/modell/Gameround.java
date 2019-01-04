@@ -14,7 +14,7 @@ import phrasesAndConstants.PhrasesAndConstants;
  */
 public class Gameround {
 
-	/** The player. */
+	/** The players. */
 	private ArrayList<Player> player;
 	
 	/** The ArrayList for the backPackingGame. */
@@ -34,6 +34,9 @@ public class Gameround {
 	
 	/** The category. */
 	private Category category;
+	
+	/** The memoryTraining */
+	private MemoryTraining memoryTraining;
 	
 	/** The level. */
 	private Level level;
@@ -308,7 +311,27 @@ public class Gameround {
 	public Category getCategory() {
 		return this.category;
 	}
-
+	
+	/**
+	 * Sets the MemoryTraining
+	 * 
+	 * @param memoryTraining the new MemoryTraining
+	 */
+	
+	public void setMemoryTraining(MemoryTraining memoryTraining) {
+		this.memoryTraining = memoryTraining;
+	}
+	
+	/**
+	 * Gets the MemoryTraining.
+	 * 
+	 * @return the MemoryTraining
+	 */
+	
+	public MemoryTraining getMemoryTraining() {
+		return this.memoryTraining;
+	}
+	
 	/**
 	 * Sets the level.
 	 *
@@ -443,8 +466,8 @@ public class Gameround {
 	public boolean isEverythingSet() {
 		boolean numberOfPLayersNotZero = this.numberOfPlayers != 0;
 		boolean allPlayersSet = this.allPlayerSet();
-		boolean isCategorySet = this.category != null;
-		boolean isLevelSet = this.level != null || category == Category.KOFFERPACKEN;
+		boolean isCategorySet = this.category != null && this.category != Category.GEDAECHTNISTRAINING;
+		boolean isLevelSet = this.level != null;
 
 		return numberOfPLayersNotZero && allPlayersSet && isCategorySet && isLevelSet;
 	}
@@ -453,12 +476,15 @@ public class Gameround {
 	 * Resets the whole Gameround, as if you would create a new one.
 	 */
 	public void reset() {
-		player.clear();
-		backPacking.clear();
+		this.player.clear();
+		this.backPacking.clear();
+		this.questionsAsked.clear();
+		this.questionsNotAsked.clear();
 		this.currentQuestion = null;
 		this.currentPlayer = null;
 		this.currentQuestion = null;
 		this.category = null;
+		this.memoryTraining = null;
 		this.level = null;
 		this.numberOfPlayers = 0;
 		this.playersCounted = 0;
