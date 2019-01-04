@@ -1,57 +1,42 @@
-package main.java.braingain.Modell;
+package braingain.modell;
 
-import main.java.braingain.handlers.AnzahlDerSpielerSetzenHandler;
+import java.util.Map;
+
+import com.amazon.ask.attributes.AttributesManager;
+import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 
 public class Datenbank {
 
-    private String player;
-    private String highscore;
+	private boolean spielmodus;
+	private int highscore;
+	private Player player;
+	private Gameround round;
 
+	public Datenbank(Gameround round) {
+		this.round = round;
 
+	}
 
-    public Datenbank() {
+	public void useDatenbank(boolean spielmodus) {
+		spielmodus = round.getNumberOfPlayers() == 1;
 
+	}
 
-
-    }
-
-    public void useDatenbank(boolean spielmodus) {
-        if (AnzahlDerSpielerSetzenHandler.selectedPlayerSlot == 1) {
-            spielmodus = true;
-        } else {
-            spielmodus = false;
-        }
-
-    }
-
-    public Spieler searchPlayer(HanderInput input, String name) {
-        Spieler player = null;
-        if (spielmodus == true) {
-            AttributesManager attributesManager = input.getAttributesManager();
-            Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-            if (persitentAttrebutes.contains(name)){
-            String oldH   = (String) persistentAttributes.get(name);
-            int oldHighscore =Integer.parseInt(oldH);
-
-                player = new Spieler(name, oldHighscore);
-            }else{
-                player = new Spieler(name);
-                perstistentAttributes.put(name,"0");
-                attributesManager.setPersitentAttributes(persitentAttributes);
-
-
-        }
-
-        return player;
-    }
-
-   // public void savePlayer(Spieler player){
-
-
-        }
-
-
-
-    }
+	public Player searchPlayer(HandlerInput input, String name) {
+		player = null;
+		if (spielmodus) {
+			AttributesManager attributesManager = input.getAttributesManager();
+			Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
+			if (persistentAttributes.containsKey(name)) {
+				String highscoreString = (String) persistentAttributes.get(name);
+				highscore = Integer.parseInt(highscoreString);
+				player = new Player(name, highscore);
+			} else {
+				player = new Player(name);
+				persistentAttributes.put(name, "0");
+				attributesManager.setPersistentAttributes(persistentAttributes);
+			}
+		}
+		return player;
+	}
 }
-
