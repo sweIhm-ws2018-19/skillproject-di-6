@@ -1,0 +1,131 @@
+11
+Sie machen bei einem Marathonlauf mit und überholen kurz vor dem Ziel den Zweiten. Wievielter sind Sie dann?
+der Zweiten
+12
+Du stehst in einem quadratischen Raum, bei dem alle 4 Wände, sowie der Boden und die Decke komplett aus Spiegeln bestehen. Wie oft kannst Du Dich sehen?
+Gar nicht, da es kein Licht gibt.
+13
+Der Eiffelturm in Paris ist dreihundert Meter hoch und wiegt circa 8000 Tonnen. Würde man ihn aus dem gleichen Material in einer Höhe von dreißig Zentimetern originalgetreu nachbauen, wie schwer wäre er dann?
+8 Gramm
+14
+Du bist in einem Boot auf einem See. Du holst den Anker ein. a) Sinkt oder b) steigt der Wasserspiegel? c) Oder bleibt er gleich?
+Er steigt
+21
+5-3+20
+22
+21
+23+14-10
+27
+21
+12+6+7
+25
+21
+Wie heißt das Ergebnis einer Addition?
+Summe
+21
+46-16+8
+38
+21
+Was ist die Summe der Zahlen von 1 bis 10? 
+55
+21
+76+8-16
+68
+21
+67-19-45
+3
+21
+-17+39-3
+19
+21
+Wie heißt der Körper dessen Flächen alle ein Quadrat sind?
+Würfel
+21
+Wie lautet die Quersumme der Zahle 362?
+11
+21
+Wieviel Nulle hat eine Milliarde?
+9 Nullen
+21
+Wieviel Grad haben alle Innenwinkel eines Dreiecks?
+180 Grad
+21
+5+3+248
+256
+21
+Wie sieht das Zeichen für Unendlichkeit aus?
+Eine liegende 8
+22
+11*5-8
+47
+22
+69/3-17
+6
+22
+(73-46)*2
+54
+22
+(5-7)*(12-5)
+-14
+22
+(22*3)/11
+6
+22
+(5+23)/7
+4
+22
+29-11*3
+4
+22
+Es ist Punkt 14 Uhr. In welchem Winkel stehen großer und kleiner Zeiger in diesem Moment zueinander?
+60 Grad
+22
+Wie lautet der Satz des Pythagoras?
+a^2+b^2 = c^2
+22
+Was ist eine Hypothenuse?
+Es ist die längste Seite in einem rechtwinkligen Dreieck
+22
+Wie bekommt man die Nullstellen einer Funktion?
+Durch Nullsetzen der ersten Ableitung
+22
+Wie nehmt man eine rechteckige Anordnung von Elementen in Spalten und Zeilen?
+Matrix
+22
+Von 13 Personen haben mindesten 2 im selben Monat Geburtstag. Richtig oder falsch?
+Richtig. Man hat nur 12 Monate aber 13 Personen.
+22
+Was ist ein Parallelogramm?
+Ein Viereck ohne rechte Winkel aber mit 2 gleichlangen parallelen Seiten
+22
+ie stapeln fünf Würfel übereinander zu einem Turm. Ein Zauberer steht mit dem Rücken zu Ihnen und bittet Sie, ihm die Augenzahl auf der Oberseite des Würfels ganz oben zu nennen. Es ist eine Sechs. Der Magier überlegt kurz und sagt Ihnen dann die Summe aller Augenzahlen, die am Würfelturm von allen vier Seiten und von oben zu sehen sind. Welche Zahl nennt er? 
+76
+23
+sqrt(64):16
+0,5
+Was beschreibt die Zahl Pi?
+Das Verhältnis vom Umfang zum Durchmesser eines Kreises
+24
+3^3+5
+32
+24 
+2^4-3
+13
+24
+(3^3-6):7
+3
+24
+Was ist die Summe der Quersummen der Zahlen von 1 bis 30? 
+168
+31
+Welcher Fluss fliesst mitten durch München?
+Isar
+32
+Was ist die Hauptstadt von Australien?
+Canberra
+33
+An welche Länder grenzt Belgien?
+Niederlande, Deutschland, Luxemburg und Frankreich
+34
+Was ist Wolof?
+Eine Sprache, sie wird hauptsächlich in Senegal gesprochen.
