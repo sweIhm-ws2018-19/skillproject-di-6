@@ -1,64 +1,85 @@
 package braingain.modell;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 /**
  * The Class Question.
  */
-public class Question {
-	
+public class Question implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** The question. */
 	private String question;
-	
-	/** The answers of the Question. */
-	private ArrayList<String> answers = new ArrayList<String>();
-	
+
+	/** The keywords of the answer. */
+	private ArrayList<String> keyWords = new ArrayList<String>();
+
+	/**
+	 * The answer
+	 */
+	private String answer;
+
 	/**
 	 * Instantiates a new question.
 	 *
-	 * @param question the question
-	 * @param answer One answer to the given Question
+	 * @param question
+	 *            the question
+	 * @param answer
+	 *            One answer to the given Question
 	 */
 	public Question(String question, String answer) {
 		this.question = question;
-		answers.add(answer);
+		keyWords.add(answer);
 	}
-	
+
 	/**
 	 * Instantiates a new question.
 	 *
-	 * @param question the question
-	 * @param answers An Array of Answers to the Question
+	 * @param question
+	 *            the question
+	 * @param answers
+	 *            An ArrayList of Answers
 	 */
-	public Question(String question, String[] answers) {
+	public Question(String question, String answer, ArrayList<String> keyWords) {
 		this.question = question;
-		for(int i = 0; i < answers.length; i++) {
-			this.answers.add(answers[i]);
-		}
+		this.answer = answer;
+		this.keyWords = keyWords;
 	}
-	
-	/**
-	 * Instantiates a new question.
-	 *
-	 * @param question the question
-	 * @param answers An ArrayList of Answers
-	 */
-	public Question(String question, ArrayList<String> answers) {
-		this.question = question;
-		this.answers = answers;
-	}
-	
+
 	public boolean checkAnswer(String answer) {
-		Iterator<String> it = answers.iterator();
-		while(it.hasNext()) {
-			if(it.next().toLowerCase().contains(answer.toLowerCase())) {
-				return true;
-			};
+		boolean isRightAnswer = true;
+		
+		String[] answerWords = answer.split(" ");
+		for(String s : answerWords) {
+			s=s.toLowerCase();
 		}
-		return false;
+		
+		ArrayList<String> answerWordsArrayList = (ArrayList<String>) Arrays.asList(answerWords);
+		
+		if (keyWords != null) {
+			Iterator<String> it = keyWords.iterator();
+			while (it.hasNext()) {
+				if (!answerWordsArrayList.contains(it.next().toLowerCase())) {
+					isRightAnswer = false;
+				}
+			}
+
+		}else {
+			if(!answerWordsArrayList.contains(this.answer.toLowerCase())) {
+				isRightAnswer = false;
+			}
+		}
+
+		return isRightAnswer;
 	}
-	
+
 	/**
 	 * Gets the question.
 	 *
@@ -67,32 +88,61 @@ public class Question {
 	public String getQuestion() {
 		return this.question;
 	}
-	
+
 	/**
-	 * Gets the ArrayList of Answers.
-	 *
-	 * @return the ArrayList of Answers
+	 * Gets the Keywords of the answer of the Question
+	 * 
+	 * @return the keyWords
 	 */
-	public ArrayList<String> getAnswersArrayList(){
-		return this.answers;
+	protected ArrayList<String> getKeyWords() {
+		return keyWords;
 	}
-	
-	/**
-	 * Gets the Array of Answers.
-	 *
-	 * @return the Array of Answers
-	 */
-	public String[] getAnswersArray() {
-		return this.answers.toArray(new String[answers.size()]);
+
+	protected String getAnswer() {
+		return answer;
 	}
-	
-	/**
-	 * Gets one random right Answer.
-	 *
-	 * @return one random Answer
-	 */
-	public String getRightAnswer() {
-		return answers.get((int) (Math.random()*answers.size()));
-	}
-	
+
 }
+
+/**
+ * Gets the ArrayList of Answers.
+ *
+ * @return the ArrayList of Answers
+ */
+/*
+ * public ArrayList<String> getAnswersArrayList(){ return this.keyWords; }
+ */
+
+/**
+ * Gets the Array of Answers.
+ *
+ * @return the Array of Answers
+ */
+/*
+ * public String[] getAnswersArray() { return this.keyWords.toArray(new
+ * String[keyWords.size()]); }
+ */
+
+/**
+ * Gets one random right Answer.
+ *
+ * @return one random Answer
+ */
+/*
+ * public String getRightAnswer() { return keyWords.get((int)
+ * (Math.random()*keyWords.size())); }
+ */
+
+/**
+ * Instantiates a new question.
+ *
+ * @param question
+ *            the question
+ * @param answers
+ *            An Array of Answers to the Question
+ */
+/*
+ * public Question(String question, String[] answers) { this.question =
+ * question; for(int i = 0; i < answers.length; i++) {
+ * this.keyWords.add(answers[i]); } }
+ */

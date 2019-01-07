@@ -15,10 +15,10 @@ public enum Category {
 	GEOGRAFIE("Geographie"),
 
 	/** Kategorie gedaechtnistraining. */
-	GEDAECHTNISTRAINING("Gedaechtnistraining"),
+	GEDAECHTNISTRAINING("Gedaechtnistraining")/*,
 
-	/** Kategorie Koffer packen. */
-	KOFFERPACKEN("Kofferpacken");
+	*//** Kategorie Koffer packen. *//*
+	KOFFERPACKEN("Kofferpacken")*/;
 
 	/** Welche Namen die Kategorie hat. */
 	private String value;

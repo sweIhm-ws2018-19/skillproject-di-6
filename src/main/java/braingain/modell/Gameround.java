@@ -24,7 +24,7 @@ public class Gameround {
 	private ArrayList<Question> questionsAsked;
 	
 	/** The ArrayList for the Questions not Asked. */
-	private ArrayList<Question> questionsNotAsked;
+	ArrayList<Question> questionsNotAsked;
 	
 	/** The current player. */
 	private Player currentPlayer;
@@ -88,7 +88,7 @@ public class Gameround {
 	 * @return the right answer, of the Current Question
 	 */
 	public String getRightAnswer() {
-		return this.currentQuestion.getRightAnswer();
+		return this.currentQuestion.getAnswer();
 	}
 
 	/**
@@ -399,10 +399,11 @@ public class Gameround {
 				+ PhrasesAndConstants.QUESTION_ENDING;
 		try {
 			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(pathname));
-			// TODO read in with Arraylist
-			// allNeededQuestions = (HashMap<Question, Integer>) objectInputStream.readObject();
+			questionsNotAsked = (ArrayList<Question>) objectInputStream.readObject();
 			objectInputStream.close();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 
@@ -444,7 +445,7 @@ public class Gameround {
 		boolean numberOfPLayersNotZero = this.numberOfPlayers != 0;
 		boolean allPlayersSet = this.allPlayerSet();
 		boolean isCategorySet = this.category != null;
-		boolean isLevelSet = this.level != null || category == Category.KOFFERPACKEN;
+		boolean isLevelSet = this.level != null /*|| category == Category.KOFFERPACKEN*/;
 
 		return numberOfPLayersNotZero && allPlayersSet && isCategorySet && isLevelSet;
 	}

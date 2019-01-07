@@ -42,7 +42,7 @@ public class SetCategoryHandler implements RequestHandler {
 			round.setCategory(Category.getCategory(choosencategoryString));
 			speechText = round.getNumberOfPlayers() == 1 ? "Du hast " : "Ihr habt ";
 			speechText += String.format("die Kategorie %s gewaehlt. ", round.getCategory().toString());
-			if (round.getCategory() == Category.KOFFERPACKEN) {
+			/*if (round.getCategory() == Category.KOFFERPACKEN) {
 				round.setNextRandomCurrentPlayer();
 				if (round.getNumberOfPlayers() == 1) {
 					String item = round.getRandomBackPackWordForAlexa();
@@ -52,9 +52,9 @@ public class SetCategoryHandler implements RequestHandler {
 					speechText += String.format("%s %s startet.", PhrasesAndConstants.START_BACK_PACKING_MORE_PLAYER,
 							round.getCurrentPlayer().getName());
 				}
-			} else {
+			} else {*/
 				speechText += PhrasesAndConstants.LIST_ALL_LEVELS;
-			}
+			//}
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, speechText).withSpeech(speechText);
 		} else {
 			responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.REPROMPT_CATEGORY)
