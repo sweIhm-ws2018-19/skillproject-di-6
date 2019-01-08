@@ -88,7 +88,7 @@ public class Gameround {
 	 * @return the right answer, of the Current Question
 	 */
 	public String getRightAnswer() {
-		return this.currentQuestion.getRightAnswer();
+		return this.currentQuestion.getAnswer();
 	}
 
 	/**
