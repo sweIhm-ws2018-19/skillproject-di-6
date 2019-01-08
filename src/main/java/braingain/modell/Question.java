@@ -58,7 +58,7 @@ public class Question implements Serializable {
 		
 		String[] answerWords = answer.split(" ");
 		for(String s : answerWords) {
-			s=s.toLowerCase();
+			s.toLowerCase();
 		}
 		
 		ArrayList<String> answerWordsArrayList = (ArrayList<String>) Arrays.asList(answerWords);
@@ -104,45 +104,3 @@ public class Question implements Serializable {
 
 }
 
-/**
- * Gets the ArrayList of Answers.
- *
- * @return the ArrayList of Answers
- */
-/*
- * public ArrayList<String> getAnswersArrayList(){ return this.keyWords; }
- */
-
-/**
- * Gets the Array of Answers.
- *
- * @return the Array of Answers
- */
-/*
- * public String[] getAnswersArray() { return this.keyWords.toArray(new
- * String[keyWords.size()]); }
- */
-
-/**
- * Gets one random right Answer.
- *
- * @return one random Answer
- */
-/*
- * public String getRightAnswer() { return keyWords.get((int)
- * (Math.random()*keyWords.size())); }
- */
-
-/**
- * Instantiates a new question.
- *
- * @param question
- *            the question
- * @param answers
- *            An Array of Answers to the Question
- */
-/*
- * public Question(String question, String[] answers) { this.question =
- * question; for(int i = 0; i < answers.length; i++) {
- * this.keyWords.add(answers[i]); } }
- */
