@@ -107,6 +107,16 @@ Was beschreibt die Zahl Pi?
 Das Verhältnis vom Umfang zum Durchmesser eines Kreises
 24
 3^3+5
+24
+Was ist ein uneigentlicher Bruch?
+Der Zähler lässt sich durch den Nenner ohne Rest teilen.
+24
+
+
+
+
+
+
 32
 24 
 2^4-3
