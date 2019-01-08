@@ -465,5 +465,50 @@ public class Gameround {
 		this.questionsAskedInt = 0;
 		this.maxQuestions = 0;
 	}
+	
+	/**
+	 * Finds the players with the highest scores
+	 *
+	 * @return a list of players with the highest score
+	 */
+	public ArrayList<Player> getHighscorePlayers() {
+		ArrayList<Player> highscorePlayers = new ArrayList<Player>();
+		highscorePlayers.add(player.get(0));
+		for (Player s : player) {
+			if (s.getPunktestand() > highscorePlayers.get(0).getPoints()) {
+				highscorePlayers.clear();
+				highscorePlayers.add(s);
+			} else if (s.getPoints() == highscoreSpieler.get(0).getPoints()) {
+				highscorePlayers.add(s);
+			}
+		}
+		return highscorePlayers;
+	}
+
+	/**
+	 * Formats the highscore and the highscore players for HighscoreHandler
+	 *
+	 * @return a formated String with Highscore and Players
+	 */
+	public String getHighscore() {
+		ArrayList<Player> highscorePlayers = getHighscorePlayers();
+		int highscore = highscoreSpieler.get(0).getPoints();
+		int anzahlGewinner = highscorePlayers.size();
+		String ausgaben = "Mit ";
+		ausgaben += Integer.toString(highscore);
+		if(anzahlGewinner > 1){
+			ausgaben += " haben ";
+			for (int i = 1; i < anzahlGewinner; i++) {
+				ausgaben += highscorePlayers.at(i).getName();
+				ausgaben += ", ";
+			}
+		}else{
+			ausgaben += " hat " + highscorePlayers.at(0).getName();	
+		}
+		
+		ausgaben += " gewonnen. Applaus!";
+
+		return ausgaben;
+	}
 
 }
