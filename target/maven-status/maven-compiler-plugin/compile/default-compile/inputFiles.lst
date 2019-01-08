@@ -1,20 +1,22 @@
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\AnswerHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\SetCategoryHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\SessionEndedRequestHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\phrasesAndConstants\PhrasesAndConstants.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\SetLevelHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\modell\BackPackWords.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\modell\Category.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\AskQuestionHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\SetNumberOfPlayersHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\HelpIntentHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\modell\Question.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\streamhandler\BraingainStreamhandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\modell\Level.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\BackPackingHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\LaunchRequestHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\modell\Player.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\FallbackIntentHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\SaveUsernameHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\handlers\CancelandStopIntentHandler.java
-C:\Hochschule\Semester 3\Software Engineering\skillproject-di-6\src\main\java\braingain\modell\Gameround.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\HighscoreHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\phrasesAndConstants\PhrasesAndConstants.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\modell\Category.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\SaveUsernameHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\HelpIntentHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\modell\BackPackWords.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\SessionEndedRequestHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\AskQuestionHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\CancelandStopIntentHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\SetNumberOfPlayersHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\modell\Player.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\LaunchRequestHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\FallbackIntentHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\SetCategoryHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\modell\Datenbank.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\AnswerHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\modell\Gameround.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\modell\Question.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\BackPackingHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\handlers\SetLevelHandler.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\modell\Level.java
+C:\Users\janik\Documents\softwareengineeringI\Sprints\Sprint3\neueste Version\neu2\skillproject-di-6\src\main\java\braingain\streamhandler\BraingainStreamhandler.java

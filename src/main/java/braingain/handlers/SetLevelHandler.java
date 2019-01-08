@@ -54,6 +54,7 @@ public class SetLevelHandler implements RequestHandler {
 					.withReprompt(PhrasesAndConstants.REPROMPT_LEVEL);
 		}
 
+		round.buildQuestions();
 		return responseBuilder.withShouldEndSession(false).build();
 	}
 

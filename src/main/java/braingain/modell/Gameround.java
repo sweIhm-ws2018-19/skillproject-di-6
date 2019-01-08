@@ -399,10 +399,11 @@ public class Gameround {
 				+ PhrasesAndConstants.QUESTION_ENDING;
 		try {
 			ObjectInputStream objectInputStream = new ObjectInputStream(new FileInputStream(pathname));
-			// TODO read in with Arraylist
-			// allNeededQuestions = (HashMap<Question, Integer>) objectInputStream.readObject();
+			questionsNotAsked = (ArrayList<Question>) objectInputStream.readObject();
 			objectInputStream.close();
 		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 

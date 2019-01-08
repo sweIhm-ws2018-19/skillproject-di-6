@@ -28,7 +28,8 @@ public class AskQuestionHandler implements RequestHandler {
 
 	@Override
 	public Optional<Response> handle(HandlerInput input) {
-		String speechText = "No Questions available yet.";
+		round.setRandomNextCurrentQuestion();
+		String speechText = round.getCurrentQuestion().getQuestion();
 
 		ResponseBuilder responseBuilder = input.getResponseBuilder();
 
