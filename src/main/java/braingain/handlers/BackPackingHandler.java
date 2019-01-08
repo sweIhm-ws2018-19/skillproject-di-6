@@ -66,11 +66,10 @@ public class BackPackingHandler implements RequestHandler {
 						speechText = String.format("%s %s und %s", PhrasesAndConstants.RIGHT_PACKING,
 								round.backPackingAlexa(), item);
 						round.addItemToBackPack(item);
-						responseBuilder.withSpeech(speechText).withSimpleCard(PhrasesAndConstants.CARD_TITLE,
-								speechText);
+						//responseBuilder.withSpeech(speechText).withSimpleCard(PhrasesAndConstants.CARD_TITLE,
+						//		speechText);
 						// for debbunging ^
-						// responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.RIGHT_PACKING)
-						// .withSpeech(speechText);
+						 responseBuilder.withSimpleCard(PhrasesAndConstants.CARD_TITLE, PhrasesAndConstants.RIGHT_PACKING).withSpeech(speechText);
 					} else {
 						round.setNextRandomCurrentPlayer();
 						speechText = String.format("%s du hast %s hinzugefuegt. Nun kommt %s", PhrasesAndConstants.RIGHT_PACKING, testWord,
