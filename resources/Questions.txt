@@ -15,19 +15,155 @@ Du bist in einem Boot auf einem See. Du holst den Anker ein. a) Sinkt oder b) st
 Er steigt
 steigt
 21
-5*3+20
+5 mal 3 plus 20
 35
 
+21
+5 minus 3 plus 20
 22
-(73-46)*2
+
+21
+23 plus 14 minus 10
+27
+
+21
+12 plus 6 plus 7
+25
+
+21
+Wie heißt das Ergebnis einer Addition?
+Summe
+
+21
+46 minus 16 plus 8
+38
+
+21
+Was ist die Summe der Zahlen von 1 bis 10? 
+55
+
+21
+76 plus 8 minus 16
+68
+
+21
+67 minus 19 minus 45
+3
+
+21
+minus 17 plus 39 minus 3
+19
+
+21
+Wie heißt der Körper dessen Flächen alle ein Quadrat sind?
+Würfel
+
+21
+Wie lautet die Quersumme der Zahle 362?
+11
+
+21
+Wieviel Nulle hat eine Milliarde?
+9 Nullen
+
+21
+Wieviel Grad haben alle Innenwinkel eines Dreiecks?
+180 Grad
+
+21
+5 Plus 3 plus 248
+256
+
+21
+Wie sieht das Zeichen für Unendlichkeit aus?
+Eine liegende 8
+
+22
+11 mal 5 minus 8
+47
+
+22
+69 durch 3 minus 17
+6
+
+22
+Klammer auf 73 minus 46 Klammer zu mal 2
 54
 
+22
+Klammer 5 minus 7 Klammer mal Klammer auf 12 minus 5 Klammer zu
+Minus 14
+
+22
+Klammer auf 22 Mal 3 Klammer zu durch 11
+6
+
+22
+Klammer 5 plus 23 klammer zu durch 7
+4
+
+22
+29 minus 11 mal 3
+4
+
+22
+Es ist Punkt 14 Uhr. In welchem Winkel stehen großer und kleiner Zeiger in diesem Moment zueinander?
+60 Grad
+
+22
+Wie lautet der Satz des Pythagoras?
+a quadrat plus b quadrat ist c Quadrat
+
+22
+Was ist eine Hypothenuse?
+Es ist die längste Seite in einem rechtwinkligen Dreieck
+längste Seite,Dreieck
+22
+Wie bekommt man die Nullstellen einer Funktion?
+Durch Nullsetzen der ersten Ableitung
+erste Ableitung
+22
+Wie nehmt man eine rechteckige Anordnung von Elementen in Spalten und Zeilen?
+Matrix
+
+22
+Von 13 Personen haben mindesten 2 im selben Monat Geburtstag. Richtig oder falsch?
+Richtig. Man hat nur 12 Monate aber 13 Personen.
+richtig
+22
+Was ist ein Parallelogramm?
+Ein Viereck ohne rechte Winkel aber mit 2 gleichlangen parallelen Seiten
+Viereck,parallele Seiten
+22
+Sie stapeln fünf Würfel übereinander zu einem Turm. Ein Zauberer steht mit dem Rücken zu Ihnen und bittet Sie, ihm die Augenzahl auf der Oberseite des Würfels ganz oben zu nennen. Es ist eine Sechs. Der Magier überlegt kurz und sagt Ihnen dann die Summe aller Augenzahlen, die am Würfelturm von allen vier Seiten und von oben zu sehen sind. Welche Zahl nennt er? 
+76
+
 23
-sqrt(64):16
+Klammer auf Wurzel von 64 Klammer zu geteilt durch 16
 0,5
 
+23
+Was beschreibt die Zahl Pi?
+Das Verhältnis vom Umfang zum Durchmesser eines Kreises
+
 24
-(3^3-6):7
+3^3+5
+32
+
+24
+2 hoch 4 minus 3
+13
+
+24
+Klammer auf 3 hoch 3 minus 6 Klammer zu, geteilt 7
+3
+
+24
+Was ist die Summe der Quersummen der Zahlen von 1 bis 30? 
+168
+
+24
+Klammer auf 3 hoch 3 minus 6 klammer zu durch 7
 3
 
 31

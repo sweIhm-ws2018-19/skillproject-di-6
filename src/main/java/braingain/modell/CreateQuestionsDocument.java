@@ -27,7 +27,7 @@ public class CreateQuestionsDocument {
 		makeNewMap();
 		readQuestions();
 		iterate();
-		//buildSystem();
+		buildSystem();
 
 	/*	Gameround spielrunde = new Gameround();
 		spielrunde.setCategory(Category.MATHE);
@@ -64,7 +64,6 @@ public class CreateQuestionsDocument {
 		String fileName = "resources"/* System.getProperty("user.dir") */ + File.separator + "Questions.txt";
 
 		try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
-			//boolean isNotEnd = true;
 			for (String temp = reader.readLine(); temp != null; temp = reader.readLine()) {
 				int zuordnung = Integer.parseInt(temp);
 				int lvl = zuordnung % 10;
@@ -77,9 +76,9 @@ public class CreateQuestionsDocument {
 				ArrayList<String> keyWords = new ArrayList<String>(Arrays.asList(tmp.split(",")));
 				newQuestion(Frage , Antwort, keyWords , kat, level );
 				
-				/*System.out.println(Frage);
+				System.out.println(Frage);
 				System.out.println(Antwort);
-				System.out.println(keyWords);*/
+				System.out.println(keyWords);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
