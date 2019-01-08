@@ -24,21 +24,21 @@ public class CreateQuestionsDocument {
 
 	public static void main(String... args) {
 
-		makeNewMap();
-		readQuestions();
-		iterate();
-		buildSystem();
+		/*makeNewMap();
+		readQuestions();*/
+		//iterate();
+		//buildSystem();
 
-	/*	Gameround spielrunde = new Gameround();
+		Gameround spielrunde = new Gameround();
 		spielrunde.setCategory(Category.MATHE);
 		spielrunde.setLevel(Level.EINFACH);
-		spielrunde.buildQuestions();*/
+		spielrunde.buildQuestions();
 
-		/*for (Question f : spielrunde.questionsNotAsked) {
+		for (Question f : spielrunde.questionsNotAsked) {
 			System.out.println(f.getQuestion());
 			System.out.println(f.getAnswer());
 			System.out.println(f.getKeyWords().toString());
-		}*/
+		}
 
 	}
 
@@ -76,9 +76,9 @@ public class CreateQuestionsDocument {
 				ArrayList<String> keyWords = new ArrayList<String>(Arrays.asList(tmp.split(",")));
 				newQuestion(Frage , Antwort, keyWords , kat, level );
 				
-				System.out.println(Frage);
+				/*System.out.println(Frage);
 				System.out.println(Antwort);
-				System.out.println(keyWords);
+				System.out.println(keyWords);*/
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
