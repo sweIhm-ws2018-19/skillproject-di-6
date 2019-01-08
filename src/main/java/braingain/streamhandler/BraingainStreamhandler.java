@@ -23,6 +23,7 @@ import braingain.handlers.BackPackingHandler;
 import braingain.handlers.CancelandStopIntentHandler;
 import braingain.handlers.FallbackIntentHandler;
 import braingain.handlers.HelpIntentHandler;
+import braingain.handlers.HighscoreHandler;
 import braingain.handlers.LaunchRequestHandler;
 import braingain.handlers.SaveUsernameHandler;
 import braingain.handlers.SessionEndedRequestHandler;
@@ -50,9 +51,10 @@ private static Skill getSkill() {
 			new SaveUsernameHandler(round),
 			new SetCategoryHandler(round),
 			new SetLevelHandler(round),
-			new SetNumberOfPlayersHandler(round))
-			.withTableName("HighScore")
-			.withAutoCreateTable(true)
+			new SetNumberOfPlayersHandler(round),
+			new HighscoreHandler(round))
+			//.withTableName("HighScore")
+			//.withAutoCreateTable(true)
 			.withSkillId("amzn1.ask.skill.9a1dd27b-4aa6-4e19-a454-5e4525eab49b")
 			.build();
 }

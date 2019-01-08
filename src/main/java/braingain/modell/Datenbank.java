@@ -1,57 +1,35 @@
-package main.java.braingain.Modell;
+package braingain.modell;
 
-import main.java.braingain.handlers.AnzahlDerSpielerSetzenHandler;
+import java.util.Map;
+
+import com.amazon.ask.attributes.AttributesManager;
+import com.amazon.ask.dispatcher.request.handler.HandlerInput;
 
 public class Datenbank {
 
-    private String player;
-    private String highscore;
-
-
-
-    public Datenbank() {
-
-
-
+	private Gameround round;
+	
+    public Datenbank(Gameround round) {
+    	this.round = round;
     }
 
-    public void useDatenbank(boolean spielmodus) {
-        if (AnzahlDerSpielerSetzenHandler.selectedPlayerSlot == 1) {
-            spielmodus = true;
-        } else {
-            spielmodus = false;
-        }
-
-    }
-
-    public Spieler searchPlayer(HanderInput input, String name) {
-        Spieler player = null;
-        if (spielmodus == true) {
+    public void searchPlayer(HandlerInput input, String name) {
+        Player player = null;
             AttributesManager attributesManager = input.getAttributesManager();
             Map<String, Object> persistentAttributes = attributesManager.getPersistentAttributes();
-            if (persitentAttrebutes.contains(name)){
+            if (persistentAttributes.containsKey(name)){
             String oldH   = (String) persistentAttributes.get(name);
             int oldHighscore =Integer.parseInt(oldH);
 
-                player = new Spieler(name, oldHighscore);
+                player = new Player(name, oldHighscore);
             }else{
-                player = new Spieler(name);
-                perstistentAttributes.put(name,"0");
-                attributesManager.setPersitentAttributes(persitentAttributes);
+                player = new Player(name);
+                persistentAttributes.put(name,"0");
+                attributesManager.setPersistentAttributes(persistentAttributes);
 
 
         }
 
-        return player;
-    }
-
-   // public void savePlayer(Spieler player){
-
-
-        }
-
-
-
+            round.addPlayer(player);
     }
 }
-
